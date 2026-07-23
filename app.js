@@ -39,6 +39,15 @@ const pages = [
     `,
   },
   {
+    slug: "success-wheel-2",
+    title: "Success spinner",
+    accent: "violet",
+    label: "Circular loader line filling into a red success confirmation.",
+    scene: () => `
+      ${successWheelTwoPrototype()}
+    `,
+  },
+  {
     slug: "pull-to-refresh-blob-capsule",
     title: "Pull-to-refresh capsule with blob gradient and checkmark",
     accent: "uba",
@@ -76,15 +85,6 @@ const pages = [
     label: "Neutral frosted capsule resolving into a top bounce and check state.",
     scene: () => `
       ${pullRefreshPrototype("neutral-complete")}
-    `,
-  },
-  {
-    slug: "success-wheel-2",
-    title: "Success spinner",
-    accent: "violet",
-    label: "Circular loader line filling into a red success confirmation.",
-    scene: () => `
-      ${successWheelTwoPrototype()}
     `,
   },
   {
