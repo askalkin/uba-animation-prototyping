@@ -2522,6 +2522,8 @@ button {
   height: 550px;
   position: relative;
   z-index: 1;
+  justify-self: center;
+  margin-inline: auto;
 }
 
 .uba-gradient-screen {
@@ -2684,13 +2686,13 @@ button {
 
 .app-shell[data-prototype-theme="dark"] .uba-gradient-flow-frame {
   background:
-    radial-gradient(circle at 78% 20%, rgba(255, 99, 23, 0.12), transparent 28%),
-    linear-gradient(180deg, #080807, #020202);
+    radial-gradient(circle at 76% 20%, rgba(255, 112, 35, 0.2), transparent 30%),
+    linear-gradient(180deg, #1a1713, #0e0d0b 78%);
   color: #fff8ef;
-  border-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 248, 239, 0.15);
   box-shadow:
-    0 36px 100px rgba(0, 0, 0, 0.5),
-    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    0 36px 100px rgba(0, 0, 0, 0.42),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 .app-shell[data-prototype-theme="dark"] .uba-gradient-flow-frame .alty-section-label {

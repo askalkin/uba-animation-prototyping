@@ -1,7 +1,7 @@
 const pages = [
   {
     slug: "progressive-blur-spinner",
-    title: "Progressive Blur Spinner",
+    title: "Search spinner",
     accent: "red",
     label: "Layered neon spinner with a stretching trimmed stroke.",
     scene: () => `
@@ -14,7 +14,7 @@ const pages = [
   },
   {
     slug: "progressive-blur-spinner-solo",
-    title: "Progressive Blur Spinner Solo",
+    title: "Spinner",
     accent: "red",
     label: "The same soft red spinner without external orbit circles.",
     scene: () => `
@@ -40,7 +40,7 @@ const pages = [
   },
   {
     slug: "pull-to-refresh-blob-capsule",
-    title: "Pull-to-refresh Blob Capsule",
+    title: "Pull-to-refresh capsule with blob gradient and checkmark",
     accent: "uba",
     themeable: true,
     label: "Frosted capsule with UBA gradient blobs moving through pull states.",
@@ -50,7 +50,7 @@ const pages = [
   },
   {
     slug: "pull-to-refresh-glass-capsule",
-    title: "Pull-to-refresh Glass Capsule",
+    title: "Pull-to-refresh red sphere",
     accent: "red",
     themeable: true,
     label: "Frosted capsule with a clean red pull indicator.",
@@ -60,7 +60,7 @@ const pages = [
   },
   {
     slug: "pull-to-refresh-neutral-capsule",
-    title: "Pull-to-refresh Neutral Capsule",
+    title: "Pull-to-refresh neutral",
     accent: "ink",
     themeable: true,
     label: "Neutral frosted capsule pull indicator in light and dark themes.",
@@ -70,7 +70,7 @@ const pages = [
   },
   {
     slug: "pull-to-refresh-neutral-capsule-2",
-    title: "Pull-to-refresh Neutral Capsule 2",
+    title: "Pull-to-refresh neutral with checkmark",
     accent: "ink",
     themeable: true,
     label: "Neutral frosted capsule resolving into a top bounce and check state.",
@@ -80,7 +80,7 @@ const pages = [
   },
   {
     slug: "success-wheel-2",
-    title: "success-wheel-2",
+    title: "Success spinner",
     accent: "violet",
     label: "Circular loader line filling into a red success confirmation.",
     scene: () => `
@@ -89,7 +89,7 @@ const pages = [
   },
   {
     slug: "uba-media-blob-prototype",
-    title: "UBA Media Blob Prototype",
+    title: "Loader blob gradient",
     accent: "uba",
     label: "Light and dark blob loader studies for the UBA Media flow.",
     scene: () => `
@@ -101,7 +101,7 @@ const pages = [
   },
   {
     slug: "uba-loader-gradient-blob-prototype",
-    title: "UBA-loader-gradient-blob prototype",
+    title: "Loader blob gradient UI",
     accent: "uba",
     themeable: true,
     label: "Gradient blob loader transitioning from PIN entry to successful payment.",
@@ -373,7 +373,7 @@ function ubaBlobPrototype(theme) {
 function ubaLoaderGradientBlobPrototype() {
   return `
     <article class="alty-flow-frame uba-gradient-flow-frame" aria-label="UBA gradient blob payment transition loading state">
-      <div class="alty-section-label">UBA-loader-gradient-blob prototype</div>
+      <div class="alty-section-label">Loader blob gradient UI</div>
       <div class="uba-gradient-device-stage">
         <div class="uba-gradient-screen uba-gradient-pin-screen">
           ${altyPhonePin({ animated: true })}
