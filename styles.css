@@ -1100,6 +1100,8 @@ button {
 }
 
 .ptr-flip-capsule .ptr-capsule {
+  perspective: 420px;
+  transform-style: preserve-3d;
   overflow: visible;
 }
 
@@ -1115,6 +1117,8 @@ button {
   height: 48px;
   margin-left: -24px;
   transform-origin: 50% 50%;
+  transform-style: preserve-3d;
+  backface-visibility: visible;
   animation-name: ptr-flip-coin-travel;
   will-change: transform;
 }
@@ -3525,28 +3529,28 @@ button {
   0%,
   18%,
   100% {
-    transform: translateY(0) scaleX(1) scaleY(1);
+    transform: perspective(420px) translateY(0) rotateX(0deg) scaleX(1) scaleY(1);
   }
   30% {
-    transform: translateY(var(--ptr-contained-drop-a)) scaleX(1.08) scaleY(0.46);
+    transform: perspective(420px) translateY(var(--ptr-contained-drop-a)) rotateX(82deg) scaleX(1.1) scaleY(0.22);
   }
   40% {
-    transform: translateY(calc(var(--ptr-contained-drop-a) + 10px)) scaleX(1.14) scaleY(0.16);
+    transform: perspective(420px) translateY(calc(var(--ptr-contained-drop-a) + 10px)) rotateX(180deg) scaleX(1) scaleY(1);
   }
   50% {
-    transform: translateY(var(--ptr-contained-drop-b)) scaleX(1.08) scaleY(0.5);
+    transform: perspective(420px) translateY(var(--ptr-contained-drop-b)) rotateX(268deg) scaleX(1.1) scaleY(0.22);
   }
   62% {
-    transform: translateY(var(--ptr-contained-drop-c)) scaleX(1) scaleY(1.02);
+    transform: perspective(420px) translateY(var(--ptr-contained-drop-c)) rotateX(360deg) scaleX(1.02) scaleY(0.98);
   }
   72% {
-    transform: translateY(var(--ptr-contained-drop-d)) scaleX(1.12) scaleY(0.2);
+    transform: perspective(420px) translateY(var(--ptr-contained-drop-d)) rotateX(448deg) scaleX(1.12) scaleY(0.2);
   }
   80% {
-    transform: translateY(calc(var(--ptr-contained-drop-d) - 20px)) scaleX(1.04) scaleY(0.54);
+    transform: perspective(420px) translateY(calc(var(--ptr-contained-drop-d) - 20px)) rotateX(540deg) scaleX(1) scaleY(1);
   }
   86% {
-    transform: translateY(0) scaleX(1) scaleY(1);
+    transform: perspective(420px) translateY(0) rotateX(720deg) scaleX(1) scaleY(1);
   }
 }
 
