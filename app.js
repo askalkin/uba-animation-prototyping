@@ -88,6 +88,26 @@ const pages = [
     `,
   },
   {
+    slug: "flip-coin-pull-to-refresh-red",
+    title: "flip coin pull to refresh red",
+    accent: "red",
+    themeable: true,
+    label: "Red glass coin flipping through a pull-to-refresh gesture.",
+    scene: () => `
+      ${pullRefreshPrototype("flip-red")}
+    `,
+  },
+  {
+    slug: "flip-coin-pull-to-refresh-white",
+    title: "flip coin pull to refresh white",
+    accent: "ink",
+    themeable: true,
+    label: "White glass coin flipping through a pull-to-refresh gesture.",
+    scene: () => `
+      ${pullRefreshPrototype("flip-white")}
+    `,
+  },
+  {
     slug: "uba-media-blob-prototype",
     title: "Loader blob gradient",
     accent: "uba",
@@ -180,12 +200,16 @@ function pullRefreshPrototype(variant) {
     clean: "Clean pull-to-refresh capsule",
     neutral: "Neutral pull-to-refresh capsule",
     "neutral-complete": "Neutral pull-to-refresh capsule with final check",
+    "flip-red": "Red flip coin pull-to-refresh capsule",
+    "flip-white": "White flip coin pull-to-refresh capsule",
   };
   const variantClasses = {
     blob: "ptr-blob-capsule",
     clean: "ptr-clean-capsule",
     neutral: "ptr-neutral-capsule",
     "neutral-complete": "ptr-neutral-capsule ptr-neutral-complete-capsule",
+    "flip-red": "ptr-clean-capsule ptr-flip-capsule ptr-flip-red-capsule",
+    "flip-white": "ptr-neutral-capsule ptr-flip-capsule ptr-flip-white-capsule",
   };
   const hasSuccessCheck = variant === "blob" || variant === "neutral-complete";
 

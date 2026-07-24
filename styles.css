@@ -1099,6 +1099,88 @@ button {
     inset 0 -8px 14px rgba(92, 88, 82, 0.12);
 }
 
+.ptr-flip-capsule .ptr-capsule {
+  perspective: 420px;
+}
+
+.ptr-flip-capsule .ptr-indicator {
+  transform-style: preserve-3d;
+  animation-name: ptr-flip-coin-travel;
+  will-change: transform;
+}
+
+.ptr-flip-capsule .ptr-indicator::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background:
+    linear-gradient(150deg, rgba(255, 255, 255, 0.36), rgba(255, 255, 255, 0.08) 34%, transparent 58%),
+    radial-gradient(circle at 50% 1px, rgba(255, 255, 255, 0.48), transparent 28%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08), transparent 54%, rgba(255, 255, 255, 0.14));
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  opacity: 0.62;
+  mix-blend-mode: screen;
+  pointer-events: none;
+  backface-visibility: hidden;
+}
+
+.ptr-flip-capsule .ptr-indicator::after {
+  content: "";
+  width: 6px;
+  position: absolute;
+  top: 5px;
+  bottom: 5px;
+  left: 50%;
+  z-index: 2;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.48);
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.24);
+  opacity: 0.18;
+  transform: translateX(-50%) scaleX(0.34);
+  animation: ptr-flip-coin-edge var(--ptr-duration) cubic-bezier(0.58, 0, 0.18, 1) infinite;
+  pointer-events: none;
+}
+
+.ptr-flip-red-capsule .ptr-indicator {
+  background:
+    radial-gradient(circle at 50% 50%, rgba(245, 47, 39, 0.98) 0 68%, rgba(231, 42, 34, 0.98) 100%),
+    #e22b22;
+  border-color: rgba(255, 75, 63, 0.58);
+  box-shadow:
+    0 16px 30px rgba(var(--ptr-accent-rgb), 0.24),
+    0 0 20px rgba(var(--ptr-accent-rgb), 0.16),
+    inset 0 0 10px rgba(255, 255, 255, 0.08),
+    inset 0 -8px 14px rgba(134, 7, 3, 0.12);
+}
+
+.ptr-flip-red-capsule .ptr-indicator::after {
+  background: rgba(255, 210, 202, 0.6);
+  box-shadow: 0 0 14px rgba(255, 89, 76, 0.28);
+}
+
+.ptr-flip-white-capsule .ptr-indicator {
+  background:
+    radial-gradient(circle at 34% 24%, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.18) 23%, transparent 36%),
+    linear-gradient(145deg, #fffefa, #ece9e2);
+  border-color: rgba(255, 255, 255, 0.72);
+  box-shadow:
+    0 15px 28px rgba(0, 0, 0, 0.18),
+    0 0 22px rgba(255, 255, 255, 0.16),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.48),
+    inset 0 -8px 14px rgba(92, 88, 82, 0.12);
+}
+
+.app-shell[data-prototype-theme="light"] .ptr-flip-white-capsule .ptr-indicator {
+  background:
+    radial-gradient(circle at 34% 24%, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.24) 23%, transparent 36%),
+    linear-gradient(145deg, #fffdfa, #e8e4dc);
+  box-shadow:
+    0 14px 26px rgba(78, 70, 60, 0.16),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.66),
+    inset 0 -8px 14px rgba(92, 88, 82, 0.1);
+}
+
 .app-shell[data-prototype-theme="dark"] .ptr-neutral-capsule .ptr-indicator {
   color: #050505;
 }
@@ -3443,6 +3525,46 @@ button {
   }
   86% {
     transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes ptr-flip-coin-travel {
+  0%,
+  18%,
+  100% {
+    transform: translateY(0) rotateY(0deg) scale(1);
+  }
+  34% {
+    transform: translateY(var(--ptr-contained-drop-a)) rotateY(150deg) scale(0.98, 1.02);
+  }
+  48% {
+    transform: translateY(var(--ptr-contained-drop-b)) rotateY(330deg) scale(0.96, 1.04);
+  }
+  62% {
+    transform: translateY(var(--ptr-contained-drop-c)) rotateY(520deg) scale(1.03, 0.97);
+  }
+  74% {
+    transform: translateY(var(--ptr-contained-drop-d)) rotateY(720deg) scale(0.99, 1.01);
+  }
+  86% {
+    transform: translateY(0) rotateY(900deg) scale(1);
+  }
+}
+
+@keyframes ptr-flip-coin-edge {
+  0%,
+  18%,
+  49%,
+  76%,
+  100% {
+    opacity: 0.16;
+    transform: translateX(-50%) scaleX(0.34);
+  }
+  34%,
+  62%,
+  86% {
+    opacity: 0.58;
+    transform: translateX(-50%) scaleX(1);
   }
 }
 
