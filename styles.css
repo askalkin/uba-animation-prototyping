@@ -1101,9 +1101,21 @@ button {
 
 .ptr-flip-capsule .ptr-capsule {
   perspective: 420px;
+  overflow: visible;
+}
+
+.ptr-flip-capsule .ptr-capsule::before,
+.ptr-flip-capsule .ptr-capsule::after {
+  content: none;
+  display: none;
 }
 
 .ptr-flip-capsule .ptr-indicator {
+  top: 5px;
+  width: 48px;
+  height: 48px;
+  margin-left: -24px;
+  transform-origin: 50% 50%;
   transform-style: preserve-3d;
   animation-name: ptr-flip-coin-travel;
   will-change: transform;
@@ -1126,20 +1138,8 @@ button {
 }
 
 .ptr-flip-capsule .ptr-indicator::after {
-  content: "";
-  width: 6px;
-  position: absolute;
-  top: 5px;
-  bottom: 5px;
-  left: 50%;
-  z-index: 2;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.48);
-  box-shadow: 0 0 12px rgba(255, 255, 255, 0.24);
-  opacity: 0.18;
-  transform: translateX(-50%) scaleX(0.34);
-  animation: ptr-flip-coin-edge var(--ptr-duration) cubic-bezier(0.58, 0, 0.18, 1) infinite;
-  pointer-events: none;
+  content: none;
+  display: none;
 }
 
 .ptr-flip-red-capsule .ptr-indicator {
@@ -1152,11 +1152,6 @@ button {
     0 0 20px rgba(var(--ptr-accent-rgb), 0.16),
     inset 0 0 10px rgba(255, 255, 255, 0.08),
     inset 0 -8px 14px rgba(134, 7, 3, 0.12);
-}
-
-.ptr-flip-red-capsule .ptr-indicator::after {
-  background: rgba(255, 210, 202, 0.6);
-  box-shadow: 0 0 14px rgba(255, 89, 76, 0.28);
 }
 
 .ptr-flip-white-capsule .ptr-indicator {
@@ -3532,39 +3527,22 @@ button {
   0%,
   18%,
   100% {
-    transform: translateY(0) rotateY(0deg) scale(1);
+    transform: translateY(0) rotate3d(0, 1, 0, 0deg) scale(1);
   }
   34% {
-    transform: translateY(var(--ptr-contained-drop-a)) rotateY(150deg) scale(0.98, 1.02);
+    transform: translateY(var(--ptr-contained-drop-a)) rotate3d(0, 1, 0, 160deg) scale(0.99);
   }
   48% {
-    transform: translateY(var(--ptr-contained-drop-b)) rotateY(330deg) scale(0.96, 1.04);
+    transform: translateY(var(--ptr-contained-drop-b)) rotate3d(0, 1, 0, 340deg) scale(0.98);
   }
   62% {
-    transform: translateY(var(--ptr-contained-drop-c)) rotateY(520deg) scale(1.03, 0.97);
+    transform: translateY(var(--ptr-contained-drop-c)) rotate3d(0, 1, 0, 540deg) scale(1.02);
   }
   74% {
-    transform: translateY(var(--ptr-contained-drop-d)) rotateY(720deg) scale(0.99, 1.01);
+    transform: translateY(var(--ptr-contained-drop-d)) rotate3d(0, 1, 0, 720deg) scale(1);
   }
   86% {
-    transform: translateY(0) rotateY(900deg) scale(1);
-  }
-}
-
-@keyframes ptr-flip-coin-edge {
-  0%,
-  18%,
-  49%,
-  76%,
-  100% {
-    opacity: 0.16;
-    transform: translateX(-50%) scaleX(0.34);
-  }
-  34%,
-  62%,
-  86% {
-    opacity: 0.58;
-    transform: translateX(-50%) scaleX(1);
+    transform: translateY(0) rotate3d(0, 1, 0, 900deg) scale(1);
   }
 }
 
