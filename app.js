@@ -89,7 +89,7 @@ const pages = [
   },
   {
     slug: "flip-coin-pull-to-refresh-red",
-    title: "flip coin pull to refresh red",
+    title: "Flip coin pull to refresh red",
     accent: "red",
     themeable: true,
     label: "Red glass coin flipping through a pull-to-refresh gesture.",
@@ -99,7 +99,7 @@ const pages = [
   },
   {
     slug: "flip-coin-pull-to-refresh-white",
-    title: "flip coin pull to refresh white",
+    title: "Flip coin pull to refresh white",
     accent: "ink",
     themeable: true,
     label: "White glass coin flipping through a pull-to-refresh gesture.",

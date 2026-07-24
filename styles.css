@@ -1183,7 +1183,7 @@ button {
 
 .ptr-coin-check {
   position: absolute;
-  inset: 10px;
+  inset: 9px;
   z-index: 4;
   overflow: visible;
   opacity: 0;
@@ -1196,7 +1196,7 @@ button {
 .ptr-coin-check path {
   fill: none;
   stroke: currentColor;
-  stroke-width: 4.4;
+  stroke-width: 4.7;
   stroke-linecap: round;
   stroke-linejoin: round;
   stroke-dasharray: 32;
@@ -3689,24 +3689,24 @@ button {
 
 @keyframes ptr-flip-coin-check-pop {
   0%,
-  78%,
+  80%,
   100% {
     opacity: 0;
     transform: scale(0.72);
   }
-  83% {
+  84% {
     opacity: 0;
     transform: scale(0.72);
   }
-  88% {
+  89% {
     opacity: 1;
-    transform: scale(1.16);
+    transform: scale(1.14);
   }
-  93% {
+  94% {
     opacity: 1;
     transform: scale(0.94);
   }
-  97% {
+  98.5% {
     opacity: 1;
     transform: scale(1);
   }
@@ -3714,12 +3714,12 @@ button {
 
 @keyframes ptr-flip-coin-check-draw {
   0%,
-  84%,
+  85%,
   100% {
     stroke-dashoffset: 32;
   }
-  92%,
-  97% {
+  93%,
+  98.5% {
     stroke-dashoffset: 0;
   }
 }
