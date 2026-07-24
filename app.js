@@ -252,10 +252,10 @@ function pullRefreshFlipCoin() {
         <span class="ptr-coin-face ptr-coin-back"></span>
       </span>
       <span class="ptr-coin-edge"></span>
-      <svg class="ptr-coin-check" viewBox="0 0 48 48" aria-hidden="true">
-        <path d="M14 25.5 L21 32 L34 16"></path>
-      </svg>
     </span>
+    <svg class="ptr-coin-check" viewBox="0 0 48 48" aria-hidden="true">
+      <path d="M14 25.5 L21 32 L34 16"></path>
+    </svg>
   `;
 }
 
