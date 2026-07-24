@@ -212,6 +212,7 @@ function pullRefreshPrototype(variant) {
     "flip-white": "ptr-neutral-capsule ptr-flip-capsule ptr-flip-white-capsule",
   };
   const hasSuccessCheck = variant === "blob" || variant === "neutral-complete";
+  const isFlipCoin = variant === "flip-red" || variant === "flip-white";
 
   return `
     <div class="pull-refresh-prototype ${variantClasses[variant]}" role="img" aria-label="${labels[variant]}">
@@ -226,11 +227,23 @@ function pullRefreshPrototype(variant) {
         </div>
         <div class="ptr-capsule">
           ${variant === "blob" ? pullRefreshBlobField() : ""}
-          <span class="ptr-indicator"></span>
+          ${isFlipCoin ? pullRefreshFlipCoin() : '<span class="ptr-indicator"></span>'}
           ${hasSuccessCheck ? pullRefreshSuccessCheck() : ""}
         </div>
       </div>
     </div>
+  `;
+}
+
+function pullRefreshFlipCoin() {
+  return `
+    <span class="ptr-indicator">
+      <span class="ptr-coin">
+        <span class="ptr-coin-face ptr-coin-front"></span>
+        <span class="ptr-coin-face ptr-coin-back"></span>
+      </span>
+      <span class="ptr-coin-edge"></span>
+    </span>
   `;
 }
 
