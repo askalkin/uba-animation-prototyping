@@ -1100,8 +1100,6 @@ button {
 }
 
 .ptr-flip-capsule .ptr-capsule {
-  perspective: 420px;
-  transform-style: preserve-3d;
   overflow: visible;
 }
 
@@ -1117,8 +1115,6 @@ button {
   height: 48px;
   margin-left: -24px;
   transform-origin: 50% 50%;
-  transform-style: preserve-3d;
-  backface-visibility: visible;
   animation-name: ptr-flip-coin-travel;
   will-change: transform;
 }
@@ -3529,28 +3525,28 @@ button {
   0%,
   18%,
   100% {
-    transform: perspective(420px) translateY(0) rotateY(0deg) scaleX(1) scaleY(1);
+    transform: translateY(0) scaleX(1) scaleY(1);
   }
   30% {
-    transform: perspective(420px) translateY(var(--ptr-contained-drop-a)) rotateY(90deg) scaleX(0.16) scaleY(1.02);
+    transform: translateY(var(--ptr-contained-drop-a)) scaleX(1.08) scaleY(0.46);
   }
   40% {
-    transform: perspective(420px) translateY(calc(var(--ptr-contained-drop-a) + 10px)) rotateY(180deg) scaleX(1) scaleY(1);
+    transform: translateY(calc(var(--ptr-contained-drop-a) + 10px)) scaleX(1.14) scaleY(0.16);
   }
   50% {
-    transform: perspective(420px) translateY(var(--ptr-contained-drop-b)) rotateY(270deg) scaleX(0.16) scaleY(1.04);
+    transform: translateY(var(--ptr-contained-drop-b)) scaleX(1.08) scaleY(0.5);
   }
   62% {
-    transform: perspective(420px) translateY(var(--ptr-contained-drop-c)) rotateY(360deg) scaleX(1.02) scaleY(0.98);
+    transform: translateY(var(--ptr-contained-drop-c)) scaleX(1) scaleY(1.02);
   }
   72% {
-    transform: perspective(420px) translateY(var(--ptr-contained-drop-d)) rotateY(450deg) scaleX(0.16) scaleY(1.02);
+    transform: translateY(var(--ptr-contained-drop-d)) scaleX(1.12) scaleY(0.2);
   }
   80% {
-    transform: perspective(420px) translateY(calc(var(--ptr-contained-drop-d) - 20px)) rotateY(540deg) scaleX(1) scaleY(1);
+    transform: translateY(calc(var(--ptr-contained-drop-d) - 20px)) scaleX(1.04) scaleY(0.54);
   }
   86% {
-    transform: perspective(420px) translateY(0) rotateY(720deg) scaleX(1) scaleY(1);
+    transform: translateY(0) scaleX(1) scaleY(1);
   }
 }
 
