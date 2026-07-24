@@ -131,6 +131,15 @@ const pages = [
       </div>
     `,
   },
+  {
+    slug: "verification-badge",
+    title: "Verification badge",
+    accent: "ink",
+    label: "White verification badge contour drawing into a filled success state.",
+    scene: () => `
+      ${verificationBadgePrototype()}
+    `,
+  },
 ];
 
 const routeAliases = {
@@ -278,6 +287,40 @@ function successWheelTwoPrototype() {
           </g>
           <circle class="success-wheel-two-fill" cx="60" cy="60" r="34"></circle>
           <path class="success-wheel-two-check" d="M42 61 L55 73 L79 45"></path>
+        </svg>
+      </div>
+    </div>
+  `;
+}
+
+function verificationBadgePrototype() {
+  const badgePath =
+    "M60 11 C70 11 72 27 80 30 C88 33 96 22 102 30 C109 39 98 47 101 56 C104 65 118 69 112 79 C107 88 93 85 89 94 C85 104 91 114 80 117 C70 120 66 106 58 106 C50 106 43 119 33 114 C24 110 30 96 23 91 C15 86 3 91 1 80 C0 70 13 66 14 58 C15 50 2 43 8 34 C14 25 27 31 33 25 C40 19 36 5 47 4 C54 4 55 11 60 11 Z";
+
+  return `
+    <div class="loader-scene verification-badge-scene" role="img" aria-label="White verification badge drawing, filling, and resolving into a check">
+      <div class="verification-badge-mark">
+        <svg class="verification-badge-svg" viewBox="0 0 120 120" aria-hidden="true">
+          <defs>
+            <linearGradient id="verification-badge-fill-gradient" x1="22" y1="18" x2="94" y2="103" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#ffffff" stop-opacity="0.72"></stop>
+              <stop offset="55%" stop-color="#ffffff" stop-opacity="0.34"></stop>
+              <stop offset="100%" stop-color="#ffffff" stop-opacity="0.18"></stop>
+            </linearGradient>
+            <filter id="verification-badge-soft-glow" x="-35%" y="-35%" width="170%" height="170%">
+              <feGaussianBlur stdDeviation="3.2" result="blur"></feGaussianBlur>
+              <feMerge>
+                <feMergeNode in="blur"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+              </feMerge>
+            </filter>
+          </defs>
+          <g class="verification-badge-rotor">
+            <path class="verification-badge-trace" d="${badgePath}" pathLength="100"></path>
+          </g>
+          <path class="verification-badge-fill" d="${badgePath}"></path>
+          <path class="verification-badge-outline" d="${badgePath}" pathLength="100"></path>
+          <path class="verification-badge-check" d="M36 62 L52 77 L84 43" pathLength="100"></path>
         </svg>
       </div>
     </div>
