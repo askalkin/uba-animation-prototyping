@@ -1101,6 +1101,7 @@ button {
 
 .ptr-flip-capsule .ptr-capsule {
   perspective: 420px;
+  transform-style: preserve-3d;
   overflow: visible;
 }
 
@@ -1117,6 +1118,7 @@ button {
   margin-left: -24px;
   transform-origin: 50% 50%;
   transform-style: preserve-3d;
+  backface-visibility: visible;
   animation-name: ptr-flip-coin-travel;
   will-change: transform;
 }
@@ -3527,22 +3529,28 @@ button {
   0%,
   18%,
   100% {
-    transform: translateY(0) rotate3d(0, 1, 0, 0deg) scale(1);
+    transform: perspective(420px) translateY(0) rotateY(0deg) scaleX(1) scaleY(1);
   }
-  34% {
-    transform: translateY(var(--ptr-contained-drop-a)) rotate3d(0, 1, 0, 160deg) scale(0.99);
+  30% {
+    transform: perspective(420px) translateY(var(--ptr-contained-drop-a)) rotateY(90deg) scaleX(0.16) scaleY(1.02);
   }
-  48% {
-    transform: translateY(var(--ptr-contained-drop-b)) rotate3d(0, 1, 0, 340deg) scale(0.98);
+  40% {
+    transform: perspective(420px) translateY(calc(var(--ptr-contained-drop-a) + 10px)) rotateY(180deg) scaleX(1) scaleY(1);
+  }
+  50% {
+    transform: perspective(420px) translateY(var(--ptr-contained-drop-b)) rotateY(270deg) scaleX(0.16) scaleY(1.04);
   }
   62% {
-    transform: translateY(var(--ptr-contained-drop-c)) rotate3d(0, 1, 0, 540deg) scale(1.02);
+    transform: perspective(420px) translateY(var(--ptr-contained-drop-c)) rotateY(360deg) scaleX(1.02) scaleY(0.98);
   }
-  74% {
-    transform: translateY(var(--ptr-contained-drop-d)) rotate3d(0, 1, 0, 720deg) scale(1);
+  72% {
+    transform: perspective(420px) translateY(var(--ptr-contained-drop-d)) rotateY(450deg) scaleX(0.16) scaleY(1.02);
+  }
+  80% {
+    transform: perspective(420px) translateY(calc(var(--ptr-contained-drop-d) - 20px)) rotateY(540deg) scaleX(1) scaleY(1);
   }
   86% {
-    transform: translateY(0) rotate3d(0, 1, 0, 900deg) scale(1);
+    transform: perspective(420px) translateY(0) rotateY(720deg) scaleX(1) scaleY(1);
   }
 }
 
