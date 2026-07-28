@@ -7268,7 +7268,7 @@ img.alty-identity-bust-image {
 
   80% {
     opacity: 0.2;
-    filter: blur(9px);
+    filter: blur(5px);
     transform: scale(1.05, 0.84);
     -webkit-mask-image: linear-gradient(180deg, #000 0 44%, rgba(0, 0, 0, 0.34) 64%, transparent 100%);
     mask-image: linear-gradient(180deg, #000 0 44%, rgba(0, 0, 0, 0.34) 64%, transparent 100%);
@@ -7277,7 +7277,7 @@ img.alty-identity-bust-image {
   88%,
   100% {
     opacity: 0;
-    filter: blur(16px);
+    filter: blur(8px);
     transform: scale(1.12, 0.72);
     -webkit-mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.18) 0, transparent 76%);
     mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.18) 0, transparent 76%);
@@ -7293,13 +7293,13 @@ img.alty-identity-bust-image {
 
   80% {
     opacity: 0.18;
-    filter: blur(3px);
+    filter: blur(2px);
   }
 
   88%,
   100% {
     opacity: 0;
-    filter: blur(9px);
+    filter: blur(5px);
   }
 }
 
@@ -7315,14 +7315,14 @@ img.alty-identity-bust-image {
   }
   58% {
     opacity: 0.92;
-    filter: blur(1.4px);
+    filter: blur(1px);
     transform: scale(1.01, 0.98);
     -webkit-mask-image: linear-gradient(180deg, #000 0 58%, rgba(0, 0, 0, 0.52) 76%, transparent 100%);
     mask-image: linear-gradient(180deg, #000 0 58%, rgba(0, 0, 0, 0.52) 76%, transparent 100%);
   }
   68% {
     opacity: 0.18;
-    filter: blur(11px);
+    filter: blur(6px);
     transform: scale(1.05, 0.88);
     -webkit-mask-image: linear-gradient(180deg, #000 0 38%, rgba(0, 0, 0, 0.34) 60%, transparent 100%);
     mask-image: linear-gradient(180deg, #000 0 38%, rgba(0, 0, 0, 0.34) 60%, transparent 100%);
@@ -7330,7 +7330,7 @@ img.alty-identity-bust-image {
   74%,
   100% {
     opacity: 0;
-    filter: blur(16px);
+    filter: blur(8px);
     transform: scale(1.13, 0.72);
     -webkit-mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.18) 0, transparent 78%);
     mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.18) 0, transparent 78%);
@@ -7345,12 +7345,12 @@ img.alty-identity-bust-image {
   }
   60% {
     opacity: 0.34;
-    filter: blur(1.5px);
+    filter: blur(1px);
   }
   68%,
   100% {
     opacity: 0;
-    filter: blur(8px);
+    filter: blur(5px);
   }
 }
 
@@ -7364,14 +7364,14 @@ img.alty-identity-bust-image {
   }
   84% {
     opacity: 0.18;
-    filter: blur(9px);
+    filter: blur(5px);
     -webkit-mask-image: linear-gradient(180deg, #000 0 48%, rgba(0, 0, 0, 0.42) 68%, transparent 100%);
     mask-image: linear-gradient(180deg, #000 0 48%, rgba(0, 0, 0, 0.42) 68%, transparent 100%);
   }
   90%,
   100% {
     opacity: 0;
-    filter: blur(14px);
+    filter: blur(7px);
     -webkit-mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.18) 0, transparent 76%);
     mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.18) 0, transparent 76%);
   }
@@ -7386,13 +7386,13 @@ img.alty-identity-bust-image {
   }
   84% {
     opacity: 0.16;
-    filter: blur(8px);
+    filter: blur(5px);
     transform: scale(1.02, 0.94);
   }
   90%,
   100% {
     opacity: 0;
-    filter: blur(16px);
+    filter: blur(8px);
     transform: scale(1.08, 0.82);
   }
 }
@@ -7969,14 +7969,14 @@ img.alty-identity-bust-image {
     transform: none;
   }
   62% {
-    opacity: 0.74;
+    opacity: 0.6;
     transform: none;
   }
-  76% {
-    opacity: 0.26;
+  68% {
+    opacity: 0.2;
     transform: none;
   }
-  90%,
+  74%,
   100% {
     opacity: 0;
     transform: none;
