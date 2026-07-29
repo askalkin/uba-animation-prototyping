@@ -507,7 +507,6 @@ const prototypeMotionVariantSets = {
     variants: [
       { slug: "failure-wheel-red", title: "Red fill to X" },
       { slug: "failure-wheel-neutral", title: "Neutral fill to X" },
-      { slug: "failure-wheel-green", title: "Green fill to X" },
       { slug: "failure-verification-badge", title: "Badge fill to X" },
     ],
   },
@@ -713,12 +712,21 @@ function silverUbaCoinPrototype() {
       <span class="uba-coin-shadow" aria-hidden="true"></span>
       <div class="uba-coin-float">
         <div class="uba-coin-model">
-          <span class="uba-coin-depth depth-four"></span>
-          <span class="uba-coin-depth depth-three"></span>
-          <span class="uba-coin-depth depth-two"></span>
           <span class="uba-coin-depth depth-one"></span>
           <span class="uba-coin-face">
             <span class="uba-coin-logo-stack">
+              <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+                <defs>
+                  <linearGradient id="uba-coin-logo-metal" gradientUnits="userSpaceOnUse" x1="2" y1="0" x2="63" y2="75">
+                    <stop offset="0%" stop-color="#faf9f4"></stop>
+                    <stop offset="55%" stop-color="#d8d6cf"></stop>
+                    <stop offset="100%" stop-color="#a9a69e"></stop>
+                  </linearGradient>
+                </defs>
+              </svg>
+              ${ubaLogoSvg("uba-coin-logo-layer logo-depth logo-depth-3")}
+              ${ubaLogoSvg("uba-coin-logo-layer logo-depth logo-depth-2")}
+              ${ubaLogoSvg("uba-coin-logo-layer logo-depth logo-depth-1")}
               ${ubaLogoSvg("uba-coin-logo-layer logo-top")}
             </span>
           </span>
@@ -912,7 +920,7 @@ function altyBrandStory(type) {
     <div class="loader-scene alty-story-scene uba-seed-story uba-seed-${type}-story" role="img" aria-label="${labels[type]}">
       <div class="alty-story-panel uba-seed-panel">
         <div class="uba-seed-stage">
-          <div class="uba-seed-state uba-state-logo">${ubaLogoSvg("uba-logo-shape")}</div>
+          <div class="uba-seed-state uba-state-logo">${ubaSeedLogoSvg("uba-logo-shape")}</div>
           <div class="uba-seed-state uba-state-hourglass">${ubaHourglassMark()}</div>
           <div class="uba-seed-state uba-state-fan">${ubaFanMark()}</div>
           <div class="uba-seed-state uba-state-flower">${ubaFlowerMark()}</div>
@@ -936,7 +944,7 @@ function altyBrandStory(type) {
   `;
 }
 
-function ubaLogoSvg(className = "") {
+function ubaSeedLogoSvg(className = "") {
   return `
     <svg class="uba-logo-svg ${className}" viewBox="0 0 65 75" aria-hidden="true">
       <path d="M19.4005 74.2561C19.6342 74.2561 22.0495 73.943 23.2961 73.7866C31.0875 72.5346 35.8403 69.2482 35.8403 62.4407C35.8403 59.3891 34.7495 56.181 33.5808 53.2076C26.8023 39.5929 19.9458 25.978 13.0895 12.5195L0 74.2561H19.4005Z"></path>
@@ -1343,7 +1351,6 @@ function renderPrototypeMotionElement(slug, contextType = "") {
     "verification-badge": verificationBadgePrototype(),
     "failure-wheel-red": successWheelTwoPrototype("red", "error"),
     "failure-wheel-neutral": successWheelTwoPrototype("neutral", "error"),
-    "failure-wheel-green": successWheelTwoPrototype("green", "error"),
     "failure-verification-badge": verificationBadgePrototype("error"),
     "pull-to-refresh-blob-capsule": renderPrototypeRefreshGesture("blob"),
     "pull-to-refresh-glass-capsule": renderPrototypeRefreshGesture("clean"),
@@ -2063,7 +2070,8 @@ function initUbaLottieSpinners() {
   const tick = (now) => {
     instances.forEach((instance) => {
       const duration = instance.durationMs || 1000;
-      const progressFrame = ((now - startTime) % duration) / duration;
+      const elapsed = (now - startTime) % (duration * 2);
+      const progressFrame = elapsed <= duration ? elapsed / duration : 2 - elapsed / duration;
       const frame = instance.ip + progressFrame * (instance.op - instance.ip);
       updateUbaLottieSpinnerInstance(instance, frame);
     });
