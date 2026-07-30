@@ -1,3 +1,5 @@
 .vercel
 .env*
 prototype-recordings/
+.DS_Store
+.claude/

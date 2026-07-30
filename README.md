@@ -1,4 +1,4 @@
-# Loader Motion Lab
+# UBA-animations-prototypes
 
 A static multi-page loader project. Open `index.html` in a browser, or serve the
 folder locally if you prefer a local URL.

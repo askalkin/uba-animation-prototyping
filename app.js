@@ -123,6 +123,15 @@ const pages = [
     `,
   },
   {
+    slug: "uba-icon-loop",
+    title: "UBA icon loop",
+    accent: "ink",
+    label: "White loader-icon set (bank, card, earth, naira, security, wallet) drawing in, then reverse-erasing, one after another in an infinite loop.",
+    scene: () => `
+      ${ubaIconLoopScene()}
+    `,
+  },
+  {
     slug: "silver-uba-coin",
     title: "Silver UBA coin",
     accent: "ink",
@@ -239,7 +248,7 @@ const pages = [
   },
   {
     slug: "uba-loader-gradient-blob-prototype",
-    title: "Payment gradient transition",
+    title: "Page transition",
     accent: "uba",
     section: "prototypes",
     themeable: true,
@@ -263,7 +272,7 @@ const pages = [
   },
   {
     slug: "account-opening-almost-there",
-    title: "Account setup wait",
+    title: "Core spinners",
     accent: "ink",
     section: "prototypes",
     themeable: true,
@@ -306,8 +315,19 @@ const pages = [
     `,
   },
   {
+    slug: "code-error",
+    title: "Code error",
+    accent: "red",
+    section: "prototypes",
+    themeable: true,
+    label: "6-digit code mockup where an invalid code shakes the input row, turns the border red, and fires an error haptic.",
+    scene: () => `
+      ${altyMockupPrototype("otp-error")}
+    `,
+  },
+  {
     slug: "searching-keyboard",
-    title: "searching",
+    title: "Searching",
     accent: "ink",
     section: "prototypes",
     themeable: true,
@@ -369,6 +389,14 @@ const routeAliases = {
   "uba-media-transition-loader": "uba-loader-gradient-blob-prototype",
 };
 
+// Toggle to bring the "Motion elements" section back into the nav/routing.
+const MOTION_ELEMENTS_VISIBLE = false;
+const visibleSections = MOTION_ELEMENTS_VISIBLE ? ["motion", "prototypes"] : ["prototypes"];
+const visiblePages = MOTION_ELEMENTS_VISIBLE
+  ? pages
+  : pages.filter((page) => getPageSection(page) !== "motion");
+const defaultPage = visiblePages[0];
+
 const navGroups = {
   motion: [
     {
@@ -390,6 +418,7 @@ const navGroups = {
         "uba-spinner-1-red",
         "uba-spinner-2",
         "uba-spinner-2-red",
+        "uba-icon-loop",
         "silver-uba-coin",
         "uba-card-rotation",
       ],
@@ -418,18 +447,28 @@ const navGroups = {
   ],
   prototypes: [
     {
-      title: "Payment flow",
+      title: "Page transitions",
       slugs: ["uba-loader-gradient-blob-prototype"],
     },
     {
-      title: "Account onboarding",
-      slugs: [
-        "account-opening-pending",
-        "account-opening-almost-there",
-        "enable-biometrics",
-        "identity-verification",
-        "six-digit-code",
-      ],
+      title: "Core spinners",
+      slugs: ["account-opening-pending", "account-opening-almost-there"],
+    },
+    {
+      title: "Biometrics",
+      slugs: ["enable-biometrics"],
+    },
+    {
+      title: "Identity verification",
+      slugs: ["identity-verification"],
+    },
+    {
+      title: "Code entry",
+      slugs: ["six-digit-code"],
+    },
+    {
+      title: "Error states",
+      slugs: ["code-error", "couldnt-load-results"],
     },
     {
       title: "Search",
@@ -437,10 +476,10 @@ const navGroups = {
     },
     {
       title: "Success",
-      slugs: ["account-opening-success", "couldnt-load-results"],
+      slugs: ["account-opening-success"],
     },
     {
-      title: "History",
+      title: "Pull to refresh",
       slugs: ["transaction-history-pull-refresh"],
     },
   ],
@@ -450,13 +489,7 @@ const prototypeMotionVariantSets = {
   pending: {
     title: "Core spinners",
     variants: [
-      { slug: "progressive-blur-spinner-solo", title: "Red comet arc" },
-      { slug: "minimalist-spinner", title: "Single arc" },
-      { slug: "uba-spinner-1", title: "UBA spinner 1" },
-      { slug: "uba-spinner-1-red", title: "UBA spinner 1 red" },
-      { slug: "uba-spinner-2", title: "UBA spinner 2" },
-      { slug: "uba-spinner-2-red", title: "UBA spinner 2 red" },
-      { slug: "uba-card-rotation", title: "Card rotation" },
+      { slug: "uba-card-rotation", title: "Card rotation", number: "07" },
     ],
   },
   almost: {
@@ -469,6 +502,7 @@ const prototypeMotionVariantSets = {
       { slug: "uba-spinner-2", title: "UBA spinner 2" },
       { slug: "uba-spinner-2-red", title: "UBA spinner 2 red" },
       { slug: "silver-uba-coin", title: "Silver UBA coin" },
+      { slug: "uba-icon-loop", title: "Banking icons loader" },
     ],
   },
   searching: {
@@ -484,7 +518,7 @@ const prototypeMotionVariantSets = {
   biometrics: {
     title: "Biometrics",
     variants: [
-      { slug: "identity-verification-motion", title: "Fingerprint" },
+      { slug: "identity-verification-motion-layered", title: "Layered fingerprint" },
     ],
   },
   identity: {
@@ -496,10 +530,9 @@ const prototypeMotionVariantSets = {
   success: {
     title: "Success loaders",
     variants: [
-      { slug: "success-wheel-2", title: "Red fill to check" },
-      { slug: "success-spinner-neutral", title: "Neutral fill to check" },
-      { slug: "success-spinner-green", title: "Green fill to check" },
-      { slug: "verification-badge", title: "Verification badge" },
+      { slug: "success-spinner-neutral", title: "Neutral fill to check", number: "02" },
+      { slug: "success-spinner-green", title: "Green fill to check", number: "03" },
+      { slug: "verification-badge", title: "Verification badge", number: "04" },
     ],
   },
   failed: {
@@ -517,6 +550,7 @@ const prototypeMotionVariantSets = {
       { slug: "pull-to-refresh-glass-capsule", title: "Red sphere" },
       { slug: "pull-to-refresh-neutral-capsule-2", title: "Neutral check" },
       { slug: "flip-coin-pull-to-refresh-white", title: "White coin flip" },
+      { slug: "pull-to-refresh-line-fill", title: "Line fill" },
     ],
   },
 };
@@ -525,6 +559,8 @@ const app = document.getElementById("app");
 let prototypeTheme = "dark";
 const prototypeVariantState = {};
 let ubaLottieSpinnerFrame = 0;
+let ubaIconLoopGeneration = 0;
+let otpErrorHapticsGeneration = 0;
 
 try {
   prototypeTheme = window.localStorage.getItem("loader-motion-theme") || prototypeTheme;
@@ -627,7 +663,8 @@ function searchSpinnerIcon(variant = "red") {
             ></animateTransform>
           </linearGradient>
         </defs>
-        <path fill="url(#${gradientId})" d="M10.75 17.5C7.02 17.5 4 14.48 4 10.75S7.02 4 10.75 4s6.75 3.02 6.75 6.75a6.72 6.72 0 0 1-1.42 4.14L20 18.81 18.81 20l-3.92-3.92a6.72 6.72 0 0 1-4.14 1.42Zm0-1.7a5.05 5.05 0 1 0 0-10.1 5.05 5.05 0 0 0 0 10.1Z"></path>
+        <circle cx="10.75" cy="10.75" r="5.05" fill="none" stroke="url(#${gradientId})" stroke-width="1.5"></circle>
+        <path d="M14.35 14.35L20 20" fill="none" stroke="url(#${gradientId})" stroke-width="1.5" stroke-linecap="round"></path>
       </svg>
     </div>
   `;
@@ -676,6 +713,87 @@ function ubaLottieSpinnerScene(spinnerKey, label, variant = "neutral") {
     <div class="loader-scene uba-lottie-scene ${variant === "red" ? "uba-lottie-red-scene" : ""}" role="img" aria-label="${label}">
       <div class="uba-lottie-spinner" data-uba-lottie-spinner="${spinnerKey}">
         <span class="uba-lottie-fallback" aria-hidden="true"></span>
+      </div>
+    </div>
+  `;
+}
+
+const ubaIconLoopIcons = [
+  {
+    key: "bank",
+    viewBox: "0 0 24 24",
+    paths: [
+      "M10 18V11",
+      "M11.119 2.20498C11.3932 2.07044 11.6946 2.00049 12 2.00049C12.3054 2.00049 12.6068 2.07044 12.881 2.20498L20.721 6.05098C20.8225 6.10073 20.9042 6.18342 20.9527 6.28557C21.0012 6.38771 21.0136 6.50327 20.988 6.61339C20.9623 6.72351 20.9001 6.82168 20.8115 6.8919C20.7229 6.96211 20.6131 7.00021 20.5 6.99998H3.5C3.38702 6.99998 3.27737 6.96172 3.18892 6.89143C3.10047 6.82114 3.03843 6.72296 3.01292 6.6129C2.9874 6.50284 2.99992 6.38738 3.04842 6.28534C3.09692 6.1833 3.17855 6.10069 3.28 6.05098L11.119 2.20498Z",
+      "M14 18V11",
+      "M18 18V11",
+      "M3 22H21",
+      "M6 18V11",
+    ],
+  },
+  {
+    key: "card",
+    viewBox: "0 0 24 24",
+    paths: [
+      "M20 5H4C2.89543 5 2 5.89543 2 7V17C2 18.1046 2.89543 19 4 19H20C21.1046 19 22 18.1046 22 17V7C22 5.89543 21.1046 5 20 5Z",
+      "M2 10H22",
+    ],
+  },
+  {
+    key: "earth",
+    viewBox: "0 0 24 24",
+    paths: [
+      "M21.54 15H17C16.4696 15 15.9609 15.2107 15.5858 15.5858C15.2107 15.9609 15 16.4696 15 17V21.54",
+      "M7 3.33984V4.99984C7 5.79549 7.31607 6.55855 7.87868 7.12116C8.44129 7.68377 9.20435 7.99984 10 7.99984C10.5304 7.99984 11.0391 8.21056 11.4142 8.58563C11.7893 8.9607 12 9.46941 12 9.99984C12 11.0998 12.9 11.9998 14 11.9998C14.5304 11.9998 15.0391 11.7891 15.4142 11.4141C15.7893 11.039 16 10.5303 16 9.99984C16 8.89984 16.9 7.99984 18 7.99984H21.17",
+      "M11 21.95V18C11 17.4696 10.7893 16.9609 10.4142 16.5858C10.0391 16.2107 9.53042 16 8.99999 16C8.46955 16 7.96085 15.7893 7.58577 15.4142C7.2107 15.0391 6.99999 14.5304 6.99999 14V13C6.99999 12.4696 6.78927 11.9609 6.4142 11.5858C6.03913 11.2107 5.53042 11 4.99999 11H2.04999",
+      "M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z",
+    ],
+  },
+  {
+    key: "naira",
+    viewBox: "0 0 26 24",
+    paths: [
+      "M8.55554 19.1668V5.8335L18.3333 19.1668V5.8335",
+      "M5 10.7002H21",
+      "M5 14.2559H21",
+    ],
+  },
+  {
+    key: "security",
+    viewBox: "0 0 24 24",
+    paths: [
+      "M20 13C20 18 16.5 20.5 12.34 21.95C12.1222 22.0238 11.8855 22.0202 11.67 21.94C7.5 20.5 4 18 4 13V5.99996C4 5.73474 4.10536 5.48039 4.29289 5.29285C4.48043 5.10532 4.73478 4.99996 5 4.99996C7 4.99996 9.5 3.79996 11.24 2.27996C11.4519 2.09896 11.7214 1.99951 12 1.99951C12.2786 1.99951 12.5481 2.09896 12.76 2.27996C14.51 3.80996 17 4.99996 19 4.99996C19.2652 4.99996 19.5196 5.10532 19.7071 5.29285C19.8946 5.48039 20 5.73474 20 5.99996V13Z",
+      "M9 12L11 14L15 10",
+    ],
+  },
+  {
+    key: "wallet",
+    viewBox: "0 0 24 24",
+    paths: [
+      "M3 11H6.75C7.06049 11 7.36672 11.0723 7.64443 11.2111C7.92214 11.35 8.16371 11.5516 8.35 11.8L8.8 12.4C9.17259 12.8968 9.65572 13.3 10.2111 13.5777C10.7666 13.8554 11.379 14 12 14C12.621 14 13.2334 13.8554 13.7889 13.5777C14.3443 13.3 14.8274 12.8968 15.2 12.4L15.65 11.8C15.8363 11.5516 16.0779 11.35 16.3556 11.2111C16.6333 11.0723 16.9395 11 17.25 11H21",
+      "M3 7H21",
+      "M19 3H5C3.89543 3 3 3.89543 3 5V19C3 20.1046 3.89543 21 5 21H19C20.1046 21 21 20.1046 21 19V5C21 3.89543 20.1046 3 19 3Z",
+    ],
+  },
+];
+
+function ubaIconLoopScene() {
+  const icons = ubaIconLoopIcons
+    .map(
+      (icon) => `
+        <span class="uba-icon-loop-icon" data-uba-icon-loop-key="${icon.key}">
+          <svg viewBox="${icon.viewBox}" aria-hidden="true">
+            ${icon.paths.map((d) => `<path d="${d}"></path>`).join("")}
+          </svg>
+        </span>
+      `,
+    )
+    .join("");
+
+  return `
+    <div class="loader-scene uba-icon-loop-scene" role="img" aria-label="White UBA loader icons drawing in and reverse-erasing in a continuous loop" data-uba-icon-loop>
+      <div class="uba-icon-loop-stack">
+        ${icons}
       </div>
     </div>
   `;
@@ -1170,7 +1288,7 @@ function renderPrototypeVariantPager(type, variantSet, activeIndex) {
                 aria-label="Show ${variant.title}"
                 aria-pressed="${index === activeIndex}"
               >
-                ${String(index + 1).padStart(2, "0")}
+                ${variant.number || String(index + 1).padStart(2, "0")}
               </button>
             `,
           )
@@ -1183,7 +1301,9 @@ function renderPrototypeVariantPager(type, variantSet, activeIndex) {
 
 function fingerprintIdentityLoader(id = "fingerprint-loader", options = {}) {
   const useShield = Boolean(options.shield);
+  const hasStaticFingerprintBase = Boolean(options.staticFingerprintBase);
   const gradientId = `${id}-gradient`;
+  const staticGradientId = `${id}-static-gradient`;
   const glowId = `${id}-glow`;
   const paths = [
     {
@@ -1213,6 +1333,18 @@ function fingerprintIdentityLoader(id = "fingerprint-loader", options = {}) {
       ${useShield ? '<div class="fingerprint-shield-composite" aria-hidden="true"><img class="fingerprint-shield-image" src="./assets/identity-shield.png" alt="">' : ""}
       <svg class="fingerprint-loader-svg" viewBox="0 0 293 485" aria-hidden="true">
           <defs>
+            ${
+              hasStaticFingerprintBase
+                ? `
+                  <linearGradient id="${staticGradientId}" x1="35" y1="20" x2="255" y2="466" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stop-color="#ff6b58"></stop>
+                    <stop offset="42%" stop-color="#f11b12"></stop>
+                    <stop offset="74%" stop-color="#d51709"></stop>
+                    <stop offset="100%" stop-color="#8f0802"></stop>
+                  </linearGradient>
+                `
+                : ""
+            }
             <linearGradient id="${gradientId}" x1="35" y1="20" x2="255" y2="466" gradientUnits="userSpaceOnUse">
               <stop offset="0%" stop-color="#ff6b58"></stop>
               <stop offset="42%" stop-color="#f11b12"></stop>
@@ -1240,6 +1372,26 @@ function fingerprintIdentityLoader(id = "fingerprint-loader", options = {}) {
               </feMerge>
             </filter>
           </defs>
+          ${
+            hasStaticFingerprintBase
+              ? `
+                <g class="fingerprint-loader-lines fingerprint-loader-lines-static">
+                  ${paths
+                    .map(
+                      (path) => `
+                        <path
+                          class="fingerprint-loader-line ${path.className}"
+                          d="${path.d}"
+                          pathLength="100"
+                          stroke="url(#${staticGradientId})"
+                        ></path>
+                      `,
+                    )
+                    .join("")}
+                </g>
+              `
+              : ""
+          }
           <g class="fingerprint-loader-lines" filter="url(#${glowId})">
             ${paths
               .map(
@@ -1323,6 +1475,10 @@ function renderPrototypeMotionElement(slug, contextType = "") {
       </div>
     `,
     "identity-verification-motion": fingerprintIdentityLoader("prototype-fingerprint", { shield: true }),
+    "identity-verification-motion-layered": fingerprintIdentityLoader("prototype-fingerprint-layered", {
+      shield: true,
+      staticFingerprintBase: true,
+    }),
     "identity-scan-reveal": identityScanRevealPrototype(),
     "identity-bust-focus": identityBustFocusPrototype(),
     "progressive-blur-spinner-solo": `
@@ -1343,6 +1499,7 @@ function renderPrototypeMotionElement(slug, contextType = "") {
     "uba-spinner-1-red": ubaLottieSpinnerScene("uba-spinner-1", "Compact UBA spinner 1 red", "red"),
     "uba-spinner-2": ubaLottieSpinnerScene("uba-spinner-2", "Compact UBA spinner 2"),
     "uba-spinner-2-red": ubaLottieSpinnerScene("uba-spinner-2", "Compact UBA spinner 2 red", "red"),
+    "uba-icon-loop": ubaIconLoopScene(),
     "silver-uba-coin": silverUbaCoinPrototype(),
     "uba-card-rotation": ubaCardRotationPrototype(),
     "success-wheel-2": successWheelTwoPrototype(),
@@ -1358,12 +1515,21 @@ function renderPrototypeMotionElement(slug, contextType = "") {
     "pull-to-refresh-neutral-capsule-2": renderPrototypeRefreshGesture("neutral-complete"),
     "flip-coin-pull-to-refresh-red": renderPrototypeRefreshGesture("flip-red"),
     "flip-coin-pull-to-refresh-white": renderPrototypeRefreshGesture("flip-white"),
+    "pull-to-refresh-line-fill": renderPrototypeRefreshGesture("line-fill"),
   };
 
   return `<div class="prototype-motion-render">${motionMarkup[slug] || ""}</div>`;
 }
 
 function renderPrototypeRefreshGesture(variant) {
+  if (variant === "line-fill") {
+    return `
+      <div class="prototype-refresh-gesture ptr-line-fill-gesture" aria-hidden="true">
+        ${pullRefreshLineFillMark()}
+      </div>
+    `;
+  }
+
   const variantClasses = {
     blob: "ptr-blob-capsule",
     clean: "ptr-clean-capsule",
@@ -1383,6 +1549,26 @@ function renderPrototypeRefreshGesture(variant) {
         ${hasSuccessCheck ? pullRefreshSuccessCheck() : ""}
       </div>
     </div>
+  `;
+}
+
+function pullRefreshLineFillMark() {
+  const paths = [
+    "M101.755 160.74L113.692 104.994C119.867 117.203 126.039 129.527 132.145 141.852C133.298 144.809 134.269 147.765 134.264 150.49C134.258 153.494 133.23 155.582 131.432 157.096C129.571 158.664 126.753 159.727 122.993 160.327C122.363 160.405 121.468 160.519 120.688 160.614C120.294 160.662 119.937 160.705 119.666 160.735C119.334 160.772 119.253 160.775 119.303 160.776Z",
+    "M162.389 89.5L150.565 145.271C144.364 133.074 138.168 120.762 132.037 108.449C130.878 105.495 129.901 102.541 129.901 99.8154C129.901 96.8113 130.924 94.7222 132.719 93.2041C134.577 91.6325 137.393 90.5634 141.151 89.9561C141.782 89.8769 142.675 89.7609 143.456 89.6641C143.849 89.6153 144.206 89.5719 144.478 89.541C144.809 89.5032 144.89 89.5 144.84 89.5Z",
+  ];
+
+  return `
+    <svg class="ptr-line-fill-mark" viewBox="72 68 124 112" aria-hidden="true" focusable="false">
+      ${paths
+        .map(
+          (path) => `
+            <path class="ptr-line-fill-guide" d="${path}" pathLength="100"></path>
+            <path class="ptr-line-fill-draw" d="${path}" pathLength="100"></path>
+          `,
+        )
+        .join("")}
+    </svg>
   `;
 }
 
@@ -1410,6 +1596,8 @@ function altyMockupPrototype(type) {
     biometrics: "Enable biometrics onboarding screen",
     identity: "Identity verification onboarding screen",
     otp: "6-digit verification code login screen",
+    "otp-error": "6-digit verification code login screen with an invalid-code error state",
+    "otp-loading": "Static 6-digit verification code screen with a scrim and banking-icons loader overlay",
     searching: "Searching screen with keyboard",
     success: "Successful account-opening screen",
     failed: "Could not load results screen",
@@ -1435,6 +1623,8 @@ function altyMockupPhone(type) {
     biometrics: altyMockupBiometricsScreen,
     identity: altyMockupIdentityScreen,
     otp: altyMockupOtpScreen,
+    "otp-error": altyMockupOtpErrorScreen,
+    "otp-loading": altyMockupOtpLoadingScreen,
     searching: altyMockupSearchingScreen,
     success: altyMockupSuccessScreen,
     failed: altyMockupFailedScreen,
@@ -1445,6 +1635,30 @@ function altyMockupPhone(type) {
     <section class="alty-mock-phone alty-mock-phone-${type}">
       ${screens[type]()}
     </section>
+  `;
+}
+
+function splashScreenPrototype() {
+  return `
+    <div class="alty-mockup-prototype alty-mockup-splash-prototype" role="group" aria-label="Splash screen animation">
+      <article class="alty-mockup-stage">
+        <section class="alty-mock-phone alty-mock-phone-splash">
+          <div class="uba-splash-canvas" aria-hidden="true">
+            <svg class="uba-splash-logo" viewBox="0 0 202 78" xmlns="http://www.w3.org/2000/svg">
+              <g class="uba-splash-row1">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M122.013 9.54619C122.013 4.06891 118.74 0.782579 111.728 4.95911e-05L90.8473 0L80.7965 48.4347H100.664C101.565 48.4347 103.845 48.0082 104.877 47.8153C105.095 47.7744 105.258 47.7441 105.339 47.7304C115.468 45.4613 120.143 38.4191 120.143 30.8292C120.143 26.0561 116.403 23.0046 111.183 22.2222C111.105 22.2222 110.949 22.2222 110.871 22.1439C117.961 19.7965 122.013 15.4147 122.013 9.54619ZM110.637 32.3158C110.637 28.7165 108.612 26.1343 104.015 25.1172C103.158 24.9607 101.599 24.8043 101.444 24.8043L95.5222 24.9608C95.3664 25.039 95.2885 25.1172 95.2885 25.2738C94.6399 28.2045 94.0336 31.1988 93.4256 34.2015C92.8648 36.9708 92.3026 39.7473 91.7044 42.4878H99.4958C102.223 42.4878 106.622 40.1274 108.923 37.1671C109.664 36.2151 110.092 35.5239 110.326 34.7414C110.56 33.959 110.637 32.4723 110.637 32.3158ZM111.847 11.8074C111.912 11.4492 111.962 11.1737 111.962 11.1111C111.962 7.51174 108.066 6.18159 105.573 6.18159L99.7296 6.33804C99.0333 6.30366 99.0293 6.33977 98.9239 7.29662C98.9094 7.42837 98.893 7.57758 98.8725 7.74647C98.7037 8.95934 98.6388 9.38963 98.4829 10.1722C98.4287 10.717 98.2989 11.2997 98.1725 11.8675C98.1173 12.1152 98.0628 12.3601 98.0154 12.5978C97.9612 13.1425 97.8314 13.7253 97.705 14.2931C97.6498 14.5408 97.5953 14.7857 97.5479 15.0234C97.4937 15.5682 97.364 16.151 97.2375 16.7188C97.1823 16.9665 97.1278 17.2114 97.0805 17.449C96.9638 18.0739 96.8472 18.7182 96.7305 19.3625C96.6134 20.0092 96.4963 20.656 96.3792 21.2832H103.314C103.781 21.2832 106.975 19.4053 107.755 18.9358C109.936 17.6056 111.417 15.1799 111.572 13.5368C111.619 13.0673 111.75 12.3444 111.847 11.8074Z" fill="white"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M169.93 48.2781L158.243 4.95911e-05H154.814L122.247 48.2781H130.973L137.206 38.8103H157.541L159.411 48.2781H169.93ZM155.671 31.6898H141.569L151.854 15.8841L155.671 31.6898Z" fill="white"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M46.885 7.48645C47.39 5.04383 47.9021 2.56692 48.3844 4.95911e-05L38.7231 0.000118256C37.5936 5.47621 36.4641 10.9719 35.3346 16.4675C34.2046 21.9655 33.0746 27.4635 31.9447 32.9419C31.9069 33.2452 31.8874 33.5485 31.8685 33.8429C31.8484 34.1561 31.829 34.4592 31.7888 34.7415V36.6194C31.7888 40.923 34.1262 46.7132 40.1256 48.1999C40.9826 48.4347 41.9176 48.6694 42.7747 48.8259C43.6317 48.9824 44.6446 49.1389 45.5796 49.2172H50.3322C50.5014 49.2172 51.1194 49.1352 51.6843 49.0602C51.9 49.0316 52.1079 49.004 52.2801 48.9824C57.6561 48.3564 63.8891 46.2437 68.564 39.7493C68.6829 39.5907 68.7961 39.4428 68.9052 39.3002C69.7788 38.1584 70.3906 37.3587 71.6026 34.1938C73.1875 27.2481 74.6837 20.2728 76.1822 13.286C77.1147 8.93852 78.0481 4.58664 79.0045 0.234747V1.90735e-05H70.1223C69.4726 3.07592 68.8367 6.15878 68.2003 9.24443C66.6996 16.5201 65.1957 23.8113 63.4996 31.0639C61.6297 39.045 55.7862 42.9574 49.8647 42.9574C43.7096 42.9574 42.1513 38.6539 42.1513 33.8808C42.1513 30.7309 42.7955 27.6619 43.4472 24.5574C43.702 23.3433 43.958 22.1238 44.1771 20.8919C44.7224 17.9186 45.3458 14.8669 45.969 11.9718C46.2659 10.481 46.5741 8.99022 46.885 7.48645Z" fill="white"/>
+              </g>
+              <g class="uba-splash-row2">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M198.757 72.1546L198.835 72.0764V74.815C197.822 75.754 197.277 76.067 196.342 76.067C195.251 76.067 194.472 75.6757 194.472 74.4238C194.472 72.5459 196.498 72.0764 197.589 72.0764C197.744 72.0764 198.368 72.1546 198.757 72.1546ZM84.536 72.1546C84.614 72.2328 84.6919 72.2329 84.7698 72.0764V74.7368C83.9127 75.754 82.9778 76.067 82.1987 76.067C81.1858 76.067 80.4066 75.754 80.4066 74.502C80.4066 72.6241 82.2765 72.0764 83.4453 72.0764C83.6012 72.0764 84.1465 72.0764 84.536 72.1546ZM74.5631 72.8589C74.5631 75.441 72.6152 75.754 70.9012 75.754C70.7453 75.754 69.9663 75.754 69.5766 75.6757V70.1202C70.0441 70.1985 70.8232 70.1202 71.057 70.1202C73.0049 70.1202 74.5631 70.5114 74.5631 72.8589ZM56.4092 69.1812V75.128C55.8638 75.754 54.9288 75.9887 54.4613 75.9887C51.8122 75.9887 51.111 74.1107 51.111 72.1546C51.111 70.3549 52.046 68.1641 54.3834 68.1641C55.0067 68.1641 55.8638 68.3206 56.4092 69.1812ZM43.7871 68.2423C44.4104 68.3206 45.6571 69.6507 45.6571 70.3549V70.7462H39.8914V70.5114C40.3589 68.8683 41.4498 68.1641 42.8522 68.1641C43.008 68.1641 43.4755 68.164 43.7871 68.2423ZM132.141 71.9981C132.141 73.5631 131.674 75.9887 129.258 75.9887C126.765 75.9887 126.531 73.4848 126.531 72.0764C126.531 70.6679 126.921 68.0858 129.336 68.0858C131.752 68.0858 132.141 70.5114 132.141 71.9981ZM179.824 66.6773V77.4754H177.954V68.2423H176.474V66.6773H179.824ZM27.2698 66.6773V77.4754H25.322V68.2423H23.8416V66.6773H27.2698ZM156.061 72.7806H151.932L154.113 66.5991L156.061 72.7806ZM199.147 66.9904C200.16 67.3816 200.861 69.3377 200.861 70.1984V75.2844C200.939 75.754 201.095 76.3017 201.718 76.6929V77.6319H200.783C200.16 77.4754 199.225 76.9276 199.069 76.3017C198.524 77.2407 196.498 77.7101 195.641 77.7101C193.693 77.7101 192.525 76.067 192.525 74.4238C192.525 71.5286 195.641 70.5115 197.511 70.5115C197.667 70.5115 198.368 70.6679 198.836 70.7462C198.913 70.6679 198.913 70.5115 198.913 70.3549C198.913 68.6336 197.589 68.1641 196.498 68.1641C195.719 68.1641 194.55 68.3988 193.927 69.103C193.615 68.6336 193.07 67.7728 193.07 67.538C193.07 67.3816 193.771 66.9904 194.083 66.9121C194.395 66.7556 194.862 66.5991 195.407 66.5209C195.641 66.4426 196.264 66.4426 196.42 66.4426C197.277 66.4426 198.368 66.6773 199.147 66.9904ZM190.966 67.538C190.732 67.9293 190.421 68.3988 190.109 68.8683C189.018 68.2423 188.473 68.0858 187.538 68.0858C184.811 68.0858 184.188 70.4332 184.188 72.1546C184.188 74.4237 185.278 76.067 187.616 76.067C188.395 76.067 189.564 75.5975 190.265 75.0497L191.044 76.6147C190.421 77.1624 188.239 77.7101 187.226 77.7101C185.201 77.7101 182.941 76.4581 182.24 73.5631C182.24 73.4065 182.162 73.0936 182.162 72.937V71.4504C182.474 67.7727 185.123 66.4426 187.616 66.4426C188.629 66.4426 190.031 66.9121 190.966 67.538ZM175.617 66.5991L174.916 68.477C174.526 68.3205 173.747 68.0858 173.591 68.0858C172.345 68.0858 171.098 69.4943 171.098 70.5897V77.4754H169.15V66.6773H171.098C171.098 67.1469 171.098 67.6946 171.176 68.1641C171.799 66.8338 173.202 66.4426 174.137 66.4426C174.371 66.4426 175.15 66.5209 175.617 66.5991ZM142.816 66.7556C142.582 67.3816 142.348 67.9293 142.114 68.477C141.725 68.3205 140.946 68.0858 140.79 68.0858C139.543 68.0858 138.297 69.4943 138.297 70.5897V77.4754H136.349V66.6773H138.297C138.297 67.1469 138.297 67.6946 138.374 68.1641C138.998 66.8338 140.4 66.4426 141.335 66.4426C141.803 66.4426 142.816 66.7556 142.816 66.7556ZM134.167 71.9981C134.167 74.7368 132.998 77.7101 129.337 77.7101C125.752 77.7101 124.428 74.7368 124.428 71.9981C124.428 69.103 126.064 66.4426 129.337 66.4426C133.076 66.4426 134.167 69.3377 134.167 71.9981ZM95.678 66.5209C97.0025 66.5209 98.2491 68.477 98.2491 69.6507V77.4754H96.3792V70.3549C96.3013 68.7117 95.3663 68.0858 94.1976 68.0858C93.9638 68.0858 93.8081 68.0076 93.7301 68.0858C93.2627 68.1641 91.6264 68.8683 91.6264 69.4943V77.4754H89.7565V66.6773H91.081C91.2369 67.0686 91.4706 67.538 91.6264 67.9293C92.4056 66.8338 93.6522 66.4426 94.743 66.4426C94.8988 66.4426 95.3663 66.5209 95.678 66.5209ZM86.3283 68.5553C86.4062 68.9465 86.7179 69.5725 86.7179 69.8073V74.8933C86.8737 75.3627 86.7958 76.2234 87.575 76.6929V77.6319H86.7179C86.1724 77.5537 85.1596 77.0842 85.0037 76.3017C84.5363 77.2407 82.2768 77.7101 81.4976 77.7101C79.6277 77.7101 78.3811 76.067 78.3811 74.4238C78.3811 71.5286 81.4976 70.5115 83.3675 70.5115C83.5234 70.5115 84.3025 70.6679 84.77 70.7462C84.8479 70.6679 84.8479 70.6679 84.8479 70.4332C84.8479 68.8683 83.7572 68.1641 82.4326 68.1641C81.4976 68.1641 80.7186 68.3206 79.8614 69.103C79.4719 68.8683 79.0824 67.9293 78.9265 67.538C79.7056 66.9121 81.264 66.4426 82.3547 66.4426C83.4455 66.4426 85.7829 66.7556 86.3283 68.5553ZM47.6052 71.0592C47.6052 71.2157 47.6052 71.8416 47.5273 72.2329H39.7359V72.8589C39.8917 75.0497 41.5279 76.067 43.1641 76.067C44.0212 76.067 44.8003 75.8322 45.8132 75.128C46.1249 75.5192 46.3586 75.9887 46.6702 76.4582C46.1249 77.1624 43.7095 77.7101 42.7746 77.7101C39.3464 77.7101 37.7102 74.8933 37.7102 72.1546C37.7102 69.2595 39.5022 66.4426 42.7746 66.4426C45.6574 66.4426 47.6052 68.0858 47.6052 71.0592ZM19.868 66.7556C20.1017 66.8339 20.725 67.4599 20.9588 67.7728C21.0367 67.7728 21.66 69.3378 21.66 69.6507V77.4754H19.7901V70.3549C19.4785 68.5553 18.8551 68.0858 17.6085 68.0858C16.7514 68.0858 15.8944 68.3989 15.0374 69.4943V77.4754H13.1675V66.6774H14.492C14.6477 67.0686 14.8815 67.538 15.0374 67.9293C15.8165 66.8339 17.0631 66.4426 18.1539 66.4426C18.3098 66.4426 19.3226 66.5209 19.868 66.7556ZM73.7842 66.2862C73.7842 68.3206 72.0701 68.5553 70.7455 68.5553H69.5769V64.33H70.8235C71.9922 64.33 73.7842 64.33 73.7842 66.2862ZM32.8795 66.6773H35.8403V68.1641H32.8795V74.2673C33.2692 75.6758 33.8145 76.067 34.7495 76.067C34.9832 76.067 35.8403 75.8322 36.3078 75.6758C36.3857 76.2234 36.5416 76.8495 36.6194 77.3971C35.7624 77.5537 34.2042 77.7102 33.9704 77.7102C32.3342 77.7102 30.9317 76.1453 30.9317 74.6586V68.1641H29.6851V66.6774H30.9317V64.4083C31.555 64.1735 32.2563 63.8605 32.8795 63.704L32.8795 66.6773ZM1.94786 62.6868V72.7023C2.25948 75.0497 3.50608 75.9105 5.06436 75.9105C6.38897 75.9105 7.63552 75.2845 8.25887 73.4849V62.6868H10.2846V73.7196C9.81709 77.0059 7.09016 77.7102 5.06436 77.7102C3.42818 77.7102 1.24666 77.2407 0.31168 75.128C0.155781 74.6586 0 73.876 0 73.7196V62.6868H1.94786ZM180.136 63.704C180.136 64.4864 179.669 64.9559 178.967 64.9559C178.188 64.9559 177.799 64.2517 177.799 63.7822C177.799 62.9998 178.188 62.6085 178.967 62.6085C179.669 62.6085 180.136 62.9998 180.136 63.704ZM27.5816 63.704C27.5816 64.4864 26.8803 64.9559 26.3349 64.9559C25.5558 64.9559 25.1662 64.2517 25.1662 63.7822C25.1662 62.9998 25.7896 62.6085 26.3349 62.6085C27.0362 62.6085 27.5816 62.9998 27.5816 63.704ZM75.888 66.1296C75.888 67.2251 75.3427 68.3206 73.7844 69.103L73.7065 69.2595C75.9659 69.729 76.823 71.4504 76.823 73.1718C76.823 73.3283 76.6672 74.0326 76.5892 74.4238C76.3555 76.1453 73.6285 77.4754 72.304 77.4754H67.4733V62.5303H71.1353C73.239 62.5303 75.888 63.1563 75.888 66.1296ZM154.425 62.452L160.035 77.4754H157.775C157.464 76.4581 157.074 75.3627 156.684 74.3455H151.386C150.919 75.3627 150.529 76.4581 150.218 77.4754H147.958C149.906 72.4676 151.932 67.4599 153.88 62.452H154.425ZM167.748 62.5303C167.67 62.6868 167.203 63.9387 167.125 63.9387C166.891 63.9387 166.346 63.7822 166.112 63.7822C164.71 63.7822 164.086 65.0342 164.086 66.1296C164.086 66.2861 164.164 66.4426 164.164 66.6773H166.346V68.2423H164.164V77.4754H162.294V68.2423H160.736V66.6773H162.294C162.216 64.0952 163.541 62.2173 165.956 62.2173C166.112 62.2173 167.125 62.3737 167.748 62.5303ZM123.883 62.5303L123.415 63.9387C123.104 63.8605 122.558 63.7822 122.324 63.7822C121.467 63.7822 120.299 64.643 120.299 65.5819V66.6773H122.558V68.2423H120.299V77.4754H118.429V68.2423H116.87V66.6773H118.429C118.429 64.017 119.753 62.2173 122.091 62.2173C122.324 62.2173 123.337 62.3737 123.883 62.5303ZM102.924 62.2173V71.5286L106.975 66.6773H109.235L105.885 70.7462L110.014 77.4754H107.91L104.56 72.0764C104.093 72.6241 103.469 73.25 102.924 73.7979V77.4754H100.976V62.2173L102.924 62.2173ZM58.3573 62.2173V77.4754H56.4874C56.4874 77.2407 56.4874 77.0059 56.4095 76.7712C55.4746 77.4754 54.5396 77.6319 53.6046 77.6319C50.1764 77.6319 49.0077 74.7368 49.0077 72.3112C49.0077 69.8855 50.6439 66.4426 53.9941 66.4426C54.5396 66.4426 55.8641 66.6774 56.4874 67.1469V62.2173L58.3573 62.2173Z" fill="white"/>
+              </g>
+            </svg>
+          </div>
+          ${altyMockupHomeIndicator()}
+        </section>
+      </article>
+    </div>
   `;
 }
 
@@ -1553,7 +1767,8 @@ function altyMockupIdentityScreen() {
   `;
 }
 
-function altyMockupOtpScreen() {
+function altyMockupOtpScreen(options = {}) {
+  const { isStatic = false } = options;
   const digits = ["1", "2", "3", "5", "3", "3"];
   const otpOffsets = [154, 92, 31, -31, -92, -154];
 
@@ -1566,7 +1781,7 @@ function altyMockupOtpScreen() {
         <p>We've sent a 6-digit verification code to mobile phone <strong>+234 ** *** 4000</strong>.</p>
       </div>
       <div class="alty-mock-otp-stack" aria-label="Verification code 1 2 3 5 3 3">
-        <div class="alty-mock-otp-cells" aria-hidden="true">
+        <div class="alty-mock-otp-cells ${isStatic ? "is-static" : ""}" aria-hidden="true">
           ${digits
             .map(
               (digit, index) => `
@@ -1576,14 +1791,60 @@ function altyMockupOtpScreen() {
               `,
             )
             .join("")}
-          <svg class="alty-mock-otp-success" viewBox="0 0 64 64" aria-hidden="true">
-            <circle cx="32" cy="32" r="25"></circle>
-            <path d="M20 33.5 29 42 45 23"></path>
-          </svg>
+          ${
+            isStatic
+              ? ""
+              : `
+            <svg class="alty-mock-otp-success" viewBox="0 0 64 64" aria-hidden="true">
+              <circle cx="32" cy="32" r="25"></circle>
+              <path d="M20 33.5 29 42 45 23"></path>
+            </svg>
+          `
+          }
         </div>
         <p class="alty-mock-resend">Didn't get the code? <a href="#six-digit-code">Resend code</a></p>
       </div>
     </main>
+  `;
+}
+
+function altyMockupOtpErrorScreen() {
+  const digits = ["1", "2", "3", "5", "3", "3"];
+
+  return `
+    ${altyMockupStatusBar()}
+    ${altyMockupTopBar()}
+    <main class="alty-mock-content alty-mock-otp-content">
+      <div class="alty-mock-copy-block">
+        <h2>6-digit code</h2>
+        <p>We've sent a 6-digit verification code to mobile phone <strong>+234 ** *** 4000</strong>.</p>
+      </div>
+      <div class="alty-mock-otp-stack" aria-label="Verification code 1 2 3 5 3 3">
+        <div class="alty-mock-otp-cells is-error" data-otp-error-cells aria-hidden="true">
+          ${digits
+            .map(
+              (digit, index) => `
+                <span style="--otp-index:${index};">
+                  <b>${digit}</b>
+                </span>
+              `,
+            )
+            .join("")}
+        </div>
+        <p class="alty-mock-resend">Didn't get the code? <a href="#six-digit-code">Resend code</a></p>
+      </div>
+    </main>
+  `;
+}
+
+function altyMockupOtpLoadingScreen() {
+  return `
+    ${altyMockupOtpScreen({ isStatic: true })}
+    <div class="alty-mock-scrim" aria-hidden="true">
+      <div class="alty-mock-scrim-loader">
+        ${ubaIconLoopScene()}
+      </div>
+    </div>
   `;
 }
 
@@ -1855,7 +2116,7 @@ function altyMockupTransactionGroup(title, total, items, leadingMarkup = "") {
 function getCurrentSlug() {
   const rawSlug = window.location.hash.replace("#", "");
   const slug = routeAliases[rawSlug] || rawSlug;
-  return pages.some((page) => page.slug === slug) ? slug : pages[0].slug;
+  return visiblePages.some((page) => page.slug === slug) ? slug : defaultPage.slug;
 }
 
 function renderPageLink(page, index, activePage) {
@@ -1926,11 +2187,13 @@ function renderPageNav(sectionPages, activePage, activeSection) {
 
 function render() {
   const currentSlug = getCurrentSlug();
-  const activePage = pages.find((page) => page.slug === currentSlug) || pages[0];
+  const activePage = pages.find((page) => page.slug === currentSlug) || defaultPage;
   const activeSection = getPageSection(activePage);
   const sectionPages = pages.filter((page) => getPageSection(page) === activeSection);
-  const sectionControls = `
+  const sectionControls = visibleSections.length > 1
+    ? `
     <nav class="section-switch" aria-label="Gallery section">
+      ${MOTION_ELEMENTS_VISIBLE ? `
       <a
         class="section-choice ${activeSection === "motion" ? "is-active" : ""}"
         href="#${pages.find((page) => getPageSection(page) === "motion").slug}"
@@ -1938,6 +2201,7 @@ function render() {
       >
         Motion elements
       </a>
+      ` : ""}
       <a
         class="section-choice ${activeSection === "prototypes" ? "is-active" : ""}"
         href="#${pages.find((page) => getPageSection(page) === "prototypes").slug}"
@@ -1946,7 +2210,8 @@ function render() {
         Prototypes
       </a>
     </nav>
-  `;
+  `
+    : "";
   const themeControls = `
     <div class="theme-pager theme-toggle" aria-label="Website theme">
       <button
@@ -1981,9 +2246,9 @@ function render() {
   document.documentElement.dataset.prototypeTheme = prototypeTheme === "light" ? "light" : "dark";
   app.innerHTML = `
     <aside class="side-rail" aria-label="Loader pages">
-      <a class="brand-mark" href="#${pages[0].slug}" aria-label="Loader Motion Lab home">
+      <a class="brand-mark" href="#${defaultPage.slug}" aria-label="UBA-animations-prototypes home">
         <span></span>
-        <strong>Loader Motion Lab</strong>
+        <strong>UBA-animations-prototypes</strong>
       </a>
       <nav class="page-nav">
         ${renderPageNav(sectionPages, activePage, activeSection)}
@@ -2004,6 +2269,8 @@ function render() {
   initThemeSwitchers();
   initPrototypeVariantPagers();
   initUbaLottieSpinners();
+  initUbaIconLoopScenes();
+  initOtpErrorHaptics();
 }
 
 function initThemeSwitchers() {
@@ -2080,6 +2347,135 @@ function initUbaLottieSpinners() {
   };
 
   tick(startTime);
+}
+
+function initUbaIconLoopScenes() {
+  ubaIconLoopGeneration += 1;
+  const generation = ubaIconLoopGeneration;
+
+  const scene = document.querySelector("[data-uba-icon-loop]");
+  if (!scene) {
+    return;
+  }
+
+  const DRAW_MS = 850;
+  const HOLD_MS = 500;
+  const ERASE_MS = 850;
+  const GAP_MS = 300;
+  // Draw starts fast so short, just-begun strokes (which render as a round-cap
+  // dot until they gain some length) pass by almost instantly instead of lingering.
+  const DRAW_EASE = "cubic-bezier(0.16, 1, 0.3, 1)";
+  const ERASE_EASE = "cubic-bezier(0.65, 0, 0.35, 1)";
+
+  const iconPathGroups = Array.from(scene.querySelectorAll(".uba-icon-loop-icon")).map((icon) => {
+    const paths = Array.from(icon.querySelectorAll("path"));
+    paths.forEach((path) => {
+      const length = path.getTotalLength();
+      path.dataset.len = length;
+      path.style.strokeDasharray = String(length);
+      path.style.strokeDashoffset = String(length);
+      path.style.opacity = "0";
+    });
+    return paths;
+  });
+
+  if (!iconPathGroups.length) {
+    return;
+  }
+
+  const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+  // Belt-and-braces: force every icon other than the active one back to fully
+  // hidden before each turn, cancelling any animation still attached to it, so a
+  // stray path can never remain partway drawn while a different icon is showing.
+  function forceHidden(paths) {
+    paths.forEach((path) => {
+      path.getAnimations().forEach((anim) => anim.cancel());
+      path.style.strokeDashoffset = path.dataset.len;
+      path.style.opacity = "0";
+    });
+  }
+
+  function animatePaths(paths, direction, duration) {
+    const anims = paths.map((path) => {
+      const length = Number(path.dataset.len);
+      const revealLength = Math.min(8, Math.max(4.5, length * 0.28));
+      const revealOffset = Math.max(length - revealLength, 0);
+      const keyframes =
+        direction === "draw"
+          ? [
+              { strokeDashoffset: length, opacity: 0, offset: 0 },
+              { strokeDashoffset: revealOffset, opacity: 0, offset: 0.12 },
+              { strokeDashoffset: revealOffset, opacity: 1, offset: 0.121 },
+              { strokeDashoffset: 0, opacity: 1, offset: 1 },
+            ]
+          : [
+              { strokeDashoffset: 0, opacity: 1, offset: 0 },
+              { strokeDashoffset: revealOffset, opacity: 1, offset: 0.84 },
+              { strokeDashoffset: revealOffset, opacity: 0, offset: 0.841 },
+              { strokeDashoffset: length, opacity: 0, offset: 1 },
+            ];
+      const easing = direction === "draw" ? DRAW_EASE : ERASE_EASE;
+      return path.animate(keyframes, { duration, easing, fill: "forwards" });
+    });
+
+    return Promise.all(anims.map((anim) => anim.finished)).then(() => {
+      anims.forEach((anim) => {
+        try {
+          anim.commitStyles();
+        } catch {
+          // Element may have been detached by a subsequent render.
+        }
+        anim.cancel();
+      });
+    });
+  }
+
+  (async function loop() {
+    let index = 0;
+
+    while (ubaIconLoopGeneration === generation) {
+      const paths = iconPathGroups[index];
+      iconPathGroups.forEach((group, groupIndex) => {
+        if (groupIndex !== index) {
+          forceHidden(group);
+        }
+      });
+      await animatePaths(paths, "draw", DRAW_MS);
+      if (ubaIconLoopGeneration !== generation) break;
+      await delay(HOLD_MS);
+      if (ubaIconLoopGeneration !== generation) break;
+      await animatePaths(paths, "erase", ERASE_MS);
+      if (ubaIconLoopGeneration !== generation) break;
+      await delay(GAP_MS);
+      index = (index + 1) % iconPathGroups.length;
+    }
+  })();
+}
+
+function initOtpErrorHaptics() {
+  otpErrorHapticsGeneration += 1;
+  const generation = otpErrorHapticsGeneration;
+
+  const cells = document.querySelector("[data-otp-error-cells]");
+  if (!cells || typeof navigator.vibrate !== "function") {
+    return;
+  }
+
+  // Mirrors the otp-error-shake keyframe timing below: the row starts shaking at 39% of the 7.2s loop.
+  const CYCLE_MS = 7200;
+  const SHAKE_AT_MS = CYCLE_MS * 0.39;
+  const ERROR_HAPTIC_PATTERN = [24, 48, 18];
+  const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+  (async function loop() {
+    while (otpErrorHapticsGeneration === generation) {
+      await delay(SHAKE_AT_MS);
+      if (otpErrorHapticsGeneration !== generation) break;
+      navigator.vibrate(ERROR_HAPTIC_PATTERN);
+      await delay(CYCLE_MS - SHAKE_AT_MS);
+    }
+  })();
 }
 
 function createUbaLottieSpinnerInstance(container, data) {
@@ -2411,7 +2807,7 @@ function initPullZones() {
 window.addEventListener("hashchange", render);
 
 if (!window.location.hash) {
-  window.location.hash = pages[0].slug;
+  window.location.hash = defaultPage.slug;
 }
 
 render();

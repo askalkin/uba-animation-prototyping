@@ -1,0 +1,7 @@
+{
+  "name": "uba-animation-prototyping",
+  "private": true,
+  "dependencies": {
+    "@vercel/edge": "^1.1.1"
+  }
+}
