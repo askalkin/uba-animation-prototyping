@@ -530,9 +530,13 @@ const prototypeMotionVariantSets = {
   success: {
     title: "Success loaders",
     variants: [
-      { slug: "success-spinner-neutral", title: "Neutral fill to check", number: "02" },
-      { slug: "success-spinner-green", title: "Green fill to check", number: "03" },
-      { slug: "verification-badge", title: "Verification badge", number: "04" },
+      { slug: "success-spinner-neutral", title: "Neutral fill to check", number: "01" },
+      { slug: "success-spinner-green", title: "Green fill to check", number: "02" },
+      { slug: "green-success-confetti", title: "Green confetti", number: "03" },
+      { slug: "green-success-rays", title: "Green rays", number: "04" },
+      { slug: "verification-badge", title: "Verification badge", number: "05" },
+      { slug: "uploaded-success-confetti", title: "Uploaded confetti", number: "06" },
+      { slug: "uploaded-success-confetti-green", title: "Green uploaded confetti", number: "07" },
     ],
   },
   failed: {
@@ -561,6 +565,7 @@ const prototypeVariantState = {};
 let ubaLottieSpinnerFrame = 0;
 let ubaIconLoopGeneration = 0;
 let otpErrorHapticsGeneration = 0;
+let successConfettiLottieInstances = [];
 
 try {
   prototypeTheme = window.localStorage.getItem("loader-motion-theme") || prototypeTheme;
@@ -928,23 +933,129 @@ function pullRefreshSuccessCheck() {
   `;
 }
 
+function successWheelTwoMark(result = "success") {
+  const isError = result === "error";
+  const resultPath = isError ? "M43 43 L77 77 M77 43 L43 77" : "M42 61 L55 73 L79 45";
+
+  return `
+    <div class="success-wheel-two-mark">
+      <svg class="success-wheel-two-svg" viewBox="0 0 120 120" aria-hidden="true">
+        <g class="success-wheel-two-rotor">
+          <circle class="success-wheel-two-line" cx="60" cy="60" r="34" pathLength="100"></circle>
+        </g>
+        <circle class="success-wheel-two-fill" cx="60" cy="60" r="34"></circle>
+        <path class="success-wheel-two-check ${isError ? "is-error" : ""}" d="${resultPath}" pathLength="78"></path>
+      </svg>
+    </div>
+  `;
+}
+
 function successWheelTwoPrototype(variant = "red", result = "success") {
   const isGreen = variant === "green";
   const isNeutral = variant === "neutral";
   const isError = result === "error";
   const resultLabel = isError ? "an X" : "a check";
-  const resultPath = isError ? "M43 43 L77 77 M77 43 L43 77" : "M42 61 L55 73 L79 45";
 
   return `
     <div class="loader-scene success-wheel-two-scene ${isGreen ? "success-wheel-two-green-scene" : ""} ${isNeutral ? "success-wheel-two-neutral-scene" : ""} ${isError ? "success-wheel-two-error-scene" : ""}" role="img" aria-label="Circular loader filling ${isNeutral ? "neutral" : isGreen ? "green" : "red"} and resolving into ${resultLabel}">
-      <div class="success-wheel-two-mark">
-        <svg class="success-wheel-two-svg" viewBox="0 0 120 120" aria-hidden="true">
-          <g class="success-wheel-two-rotor">
-            <circle class="success-wheel-two-line" cx="60" cy="60" r="34" pathLength="100"></circle>
-          </g>
-          <circle class="success-wheel-two-fill" cx="60" cy="60" r="34"></circle>
-          <path class="success-wheel-two-check ${isError ? "is-error" : ""}" d="${resultPath}" pathLength="78"></path>
-        </svg>
+      ${successWheelTwoMark(result)}
+    </div>
+  `;
+}
+
+function successConfettiPieces() {
+  const pieces = [
+    { x: -148, y: -92, w: 8, h: 16, tone: "green", shape: "rect", rotate: -250, drift: -18, delay: 0 },
+    { x: -112, y: -132, w: 9, h: 9, tone: "white", shape: "dot", rotate: 180, drift: -24, delay: 25 },
+    { x: -70, y: -154, w: 6, h: 20, tone: "green", shape: "ribbon", rotate: -140, drift: -12, delay: 55 },
+    { x: -26, y: -166, w: 10, h: 10, tone: "white", shape: "spark", rotate: 160, drift: -8, delay: 10 },
+    { x: 22, y: -164, w: 7, h: 18, tone: "green", shape: "rect", rotate: 210, drift: 8, delay: 45 },
+    { x: 72, y: -150, w: 8, h: 8, tone: "white", shape: "dot", rotate: 260, drift: 12, delay: 80 },
+    { x: 116, y: -122, w: 6, h: 21, tone: "green", shape: "ribbon", rotate: 135, drift: 22, delay: 35 },
+    { x: 150, y: -84, w: 10, h: 10, tone: "white", shape: "spark", rotate: 240, drift: 26, delay: 0 },
+    { x: -166, y: -30, w: 6, h: 18, tone: "green", shape: "rect", rotate: -210, drift: -20, delay: 95 },
+    { x: -142, y: 28, w: 11, h: 11, tone: "white", shape: "dot", rotate: -90, drift: -28, delay: 30 },
+    { x: -118, y: 82, w: 7, h: 18, tone: "green", shape: "ribbon", rotate: -160, drift: -14, delay: 75 },
+    { x: -58, y: 122, w: 10, h: 10, tone: "white", shape: "spark", rotate: 210, drift: -10, delay: 55 },
+    { x: 0, y: 138, w: 8, h: 17, tone: "green", shape: "rect", rotate: 180, drift: 0, delay: 100 },
+    { x: 60, y: 120, w: 9, h: 9, tone: "white", shape: "dot", rotate: 310, drift: 10, delay: 65 },
+    { x: 118, y: 82, w: 6, h: 18, tone: "green", shape: "ribbon", rotate: 150, drift: 16, delay: 90 },
+    { x: 146, y: 28, w: 9, h: 9, tone: "white", shape: "spark", rotate: 280, drift: 28, delay: 40 },
+    { x: 168, y: -28, w: 7, h: 17, tone: "green", shape: "rect", rotate: 210, drift: 22, delay: 105 },
+    { x: -92, y: -68, w: 7, h: 7, tone: "white", shape: "dot", rotate: -120, drift: -16, delay: 120 },
+    { x: -42, y: -104, w: 5, h: 16, tone: "green", shape: "ribbon", rotate: -200, drift: -8, delay: 135 },
+    { x: 42, y: -104, w: 7, h: 7, tone: "white", shape: "dot", rotate: 220, drift: 8, delay: 115 },
+    { x: 94, y: -66, w: 5, h: 18, tone: "green", shape: "ribbon", rotate: 160, drift: 18, delay: 130 },
+    { x: -92, y: 50, w: 8, h: 8, tone: "white", shape: "spark", rotate: -230, drift: -18, delay: 150 },
+    { x: 92, y: 52, w: 8, h: 15, tone: "green", shape: "rect", rotate: 250, drift: 18, delay: 145 },
+    { x: 0, y: -118, w: 11, h: 11, tone: "white", shape: "spark", rotate: 180, drift: 0, delay: 165 },
+  ];
+  return pieces
+    .map(
+      ({ x, y, w, h, tone, shape, rotate, drift, delay }) => `
+        <span
+          class="success-confetti success-confetti-${shape}"
+          style="--confetti-x:${x}px; --confetti-y:${y}px; --confetti-w:${w}px; --confetti-h:${h}px; --confetti-color:var(--success-confetti-${tone}); --confetti-rotate:${rotate}deg; --confetti-drift:${drift}px; --confetti-delay:${delay}ms;"
+        ></span>
+      `,
+    )
+    .join("");
+}
+
+function greenSuccessConfettiPrototype() {
+  return `
+    <div class="loader-scene success-wheel-two-scene success-wheel-two-green-scene green-success-confetti-scene" role="img" aria-label="Green circular loader filling and resolving into a check with confetti">
+      <div class="success-confetti-field" aria-hidden="true">
+        ${successConfettiPieces()}
+      </div>
+      ${successWheelTwoMark()}
+    </div>
+  `;
+}
+
+function successRayLines() {
+  const rays = [
+    { angle: 0, delay: 0 },
+    { angle: 45, delay: 45 },
+    { angle: 90, delay: 80 },
+    { angle: 135, delay: 35 },
+    { angle: 180, delay: 110 },
+    { angle: 225, delay: 60 },
+    { angle: 270, delay: 95 },
+    { angle: 315, delay: 20 },
+  ];
+
+  return rays
+    .map(
+      ({ angle, delay }) => `
+        <span
+          class="success-ray-line"
+          style="--ray-angle:${angle}deg; --ray-delay:${delay}ms;"
+        ></span>
+      `,
+    )
+    .join("");
+}
+
+function greenSuccessRaysPrototype() {
+  return `
+    <div class="loader-scene success-wheel-two-scene success-wheel-two-green-scene green-success-rays-scene" role="img" aria-label="Green circular loader filling and resolving into a check with rounded radial highlight lines">
+      <div class="success-ray-field" aria-hidden="true">
+        ${successRayLines()}
+      </div>
+      ${successWheelTwoMark()}
+    </div>
+  `;
+}
+
+function uploadedSuccessConfettiPrototype(palette = "") {
+  const isGreenPalette = palette === "green";
+  const delayAttribute = isGreenPalette ? ' data-success-confetti-delay-ms="5050" data-success-confetti-start-frame="30"' : "";
+
+  return `
+    <div class="loader-scene success-lottie-confetti-scene ${isGreenPalette ? "success-lottie-confetti-green-scene" : ""}" role="img" aria-label="${isGreenPalette ? "Green and white uploaded confetti animation" : "Uploaded confetti animation"} on a transparent background">
+      <div class="success-lottie-confetti" data-success-confetti-lottie${isGreenPalette ? ' data-success-confetti-palette="green"' : ""}${delayAttribute}>
+        <span class="success-lottie-fallback" aria-hidden="true"></span>
       </div>
     </div>
   `;
@@ -1505,7 +1616,11 @@ function renderPrototypeMotionElement(slug, contextType = "") {
     "success-wheel-2": successWheelTwoPrototype(),
     "success-spinner-neutral": successWheelTwoPrototype("neutral"),
     "success-spinner-green": successWheelTwoPrototype("green"),
+    "green-success-confetti": greenSuccessConfettiPrototype(),
+    "green-success-rays": greenSuccessRaysPrototype(),
     "verification-badge": verificationBadgePrototype(),
+    "uploaded-success-confetti": uploadedSuccessConfettiPrototype(),
+    "uploaded-success-confetti-green": uploadedSuccessConfettiPrototype("green"),
     "failure-wheel-red": successWheelTwoPrototype("red", "error"),
     "failure-wheel-neutral": successWheelTwoPrototype("neutral", "error"),
     "failure-verification-badge": verificationBadgePrototype("error"),
@@ -1572,7 +1687,17 @@ function pullRefreshLineFillMark() {
   `;
 }
 
-function altyMockupMotionSlot(type, slotStyle = "") {
+function getActivePrototypeMotionSlug(type) {
+  const variantSet = prototypeMotionVariantSets[type];
+
+  if (!variantSet) {
+    return "";
+  }
+
+  return variantSet.variants[getPrototypeVariantIndex(type)]?.slug || "";
+}
+
+function altyMockupMotionSlot(type, slotStyle = "", overrideSlug = "") {
   const variantSet = prototypeMotionVariantSets[type];
 
   if (!variantSet) {
@@ -1580,7 +1705,9 @@ function altyMockupMotionSlot(type, slotStyle = "") {
   }
 
   const activeIndex = getPrototypeVariantIndex(type);
-  const activeVariant = variantSet.variants[activeIndex];
+  const activeVariant = overrideSlug
+    ? variantSet.variants.find((variant) => variant.slug === overrideSlug) || { slug: overrideSlug }
+    : variantSet.variants[activeIndex];
 
   return `
     <div class="alty-mock-motion-slot is-${type} ${slotStyle ? `is-${slotStyle}` : ""}" data-motion-source="${activeVariant.slug}" aria-hidden="true">
@@ -1605,9 +1732,11 @@ function altyMockupPrototype(type) {
   };
   const variantSet = prototypeMotionVariantSets[type];
   const activeIndex = getPrototypeVariantIndex(type);
+  const activeVariant = variantSet?.variants[activeIndex];
+  const activeMotionSource = activeVariant ? ` data-active-motion-source="${activeVariant.slug}"` : "";
 
   return `
-    <div class="alty-mockup-prototype alty-mockup-${type}-prototype" role="group" aria-label="${labels[type]}">
+    <div class="alty-mockup-prototype alty-mockup-${type}-prototype"${activeMotionSource} role="group" aria-label="${labels[type]}">
       <article class="alty-mockup-stage ${variantSet ? "has-prototype-variant-pager" : ""}">
         ${variantSet ? renderPrototypeVariantPager(type, variantSet, activeIndex) : ""}
         ${altyMockupPhone(type)}
@@ -1868,36 +1997,49 @@ function altyMockupSearchingScreen() {
 }
 
 function altyMockupSuccessScreen() {
+  const activeSuccessMotion = getActivePrototypeMotionSlug("success");
+  const showGreenSpinnerUnderConfetti = activeSuccessMotion === "uploaded-success-confetti-green";
+
   return `
     ${altyMockupStatusBar()}
     ${altyMockupTopBar()}
     <main class="alty-mock-content alty-mock-success-content">
       <div class="alty-mock-copy-block">
         <h2>Your account<br>successfully opened!</h2>
-        <p>Your account details are below. Go to the Home screen to fund your account and start using it.</p>
+        <p>Your <span class="alty-mock-text-accent">Tier 1 Savings</span> account is ready. You can start funding your account and enjoy banking with UBA.</p>
       </div>
+      ${showGreenSpinnerUnderConfetti ? altyMockupMotionSlot("success", "success", "success-spinner-green") : ""}
       ${altyMockupMotionSlot("success", "success")}
       <div class="alty-mock-details-stack">
         <section class="alty-mock-detail-card">
           ${altyMockupDetailRow("Name", "Balogun Seyi")}
           ${altyMockupDetailRow("Account number", "0123456789")}
         </section>
-        <section class="alty-mock-detail-card is-large">
-          <header>
-            <span>Additional account details</span>
-            <i aria-hidden="true">⌃</i>
-          </header>
-          ${altyMockupDetailRow("Tier", "1")}
-          ${altyMockupDetailRow("Account type", "Savings")}
-          ${altyMockupDetailRow("Currency", "Naira")}
+        <section class="alty-mock-upgrade-card" aria-label="Get higher limits">
+          <div class="alty-mock-upgrade-glow" aria-hidden="true"></div>
+          <div class="alty-mock-upgrade-content">
+            <div class="alty-mock-upgrade-copy">
+              <h3>Get higher limits</h3>
+              <p>Upgrade your account to increase your transaction limits.</p>
+              <button class="alty-mock-upgrade-button" type="button"><span>Upgrade account</span></button>
+            </div>
+            ${altyMockupCoinStack()}
+          </div>
         </section>
       </div>
     </main>
-    <footer class="alty-mock-footer">
-      ${altyMockupButton("Open card", "secondary")}
+    <footer class="alty-mock-footer is-single">
       ${altyMockupButton("Go to Home", "primary")}
     </footer>
     ${altyMockupHomeIndicator()}
+  `;
+}
+
+function altyMockupCoinStack() {
+  return `
+    <div class="alty-mock-upgrade-art" aria-hidden="true">
+      <img class="alty-mock-upgrade-coins" src="./assets/account-success-upgrade-coins.png" alt="">
+    </div>
   `;
 }
 
@@ -2269,6 +2411,7 @@ function render() {
   initThemeSwitchers();
   initPrototypeVariantPagers();
   initUbaLottieSpinners();
+  initSuccessConfettiLotties();
   initUbaIconLoopScenes();
   initOtpErrorHaptics();
 }
@@ -2292,6 +2435,8 @@ function initThemeSwitchers() {
         themeButton.classList.toggle("is-active", isActive);
         themeButton.setAttribute("aria-pressed", String(isActive));
       });
+
+      initSuccessConfettiLotties();
     });
   });
 }
@@ -2347,6 +2492,171 @@ function initUbaLottieSpinners() {
   };
 
   tick(startTime);
+}
+
+function initSuccessConfettiLotties() {
+  successConfettiLottieInstances.forEach((instance) => instance.destroy());
+  successConfettiLottieInstances = [];
+
+  const containers = Array.from(document.querySelectorAll("[data-success-confetti-lottie]"));
+  if (!containers.length) {
+    return;
+  }
+
+  if (!window.lottie || !window.confettiLottieData) {
+    containers.forEach((container) => {
+      container.dataset.lottieState = "missing";
+    });
+    return;
+  }
+
+  containers.forEach((container) => {
+    const delayMs = Number(container.dataset.successConfettiDelayMs || 0);
+    const hasDelay = Number.isFinite(delayMs) && delayMs > 0;
+    const startFrame = Number(container.dataset.successConfettiStartFrame || 0);
+
+    container.dataset.lottieState = hasDelay ? "waiting" : "loading";
+    container.style.opacity = hasDelay ? "0" : "";
+
+    const animationData = cloneLottieData(window.confettiLottieData);
+    const successPalette = getSuccessConfettiLottiePalette(container);
+
+    if (successPalette) {
+      recolorSuccessConfettiLottie(animationData, successPalette);
+    }
+
+    try {
+      const instance = window.lottie.loadAnimation({
+        animationData,
+        autoplay: !hasDelay,
+        container,
+        loop: false,
+        renderer: "svg",
+        rendererSettings: {
+          hideOnTransparent: true,
+          preserveAspectRatio: "xMidYMid slice",
+          progressiveLoad: true,
+        },
+      });
+      let hasStarted = !hasDelay;
+
+      instance.addEventListener("DOMLoaded", () => {
+        container.dataset.lottieState = hasStarted ? "loaded" : "waiting";
+      });
+      instance.addEventListener("data_failed", () => {
+        container.dataset.lottieState = "missing";
+      });
+
+      if (hasDelay) {
+        const timeoutId = window.setTimeout(() => {
+          hasStarted = true;
+          container.style.opacity = "";
+          container.dataset.lottieState = "loaded";
+          instance.goToAndPlay(Number.isFinite(startFrame) ? startFrame : 0, true);
+        }, delayMs);
+
+        successConfettiLottieInstances.push({
+          destroy() {
+            window.clearTimeout(timeoutId);
+            instance.destroy();
+          },
+        });
+      } else {
+        successConfettiLottieInstances.push(instance);
+      }
+    } catch {
+      container.style.opacity = "";
+      container.dataset.lottieState = "missing";
+    }
+  });
+}
+
+function getSuccessConfettiLottiePalette(container) {
+  if (container.dataset.successConfettiPalette !== "green") {
+    return null;
+  }
+
+  const green = [0.133, 0.773, 0.369, 1];
+  const white = [1, 1, 1, 1];
+
+  return prototypeTheme === "light" ? [green] : [green, white];
+}
+
+function recolorSuccessConfettiLottie(animationData, palette) {
+  let colorIndex = 0;
+  const nextColor = () => palette[colorIndex++ % palette.length].slice();
+  const isStaticColor = (value) => (
+    Array.isArray(value)
+    && value.length >= 3
+    && value.slice(0, 4).every((channel) => Number.isFinite(Number(channel)))
+  );
+  const setFlatColor = (colorProperty) => {
+    if (isStaticColor(colorProperty?.k)) {
+      colorProperty.k = nextColor();
+    }
+  };
+  const setGradientColors = (gradientProperty) => {
+    const stopCount = Number(gradientProperty?.p || 0);
+    const value = gradientProperty?.k?.k;
+
+    if (!stopCount || !Array.isArray(value)) {
+      return;
+    }
+
+    const applyStops = (stops) => {
+      if (!Array.isArray(stops)) {
+        return;
+      }
+
+      for (let index = 0; index < stopCount; index += 1) {
+        const offset = index * 4;
+        const color = nextColor();
+        stops[offset + 1] = color[0];
+        stops[offset + 2] = color[1];
+        stops[offset + 3] = color[2];
+      }
+    };
+
+    if (value.every((channel) => Number.isFinite(Number(channel)))) {
+      applyStops(value);
+      return;
+    }
+
+    value.forEach((keyframe) => {
+      applyStops(keyframe.s);
+      applyStops(keyframe.e);
+    });
+  };
+  const walk = (node) => {
+    if (!node || typeof node !== "object") {
+      return;
+    }
+
+    if (Array.isArray(node)) {
+      node.forEach(walk);
+      return;
+    }
+
+    if (node.ty === "fl" || node.ty === "st") {
+      setFlatColor(node.c);
+    }
+
+    if (node.ty === "gf" || node.ty === "gs") {
+      setGradientColors(node.g);
+    }
+
+    Object.values(node).forEach(walk);
+  };
+
+  walk(animationData);
+}
+
+function cloneLottieData(data) {
+  if (typeof structuredClone === "function") {
+    return structuredClone(data);
+  }
+
+  return JSON.parse(JSON.stringify(data));
 }
 
 function initUbaIconLoopScenes() {
