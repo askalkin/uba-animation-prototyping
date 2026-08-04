@@ -1073,6 +1073,83 @@ button {
   pointer-events: none;
 }
 
+.uba-coin-flip-scene {
+  --coin-radius: 106px;
+  --coin-half-thickness: 9px;
+  overflow: visible;
+}
+
+.uba-coin-flip-float {
+  display: grid;
+  place-items: center;
+  position: relative;
+  z-index: 1;
+  transform-style: preserve-3d;
+  animation: uba-coin-float 5.4s cubic-bezier(0.45, 0, 0.2, 1) infinite;
+  will-change: transform;
+}
+
+.uba-coin-flip {
+  width: 212px;
+  height: 212px;
+  position: relative;
+  transform-style: preserve-3d;
+  animation: uba-coin-flip-spin 3s linear 1 both;
+  will-change: transform;
+}
+
+.uba-coin-flip-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+}
+
+.uba-coin-flip-face.is-front {
+  transform: translateZ(var(--coin-half-thickness));
+}
+
+.uba-coin-flip-face.is-back {
+  transform: rotateY(180deg) translateZ(var(--coin-half-thickness));
+}
+
+.uba-coin-flip .uba-coin-logo-stack,
+.uba-coin-flip .uba-coin-logo-layer {
+  backface-visibility: hidden;
+}
+
+/* Cylindrical edge band — a ring of thin metal panels giving the coin real thickness. */
+.uba-coin-cyl-edge {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 0;
+  height: 0;
+  transform-style: preserve-3d;
+}
+
+.uba-coin-cyl-seg {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: calc(var(--coin-half-thickness) * 2);
+  height: 15px;
+  margin-left: calc(var(--coin-half-thickness) * -1);
+  margin-top: -7.5px;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      rgba(58, 55, 50, 0.32) 0 0.6px,
+      rgba(255, 255, 255, 0.28) 0.6px 1.2px,
+      rgba(120, 117, 110, 0.12) 1.2px 2.4px
+    ),
+    linear-gradient(90deg, #7f7c74, #efeee8 42%, #cfcdc6 60%, #6f6c65);
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.4),
+    inset 0 -1px 2px rgba(52, 49, 44, 0.4);
+  backface-visibility: hidden;
+  transform: rotateZ(var(--seg-angle)) rotateY(90deg) translateZ(var(--coin-radius));
+}
+
 .uba-coin-shadow {
   width: 238px;
   height: 42px;
@@ -1389,6 +1466,42 @@ button {
   transform-origin: 50% 100%;
   animation: success-ray-grow 5.8s cubic-bezier(0.18, 0.9, 0.22, 1) infinite;
   animation-delay: var(--ray-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+.green-success-stars-scene {
+  --success-star-green: var(--success-wheel-color);
+  --success-star-white: #fffaf3;
+  width: min(520px, 78vmin);
+  overflow: visible;
+}
+
+.app-shell[data-prototype-theme="light"] .green-success-stars-scene {
+  --success-star-white: var(--success-star-green);
+}
+
+.success-star-field {
+  position: absolute;
+  inset: 6%;
+  z-index: 1;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.success-star {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: var(--star-size, 14px);
+  height: var(--star-size, 14px);
+  background: var(--star-color, var(--success-star-white));
+  clip-path: polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%);
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.2) rotate(0deg);
+  transform-origin: center;
+  filter: drop-shadow(0 0 6px rgba(var(--success-wheel-rgb), 0.35));
+  animation: success-star-sprinkle 5.8s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+  animation-delay: var(--star-delay, 0ms);
   will-change: opacity, transform;
 }
 
@@ -4511,27 +4624,82 @@ button {
   max-width: none;
 }
 
-.alty-mock-motion-slot[data-motion-source="uba-card-rotation"] {
+.alty-mock-motion-slot[data-motion-source^="uba-card-rotation"] {
   width: 188px;
   height: 148px;
 }
 
-.alty-mock-motion-slot[data-motion-source="uba-card-rotation"] .uba-card-rotation-scene {
+.alty-mock-motion-slot[data-motion-source^="uba-card-rotation"] .uba-card-rotation-scene {
   min-height: 0;
 }
 
-.alty-mock-motion-slot[data-motion-source="uba-card-rotation"] .uba-card-flip {
+.alty-mock-motion-slot[data-motion-source^="uba-card-rotation"] .uba-card-flip {
   width: 172px;
 }
 
-.alty-mock-motion-slot[data-motion-source="uba-card-rotation"] .uba-card-shadow {
+.alty-mock-motion-slot[data-motion-source^="uba-card-rotation"] .uba-card-shadow {
   width: 146px;
   height: 20px;
   bottom: 16px;
   filter: blur(11px);
 }
 
-.alty-mock-motion-slot.is-pending[data-motion-source="uba-card-rotation"]::before,
+.alty-mock-motion-slot[data-motion-source^="uba-coin-flip"] {
+  width: 188px;
+  height: 168px;
+  overflow: visible;
+}
+
+.alty-mock-motion-slot[data-motion-source^="uba-coin-flip"] .uba-coin-flip-scene {
+  width: 212px;
+  min-height: 212px;
+  max-width: none;
+  aspect-ratio: 1;
+  perspective: 780px;
+  transform: scale(0.6);
+  transform-origin: center;
+}
+
+.alty-mock-motion-slot[data-motion-source^="uba-coin-flip"] .uba-coin-shadow {
+  width: 190px;
+  height: 34px;
+  bottom: 44px;
+  filter: blur(15px);
+}
+
+.alty-mock-motion-slot.is-pending[data-motion-source^="uba-coin-flip"] .uba-coin-flip-float {
+  animation: uba-coin-flip-float-settle 3.4s cubic-bezier(0.45, 0, 0.2, 1) 1 forwards;
+}
+
+.alty-mock-motion-slot.is-pending[data-motion-source^="uba-coin-flip"] .uba-coin-shadow {
+  animation: uba-coin-flip-shadow-settle 3.4s cubic-bezier(0.45, 0, 0.2, 1) 1 forwards;
+}
+
+.alty-mock-motion-slot.is-pending[data-motion-source^="uba-coin-flip"]::before {
+  content: "";
+  width: 128px;
+  height: 30px;
+  position: absolute;
+  left: 50%;
+  bottom: 10px;
+  z-index: -1;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.12);
+  filter: blur(16px);
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+/* Red-shadow duplicates: recolor the contact shadow / glow to the "Go home" button red. */
+.alty-mock-motion-slot[data-motion-source="uba-coin-flip-red"] .uba-silver-coin-scene {
+  --uba-coin-shadow: rgba(213, 23, 9, 0.34);
+}
+
+.alty-mock-motion-slot[data-motion-source="uba-card-rotation-red"] .uba-card-rotation-scene {
+  --uba-card-shadow: rgba(213, 23, 9, 0.32);
+}
+
+.alty-mock-motion-slot.is-pending[data-motion-source^="uba-card-rotation"]::before,
 .alty-mock-motion-slot.is-almost[data-motion-source="silver-uba-coin"]::before {
   content: "";
   width: 172px;
@@ -4550,6 +4718,11 @@ button {
 .app-shell[data-prototype-theme="light"] .alty-mock-motion-slot.is-pending[data-motion-source="uba-card-rotation"]::before,
 .app-shell[data-prototype-theme="light"] .alty-mock-motion-slot.is-almost[data-motion-source="silver-uba-coin"]::before {
   background: rgba(0, 0, 0, 0.1);
+}
+
+.alty-mock-motion-slot.is-pending[data-motion-source="uba-coin-flip-red"]::before,
+.alty-mock-motion-slot.is-pending[data-motion-source="uba-card-rotation-red"]::before {
+  background: rgba(213, 23, 9, 0.22);
 }
 
 .alty-mock-motion-slot[data-motion-source="silver-uba-coin"] {
@@ -5402,6 +5575,83 @@ button {
   animation: otp-success-check-draw 7.2s ease-in-out infinite;
 }
 
+/* Monochrome colorway: success circle follows the theme —
+   black on light, white on dark — with a contrasting check mark. */
+.alty-mock-otp-cells.is-mono .alty-mock-otp-success circle {
+  fill: var(--mock-text);
+  filter:
+    drop-shadow(0 14px 28px color-mix(in srgb, var(--mock-text) 26%, transparent))
+    drop-shadow(0 0 18px color-mix(in srgb, var(--mock-text) 16%, transparent));
+}
+
+.alty-mock-otp-cells.is-mono .alty-mock-otp-success path {
+  stroke: var(--mock-phone-bg);
+}
+
+/* Green colorway: recolor the border-loader gradient, glow and success mark. */
+.alty-mock-otp-cells.is-green span {
+  background:
+    linear-gradient(
+      color-mix(in srgb, var(--mock-phone-bg) 96%, var(--mock-text) 4%),
+      color-mix(in srgb, var(--mock-phone-bg) 96%, var(--mock-text) 4%)
+    ) padding-box,
+    conic-gradient(
+      from var(--otp-border-angle),
+      transparent 0 8%,
+      rgba(134, 239, 172, calc(var(--otp-border-alpha) * 0.72)) 15%,
+      rgba(74, 222, 128, var(--otp-border-alpha)) 27%,
+      rgba(22, 163, 74, var(--otp-border-alpha)) 43%,
+      rgba(34, 197, 94, calc(var(--otp-border-alpha) * 0.94)) 57%,
+      rgba(134, 239, 172, calc(var(--otp-border-alpha) * 0.74)) 72%,
+      transparent 86% 100%
+    ) border-box,
+    linear-gradient(
+      var(--otp-border-track),
+      var(--otp-border-track)
+    ) border-box;
+  box-shadow:
+    0 0 10px rgba(22, 163, 74, calc(var(--otp-border-alpha) * 0.24)),
+    0 0 22px rgba(74, 222, 128, calc(var(--otp-border-alpha) * 0.16));
+}
+
+.alty-mock-otp-cells.is-green .alty-mock-otp-success circle {
+  fill: #22c55e;
+  filter:
+    drop-shadow(0 14px 28px rgba(34, 197, 94, 0.26))
+    drop-shadow(0 0 18px rgba(34, 197, 94, 0.16));
+}
+
+/* Green colorway: the "Resend code" / "Download the SecurePass app" links
+   deliberately stay red — only the button and loader turn green. */
+.alty-otp-green .alty-mock-liquid-button.is-primary {
+  color: #ffffff;
+  background:
+    linear-gradient(180deg, #22c55e 0%, #16a34a 72%, #15803d 100%),
+    linear-gradient(0deg, #999999, #999999),
+    linear-gradient(0deg, #ffffff, #ffffff),
+    rgba(255, 255, 255, 0.75);
+  background-blend-mode: plus-darker, overlay, saturation, normal;
+  box-shadow:
+    0 18px 46px rgba(0, 0, 0, 0.12),
+    0 18px 46px rgba(34, 197, 94, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.26);
+}
+
+/* SecurePass "Update limit" button stays red even in the green colorway. */
+.alty-mock-securepass-content.alty-otp-green .alty-mock-liquid-button.is-primary {
+  color: #fefdfd;
+  background:
+    linear-gradient(180deg, #d51709 0%, #b70e06 72%, #a70702 100%),
+    linear-gradient(0deg, #999999, #999999),
+    linear-gradient(0deg, #ffffff, #ffffff),
+    rgba(255, 255, 255, 0.75);
+  background-blend-mode: plus-darker, overlay, saturation, normal;
+  box-shadow:
+    0 18px 46px rgba(0, 0, 0, 0.12),
+    0 18px 46px rgba(213, 23, 9, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.26);
+}
+
 .alty-mock-resend {
   margin: 0;
   color: var(--mock-subtle);
@@ -6072,6 +6322,105 @@ img.alty-identity-bust-image {
   font-size: 20px;
 }
 
+.alty-mock-securepass-content {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  bottom: 308px;
+}
+
+.alty-mock-securepass-content .alty-mock-copy-block {
+  gap: 12px;
+}
+
+.alty-mock-securepass-content .alty-mock-copy-block h2 {
+  max-width: none;
+  font-size: 32px;
+  line-height: 40px;
+}
+
+.alty-mock-securepass-content .alty-mock-copy-block p {
+  max-width: 361px;
+  color: var(--mock-text);
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+.alty-mock-securepass-hint {
+  display: flex;
+  gap: 4px;
+  font-size: 14px;
+}
+
+.alty-mock-securepass-hint a {
+  font-size: 14px;
+}
+
+.alty-mock-securepass-actions {
+  margin-top: auto;
+  display: grid;
+  gap: 12px;
+}
+
+.alty-mock-limit-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 20px 16px;
+  border-radius: 20px;
+  background: var(--mock-surface);
+}
+
+.alty-mock-limit-card span {
+  color: var(--mock-subtle);
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+.alty-mock-limit-card strong {
+  color: var(--mock-text);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.alty-mock-keyboard-numeric {
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  padding: 8px 6px 36px;
+  border-radius: 12px 12px 62px 62px;
+}
+
+.alty-mock-keyboard-numeric .alty-mock-key-rows {
+  gap: 11px;
+}
+
+.alty-mock-keyboard-numeric .alty-mock-key-row {
+  gap: 6px;
+}
+
+.alty-mock-keyboard-numeric .alty-mock-key {
+  width: auto;
+  height: 48px;
+  flex: 1 1 0;
+  border-radius: 5px;
+  font-size: 25px;
+  font-weight: 400;
+}
+
+.alty-mock-keyboard-numeric .alty-mock-key.is-blank,
+.alty-mock-keyboard-numeric .alty-mock-key.is-action {
+  background: transparent;
+  box-shadow: none;
+}
+
+.alty-mock-keyboard-numeric .alty-mock-key.is-action {
+  color: var(--mock-key-text);
+  font-size: 22px;
+}
+
 .alty-mock-details-stack {
   display: grid;
   gap: 16px;
@@ -6121,6 +6470,37 @@ img.alty-identity-bust-image {
 .alty-mockup-success-prototype .success-wheel-two-check,
 .alty-mockup-failed-prototype .success-wheel-two-check {
   animation-name: prototype-success-wheel-two-check;
+}
+
+/* In the success mockup the sparkles must follow the checkmark: hold the stars
+   hidden until the check has drawn (~83%), then sprinkle them and freeze them
+   in place (one iteration, forwards) rather than looping the gallery timeline. */
+.alty-mockup-success-prototype .success-star {
+  animation-name: prototype-success-star-sprinkle;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+/* Lift variant of the success page: the content beneath loads first (the detail
+   cards reveal at 5.05s while the checkmark stays put), the checkmark holds on
+   screen for a beat, and only then — once the content is fully loaded — does the
+   checkmark dissolve (6.1s) and the layout slot collapse so the detail cards
+   below lift up into the space where the checkmark used to sit. This keeps the
+   checkmark visible for well over 4s before it disappears. The confetti overlays
+   are absolutely positioned, so they are faded rather than collapsed. */
+.alty-mockup-success-prototype.is-lift-mode
+  .alty-mock-motion-slot.is-success:not([data-motion-source="uploaded-success-confetti"]):not([data-motion-source="uploaded-success-confetti-green"]) {
+  margin-left: auto;
+  margin-right: auto;
+  overflow: visible;
+  animation: prototype-success-motion-collapse 0.6s cubic-bezier(0.22, 0.9, 0.22, 1) 6.1s forwards;
+}
+
+.alty-mockup-success-prototype.is-lift-mode
+  .alty-mock-motion-slot.is-success[data-motion-source="uploaded-success-confetti"],
+.alty-mockup-success-prototype.is-lift-mode
+  .alty-mock-motion-slot.is-success[data-motion-source="uploaded-success-confetti-green"] {
+  animation: prototype-success-overlay-fade 0.6s cubic-bezier(0.22, 0.9, 0.22, 1) 6.1s forwards;
 }
 
 .alty-mockup-success-prototype[data-active-motion-source="uploaded-success-confetti"] .alty-mock-statusbar,
@@ -6805,6 +7185,47 @@ img.alty-identity-bust-image {
   }
 }
 
+/* Pending screen: one gentle bob during/just after the flip, then come to rest still. */
+@keyframes uba-coin-flip-float-settle {
+  0% {
+    transform: translateY(-10px);
+  }
+
+  50% {
+    transform: translateY(14px);
+  }
+
+  88% {
+    transform: translateY(-8px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes uba-coin-flip-shadow-settle {
+  0% {
+    opacity: 0.48;
+    transform: translateX(-50%) scaleX(0.98) scaleY(0.86);
+  }
+
+  50% {
+    opacity: 0.76;
+    transform: translateX(-50%) scaleX(1.22) scaleY(1);
+  }
+
+  88% {
+    opacity: 0.5;
+    transform: translateX(-50%) scaleX(1) scaleY(0.88);
+  }
+
+  100% {
+    opacity: 0.62;
+    transform: translateX(-50%) scaleX(1.1) scaleY(0.93);
+  }
+}
+
 @keyframes uba-card-rotation {
   0%,
   12% {
@@ -6832,6 +7253,30 @@ img.alty-identity-bust-image {
   50% {
     opacity: 0.72;
     transform: translateX(-50%) scaleX(1.26) scaleY(1);
+  }
+}
+
+@keyframes uba-coin-flip-spin {
+  0% {
+    transform: rotateX(8deg) rotateY(0deg);
+    /* ease-in: accelerate up from rest */
+    animation-timing-function: cubic-bezier(0.42, 0, 1, 1);
+  }
+
+  40% {
+    transform: rotateX(8deg) rotateY(360deg);
+    /* steady, fast middle turn */
+    animation-timing-function: linear;
+  }
+
+  65% {
+    transform: rotateX(8deg) rotateY(720deg);
+    /* ease-out: slow the final turn down into the resting logo face */
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  }
+
+  100% {
+    transform: rotateX(8deg) rotateY(1080deg);
   }
 }
 
@@ -7501,6 +7946,81 @@ img.alty-identity-bust-image {
   }
 }
 
+@keyframes success-star-sprinkle {
+  0%,
+  62% {
+    opacity: 0;
+    transform:
+      translate(
+        calc(-50% + var(--star-x, 0px)),
+        calc(-50% + var(--star-y, 0px))
+      )
+      scale(0.15)
+      rotate(var(--star-rotate, 0deg));
+  }
+  66% {
+    opacity: 1;
+    transform:
+      translate(
+        calc(-50% + var(--star-x, 0px)),
+        calc(-50% + var(--star-y, 0px))
+      )
+      scale(1.3)
+      rotate(var(--star-rotate, 0deg));
+    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  73% {
+    opacity: 0.5;
+    transform:
+      translate(
+        calc(-50% + var(--star-x, 0px)),
+        calc(-50% + var(--star-y, 0px))
+      )
+      scale(0.72)
+      rotate(var(--star-rotate, 0deg));
+  }
+  80% {
+    opacity: 1;
+    transform:
+      translate(
+        calc(-50% + var(--star-x, 0px)),
+        calc(-50% + var(--star-y, 0px))
+      )
+      scale(1.18)
+      rotate(var(--star-rotate, 0deg));
+  }
+  87% {
+    opacity: 0.55;
+    transform:
+      translate(
+        calc(-50% + var(--star-x, 0px)),
+        calc(-50% + var(--star-y, 0px))
+      )
+      scale(0.76)
+      rotate(var(--star-rotate, 0deg));
+  }
+  94% {
+    opacity: 1;
+    transform:
+      translate(
+        calc(-50% + var(--star-x, 0px)),
+        calc(-50% + var(--star-y, 0px))
+      )
+      scale(1.1)
+      rotate(var(--star-rotate, 0deg));
+  }
+  100% {
+    opacity: 0;
+    transform:
+      translate(
+        calc(-50% + var(--star-x, 0px)),
+        calc(-50% + var(--star-y, 0px))
+      )
+      scale(0.3)
+      rotate(var(--star-rotate, 0deg));
+  }
+}
+
 @keyframes prototype-success-content-reveal {
   from {
     opacity: 0;
@@ -7510,6 +8030,39 @@ img.alty-identity-bust-image {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes prototype-success-motion-collapse {
+  0% {
+    opacity: 1;
+    height: 82px;
+    margin-top: -8px;
+    margin-bottom: -8px;
+    overflow: hidden;
+  }
+
+  45% {
+    opacity: 0;
+    overflow: hidden;
+  }
+
+  100% {
+    opacity: 0;
+    height: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    overflow: hidden;
+  }
+}
+
+@keyframes prototype-success-overlay-fade {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
   }
 }
 
@@ -7580,6 +8133,54 @@ img.alty-identity-bust-image {
     opacity: 1;
     stroke-dashoffset: 0;
     transform: scale(0.6);
+  }
+}
+
+/* Sparkles pop only after the checkmark has drawn (~83%) and settle visible so
+   the frozen success state keeps them on screen. Per-star delays still stagger
+   the pop. */
+@keyframes prototype-success-star-sprinkle {
+  0%,
+  83% {
+    opacity: 0;
+    transform:
+      translate(
+        calc(-50% + var(--star-x, 0px)),
+        calc(-50% + var(--star-y, 0px))
+      )
+      scale(0.15)
+      rotate(var(--star-rotate, 0deg));
+  }
+  90% {
+    opacity: 1;
+    transform:
+      translate(
+        calc(-50% + var(--star-x, 0px)),
+        calc(-50% + var(--star-y, 0px))
+      )
+      scale(1.3)
+      rotate(var(--star-rotate, 0deg));
+    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  95% {
+    opacity: 1;
+    transform:
+      translate(
+        calc(-50% + var(--star-x, 0px)),
+        calc(-50% + var(--star-y, 0px))
+      )
+      scale(0.86)
+      rotate(var(--star-rotate, 0deg));
+  }
+  100% {
+    opacity: 1;
+    transform:
+      translate(
+        calc(-50% + var(--star-x, 0px)),
+        calc(-50% + var(--star-y, 0px))
+      )
+      scale(1)
+      rotate(var(--star-rotate, 0deg));
   }
 }
 

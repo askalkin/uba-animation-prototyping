@@ -315,6 +315,17 @@ const pages = [
     `,
   },
   {
+    slug: "verify-securepass",
+    title: "Verify with SecurePass",
+    accent: "red",
+    section: "prototypes",
+    themeable: true,
+    label: "SecurePass verification mockup: empty 6-digit code entry, new-limit summary, and numeric keyboard.",
+    scene: () => `
+      ${altyMockupPrototype("securepass")}
+    `,
+  },
+  {
     slug: "code-error",
     title: "Code error",
     accent: "red",
@@ -345,6 +356,17 @@ const pages = [
     label: "Successful account-opening mockup with details cards.",
     scene: () => `
       ${altyMockupPrototype("success")}
+    `,
+  },
+  {
+    slug: "account-opening-success-lift",
+    title: "Account details success (lift)",
+    accent: "green",
+    section: "prototypes",
+    themeable: true,
+    label: "Success mockup where each checkmark dissolves and the content beneath lifts into its place.",
+    scene: () => `
+      ${altyMockupPrototype("success", { lift: true })}
     `,
   },
   {
@@ -464,7 +486,7 @@ const navGroups = {
     },
     {
       title: "Code entry",
-      slugs: ["six-digit-code"],
+      slugs: ["six-digit-code", "verify-securepass"],
     },
     {
       title: "Error states",
@@ -476,7 +498,7 @@ const navGroups = {
     },
     {
       title: "Success",
-      slugs: ["account-opening-success"],
+      slugs: ["account-opening-success", "account-opening-success-lift"],
     },
     {
       title: "Pull to refresh",
@@ -489,7 +511,26 @@ const prototypeMotionVariantSets = {
   pending: {
     title: "Core spinners",
     variants: [
-      { slug: "uba-card-rotation", title: "Card rotation", number: "07" },
+      { slug: "uba-card-rotation", title: "Card rotation" },
+      { slug: "uba-coin-flip", title: "Coin flip" },
+      { slug: "uba-card-rotation-red", title: "Card rotation (red shadow)" },
+      { slug: "uba-coin-flip-red", title: "Coin flip (red shadow)" },
+    ],
+  },
+  otp: {
+    title: "Colorway",
+    variants: [
+      { slug: "otp-red", title: "Red", colorway: "" },
+      { slug: "otp-mono", title: "Mono check", colorway: "mono" },
+      { slug: "otp-green", title: "Green", colorway: "green" },
+    ],
+  },
+  securepass: {
+    title: "Colorway",
+    variants: [
+      { slug: "securepass-red", title: "Red", colorway: "" },
+      { slug: "securepass-mono", title: "Mono check", colorway: "mono" },
+      { slug: "securepass-green", title: "Green", colorway: "green" },
     ],
   },
   almost: {
@@ -530,13 +571,14 @@ const prototypeMotionVariantSets = {
   success: {
     title: "Success loaders",
     variants: [
-      { slug: "success-spinner-neutral", title: "Neutral fill to check", number: "01" },
-      { slug: "success-spinner-green", title: "Green fill to check", number: "02" },
-      { slug: "green-success-confetti", title: "Green confetti", number: "03" },
-      { slug: "green-success-rays", title: "Green rays", number: "04" },
-      { slug: "verification-badge", title: "Verification badge", number: "05" },
-      { slug: "uploaded-success-confetti", title: "Uploaded confetti", number: "06" },
-      { slug: "uploaded-success-confetti-green", title: "Green uploaded confetti", number: "07" },
+      { slug: "success-spinner-neutral", title: "Neutral fill to check" },
+      { slug: "success-spinner-green", title: "Green fill to check" },
+      { slug: "green-success-confetti", title: "Green confetti" },
+      { slug: "green-success-rays", title: "Green rays" },
+      { slug: "verification-badge", title: "Verification badge" },
+      { slug: "uploaded-success-confetti", title: "Uploaded confetti" },
+      { slug: "uploaded-success-confetti-green", title: "Green uploaded confetti" },
+      { slug: "green-success-stars", title: "Green stars" },
     ],
   },
   failed: {
@@ -829,6 +871,26 @@ function ubaLogoSvg(className) {
   `;
 }
 
+function ubaCoinLogoStack() {
+  return `
+    <span class="uba-coin-logo-stack">
+      <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+        <defs>
+          <linearGradient id="uba-coin-logo-metal" gradientUnits="userSpaceOnUse" x1="2" y1="0" x2="63" y2="75">
+            <stop offset="0%" stop-color="#faf9f4"></stop>
+            <stop offset="55%" stop-color="#d8d6cf"></stop>
+            <stop offset="100%" stop-color="#a9a69e"></stop>
+          </linearGradient>
+        </defs>
+      </svg>
+      ${ubaLogoSvg("uba-coin-logo-layer logo-depth logo-depth-3")}
+      ${ubaLogoSvg("uba-coin-logo-layer logo-depth logo-depth-2")}
+      ${ubaLogoSvg("uba-coin-logo-layer logo-depth logo-depth-1")}
+      ${ubaLogoSvg("uba-coin-logo-layer logo-top")}
+    </span>
+  `;
+}
+
 function silverUbaCoinPrototype() {
   return `
     <div class="loader-scene uba-silver-coin-scene" role="img" aria-label="Floating silver coin with extruded UBA logo">
@@ -837,22 +899,34 @@ function silverUbaCoinPrototype() {
         <div class="uba-coin-model">
           <span class="uba-coin-depth depth-one"></span>
           <span class="uba-coin-face">
-            <span class="uba-coin-logo-stack">
-              <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-                <defs>
-                  <linearGradient id="uba-coin-logo-metal" gradientUnits="userSpaceOnUse" x1="2" y1="0" x2="63" y2="75">
-                    <stop offset="0%" stop-color="#faf9f4"></stop>
-                    <stop offset="55%" stop-color="#d8d6cf"></stop>
-                    <stop offset="100%" stop-color="#a9a69e"></stop>
-                  </linearGradient>
-                </defs>
-              </svg>
-              ${ubaLogoSvg("uba-coin-logo-layer logo-depth logo-depth-3")}
-              ${ubaLogoSvg("uba-coin-logo-layer logo-depth logo-depth-2")}
-              ${ubaLogoSvg("uba-coin-logo-layer logo-depth logo-depth-1")}
-              ${ubaLogoSvg("uba-coin-logo-layer logo-top")}
-            </span>
+            ${ubaCoinLogoStack()}
           </span>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function ubaCoinCylinderEdge(segments = 48) {
+  const bands = Array.from({ length: segments }, (_, index) => {
+    const angle = (360 / segments) * index;
+    return `<span class="uba-coin-cyl-seg" style="--seg-angle:${angle}deg;"></span>`;
+  }).join("");
+
+  return `<span class="uba-coin-cyl-edge" aria-hidden="true">${bands}</span>`;
+}
+
+function ubaCoinFlipPrototype() {
+  return `
+    <div class="loader-scene uba-silver-coin-scene uba-coin-flip-scene" role="img" aria-label="Silver UBA coin flipping horizontally, UBA mark on one side">
+      <span class="uba-coin-shadow" aria-hidden="true"></span>
+      <div class="uba-coin-flip-float">
+        <div class="uba-coin-flip">
+          ${ubaCoinCylinderEdge()}
+          <span class="uba-coin-flip-face uba-coin-face is-front">
+            ${ubaCoinLogoStack()}
+          </span>
+          <span class="uba-coin-flip-face uba-coin-face is-back"></span>
         </div>
       </div>
     </div>
@@ -1042,6 +1116,36 @@ function greenSuccessRaysPrototype() {
     <div class="loader-scene success-wheel-two-scene success-wheel-two-green-scene green-success-rays-scene" role="img" aria-label="Green circular loader filling and resolving into a check with rounded radial highlight lines">
       <div class="success-ray-field" aria-hidden="true">
         ${successRayLines()}
+      </div>
+      ${successWheelTwoMark()}
+    </div>
+  `;
+}
+
+function successStarPieces() {
+  const stars = [
+    { x: 32, y: -30, size: 13, rotate: 10, tone: "white", delay: 0 },
+    { x: -34, y: 6, size: 9, rotate: -16, tone: "green", delay: 130 },
+    { x: 14, y: 34, size: 10, rotate: 20, tone: "white", delay: 260 },
+  ];
+
+  return stars
+    .map(
+      ({ x, y, size, rotate, tone, delay }) => `
+        <span
+          class="success-star"
+          style="--star-x:${x}px; --star-y:${y}px; --star-size:${size}px; --star-rotate:${rotate}deg; --star-color:var(--success-star-${tone}); --star-delay:${delay}ms;"
+        ></span>
+      `,
+    )
+    .join("");
+}
+
+function greenSuccessStarsPrototype() {
+  return `
+    <div class="loader-scene success-wheel-two-scene success-wheel-two-green-scene green-success-stars-scene" role="img" aria-label="Green circular loader filling and resolving into a check with a sprinkle of four-pointed stars">
+      <div class="success-star-field" aria-hidden="true">
+        ${successStarPieces()}
       </div>
       ${successWheelTwoMark()}
     </div>
@@ -1613,11 +1717,15 @@ function renderPrototypeMotionElement(slug, contextType = "") {
     "uba-icon-loop": ubaIconLoopScene(),
     "silver-uba-coin": silverUbaCoinPrototype(),
     "uba-card-rotation": ubaCardRotationPrototype(),
+    "uba-coin-flip": ubaCoinFlipPrototype(),
+    "uba-card-rotation-red": ubaCardRotationPrototype(),
+    "uba-coin-flip-red": ubaCoinFlipPrototype(),
     "success-wheel-2": successWheelTwoPrototype(),
     "success-spinner-neutral": successWheelTwoPrototype("neutral"),
     "success-spinner-green": successWheelTwoPrototype("green"),
     "green-success-confetti": greenSuccessConfettiPrototype(),
     "green-success-rays": greenSuccessRaysPrototype(),
+    "green-success-stars": greenSuccessStarsPrototype(),
     "verification-badge": verificationBadgePrototype(),
     "uploaded-success-confetti": uploadedSuccessConfettiPrototype(),
     "uploaded-success-confetti-green": uploadedSuccessConfettiPrototype("green"),
@@ -1697,6 +1805,16 @@ function getActivePrototypeMotionSlug(type) {
   return variantSet.variants[getPrototypeVariantIndex(type)]?.slug || "";
 }
 
+function getPrototypeVariantColorway(type) {
+  const variantSet = prototypeMotionVariantSets[type];
+
+  if (!variantSet) {
+    return "";
+  }
+
+  return variantSet.variants[getPrototypeVariantIndex(type)]?.colorway || "";
+}
+
 function altyMockupMotionSlot(type, slotStyle = "", overrideSlug = "") {
   const variantSet = prototypeMotionVariantSets[type];
 
@@ -1716,7 +1834,8 @@ function altyMockupMotionSlot(type, slotStyle = "", overrideSlug = "") {
   `;
 }
 
-function altyMockupPrototype(type) {
+function altyMockupPrototype(type, options = {}) {
+  const { lift = false } = options;
   const labels = {
     pending: "Pending account-opening screen",
     almost: "Almost there onboarding screen",
@@ -1725,6 +1844,7 @@ function altyMockupPrototype(type) {
     otp: "6-digit verification code login screen",
     "otp-error": "6-digit verification code login screen with an invalid-code error state",
     "otp-loading": "Static 6-digit verification code screen with a scrim and banking-icons loader overlay",
+    securepass: "Verify with SecurePass screen with empty 6-digit code entry and numeric keyboard",
     searching: "Searching screen with keyboard",
     success: "Successful account-opening screen",
     failed: "Could not load results screen",
@@ -1736,7 +1856,7 @@ function altyMockupPrototype(type) {
   const activeMotionSource = activeVariant ? ` data-active-motion-source="${activeVariant.slug}"` : "";
 
   return `
-    <div class="alty-mockup-prototype alty-mockup-${type}-prototype"${activeMotionSource} role="group" aria-label="${labels[type]}">
+    <div class="alty-mockup-prototype alty-mockup-${type}-prototype${lift ? " is-lift-mode" : ""}"${activeMotionSource} role="group" aria-label="${labels[type]}">
       <article class="alty-mockup-stage ${variantSet ? "has-prototype-variant-pager" : ""}">
         ${variantSet ? renderPrototypeVariantPager(type, variantSet, activeIndex) : ""}
         ${altyMockupPhone(type)}
@@ -1754,6 +1874,7 @@ function altyMockupPhone(type) {
     otp: altyMockupOtpScreen,
     "otp-error": altyMockupOtpErrorScreen,
     "otp-loading": altyMockupOtpLoadingScreen,
+    securepass: altyMockupSecurePassScreen,
     searching: altyMockupSearchingScreen,
     success: altyMockupSuccessScreen,
     failed: altyMockupFailedScreen,
@@ -1896,41 +2017,52 @@ function altyMockupIdentityScreen() {
   `;
 }
 
-function altyMockupOtpScreen(options = {}) {
-  const { isStatic = false } = options;
+function altyMockupOtpCells(options = {}) {
+  const { isStatic = false, colorway = "" } = options;
   const digits = ["1", "2", "3", "5", "3", "3"];
   const otpOffsets = [154, 92, 31, -31, -92, -154];
+  const colorwayClass = colorway ? `is-${colorway}` : "";
+
+  return `
+    <div class="alty-mock-otp-cells ${isStatic ? "is-static" : ""} ${colorwayClass}" aria-hidden="true">
+      ${digits
+        .map(
+          (digit, index) => `
+            <span style="--otp-index:${index}; --otp-shift:${otpOffsets[index]}px;">
+              <b>${digit}</b>
+            </span>
+          `,
+        )
+        .join("")}
+      ${
+        isStatic
+          ? ""
+          : `
+        <svg class="alty-mock-otp-success" viewBox="0 0 64 64" aria-hidden="true">
+          <circle cx="32" cy="32" r="25"></circle>
+          <path d="M20 33.5 29 42 45 23"></path>
+        </svg>
+      `
+      }
+    </div>
+  `;
+}
+
+function altyMockupOtpScreen(options = {}) {
+  const { isStatic = false } = options;
+  const colorway = isStatic ? "" : getPrototypeVariantColorway("otp");
+  const colorwayClass = colorway ? `alty-otp-${colorway}` : "";
 
   return `
     ${altyMockupStatusBar()}
     ${altyMockupTopBar()}
-    <main class="alty-mock-content alty-mock-otp-content">
+    <main class="alty-mock-content alty-mock-otp-content ${colorwayClass}">
       <div class="alty-mock-copy-block">
         <h2>6-digit code</h2>
         <p>We've sent a 6-digit verification code to mobile phone <strong>+234 ** *** 4000</strong>.</p>
       </div>
       <div class="alty-mock-otp-stack" aria-label="Verification code 1 2 3 5 3 3">
-        <div class="alty-mock-otp-cells ${isStatic ? "is-static" : ""}" aria-hidden="true">
-          ${digits
-            .map(
-              (digit, index) => `
-                <span style="--otp-index:${index}; --otp-shift:${otpOffsets[index]}px;">
-                  <b>${digit}</b>
-                </span>
-              `,
-            )
-            .join("")}
-          ${
-            isStatic
-              ? ""
-              : `
-            <svg class="alty-mock-otp-success" viewBox="0 0 64 64" aria-hidden="true">
-              <circle cx="32" cy="32" r="25"></circle>
-              <path d="M20 33.5 29 42 45 23"></path>
-            </svg>
-          `
-          }
-        </div>
+        ${altyMockupOtpCells({ isStatic, colorway })}
         <p class="alty-mock-resend">Didn't get the code? <a href="#six-digit-code">Resend code</a></p>
       </div>
     </main>
@@ -1972,6 +2104,70 @@ function altyMockupOtpLoadingScreen() {
     <div class="alty-mock-scrim" aria-hidden="true">
       <div class="alty-mock-scrim-loader">
         ${ubaIconLoopScene()}
+      </div>
+    </div>
+  `;
+}
+
+function altyMockupSecurePassScreen() {
+  const colorway = getPrototypeVariantColorway("securepass");
+  const colorwayClass = colorway ? `alty-otp-${colorway}` : "";
+
+  return `
+    ${altyMockupStatusBar()}
+    ${altyMockupTopBar()}
+    <main class="alty-mock-content alty-mock-securepass-content ${colorwayClass}">
+      <div class="alty-mock-copy-block">
+        <h2>Verify with SecurePass</h2>
+        <p>Open the SecurePass app and enter the 6-digit code to confirm this change.</p>
+      </div>
+      <div class="alty-mock-otp-stack" aria-label="Verification code 1 2 3 5 3 3">
+        ${altyMockupOtpCells({ colorway })}
+      </div>
+      <p class="alty-mock-resend alty-mock-securepass-hint">Don't have a code? <a href="#verify-securepass">Download the SecurePass app</a></p>
+      <div class="alty-mock-securepass-actions">
+        <div class="alty-mock-limit-card">
+          <span>New limit</span>
+          <strong>₦500,000</strong>
+        </div>
+        ${altyMockupButton("Update limit", "primary")}
+      </div>
+    </main>
+    ${altyMockupNumericKeyboard()}
+    ${altyMockupHomeIndicator()}
+  `;
+}
+
+function altyMockupNumericKeyboard() {
+  const keys = [
+    ["1", "2", "3"],
+    ["4", "5", "6"],
+    ["7", "8", "9"],
+    ["", "0", "del"],
+  ];
+
+  return `
+    <div class="alty-mock-keyboard alty-mock-keyboard-numeric" aria-hidden="true">
+      <div class="alty-mock-key-rows">
+        ${keys
+          .map(
+            (row) => `
+              <div class="alty-mock-key-row">
+                ${row
+                  .map((key) => {
+                    if (key === "") {
+                      return `<span class="alty-mock-key is-blank"></span>`;
+                    }
+                    if (key === "del") {
+                      return `<span class="alty-mock-key is-action" aria-label="Delete">⌫</span>`;
+                    }
+                    return `<span class="alty-mock-key">${key}</span>`;
+                  })
+                  .join("")}
+              </div>
+            `,
+          )
+          .join("")}
       </div>
     </div>
   `;
@@ -2275,7 +2471,6 @@ function renderPageLink(page, index, activePage) {
 }
 
 function renderPageNav(sectionPages, activePage, activeSection) {
-  const sectionIndex = new Map(sectionPages.map((page, index) => [page.slug, index]));
   const sectionBySlug = new Map(sectionPages.map((page) => [page.slug, page]));
   const groups = navGroups[activeSection] || [
     {
@@ -2284,6 +2479,9 @@ function renderPageNav(sectionPages, activePage, activeSection) {
     },
   ];
   const usedSlugs = new Set();
+  // Number pages by the order they appear in the nav, so the count stays a
+  // clean, gap-free sequence regardless of how the pages are defined.
+  let order = 0;
   const renderedGroups = groups
     .map((group) => {
       const groupPages = group.slugs
@@ -2303,7 +2501,7 @@ function renderPageNav(sectionPages, activePage, activeSection) {
           <h2 class="page-nav-heading">${group.title}</h2>
           <div class="page-nav-children">
             ${groupPages
-              .map((page) => renderPageLink(page, sectionIndex.get(page.slug), activePage))
+              .map((page) => renderPageLink(page, order++, activePage))
               .join("")}
           </div>
         </section>
@@ -2317,7 +2515,7 @@ function renderPageNav(sectionPages, activePage, activeSection) {
         <h2 class="page-nav-heading">Other</h2>
         <div class="page-nav-children">
           ${ungroupedPages
-            .map((page) => renderPageLink(page, sectionIndex.get(page.slug), activePage))
+            .map((page) => renderPageLink(page, order++, activePage))
             .join("")}
         </div>
       </section>

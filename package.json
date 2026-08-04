@@ -1,6 +1,9 @@
 {
   "name": "uba-animation-prototyping",
   "private": true,
+  "scripts": {
+    "dev": "python3 -m http.server 8000"
+  },
   "dependencies": {
     "@vercel/edge": "^1.1.1"
   }
