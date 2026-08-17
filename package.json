@@ -3,7 +3,8 @@
   "private": true,
   "scripts": {
     "build": "node scripts/build-sites.mjs",
-    "dev": "python3 -m http.server 8000"
+    "dev": "python3 -m http.server 8000",
+    "vercel-build": "node scripts/build-vercel.mjs"
   },
   "dependencies": {
     "@vercel/edge": "^1.1.1"
