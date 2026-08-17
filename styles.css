@@ -897,18 +897,63 @@ button {
 .uba-lottie-scene {
   --uba-lottie-spinner-color: #fffaf2;
   --uba-lottie-spinner-glow: rgba(255, 250, 242, 0.28);
+  --uba-lottie-resolve-glow: rgba(255, 250, 242, 0.22);
+  --uba-lottie-resolve-shadow: rgba(0, 0, 0, 0.1);
+  --uba-lottie-result-circle-color: currentColor;
+  --uba-lottie-result-glow: var(--uba-lottie-resolve-glow);
+  --uba-lottie-result-shadow: var(--uba-lottie-resolve-shadow);
+  --uba-lottie-result-mark-color: #1f1d1a;
+  --uba-lottie-result-mark-shadow: rgba(255, 255, 255, 0.18);
   width: min(460px, 76vmin);
 }
 
 .app-shell[data-prototype-theme="light"] .uba-lottie-scene {
   --uba-lottie-spinner-color: #1f1f1f;
   --uba-lottie-spinner-glow: rgba(31, 31, 31, 0.16);
+  --uba-lottie-resolve-glow: rgba(31, 31, 31, 0.09);
+  --uba-lottie-resolve-shadow: rgba(31, 31, 31, 0.05);
+  --uba-lottie-result-mark-color: #fffaf3;
+  --uba-lottie-result-mark-shadow: rgba(0, 0, 0, 0.16);
 }
 
 .uba-lottie-red-scene,
 .app-shell[data-prototype-theme="light"] .uba-lottie-red-scene {
   --uba-lottie-spinner-color: #ef2a22;
   --uba-lottie-spinner-glow: rgba(239, 42, 34, 0.26);
+  --uba-lottie-resolve-glow: rgba(239, 42, 34, 0.18);
+  --uba-lottie-resolve-shadow: rgba(239, 42, 34, 0.07);
+  --uba-lottie-result-circle-color: #ef2a22;
+  --uba-lottie-result-mark-color: #fffaf3;
+  --uba-lottie-result-mark-shadow: rgba(96, 0, 0, 0.22);
+}
+
+.uba-lottie-green-scene,
+.app-shell[data-prototype-theme="light"] .uba-lottie-green-scene {
+  --uba-lottie-spinner-color: #22c55e;
+  --uba-lottie-spinner-glow: rgba(34, 197, 94, 0.26);
+  --uba-lottie-resolve-glow: rgba(34, 197, 94, 0.18);
+  --uba-lottie-resolve-shadow: rgba(34, 197, 94, 0.07);
+  --uba-lottie-result-circle-color: #22c55e;
+  --uba-lottie-result-mark-color: #fffaf3;
+  --uba-lottie-result-mark-shadow: rgba(0, 82, 35, 0.24);
+}
+
+.uba-lottie-result-red-scene,
+.app-shell[data-prototype-theme="light"] .uba-lottie-result-red-scene {
+  --uba-lottie-result-circle-color: #ef2a22;
+  --uba-lottie-result-glow: rgba(239, 42, 34, 0.18);
+  --uba-lottie-result-shadow: rgba(239, 42, 34, 0.07);
+  --uba-lottie-result-mark-color: #fffaf3;
+  --uba-lottie-result-mark-shadow: rgba(96, 0, 0, 0.22);
+}
+
+.uba-lottie-result-green-scene,
+.app-shell[data-prototype-theme="light"] .uba-lottie-result-green-scene {
+  --uba-lottie-result-circle-color: #22c55e;
+  --uba-lottie-result-glow: rgba(34, 197, 94, 0.18);
+  --uba-lottie-result-shadow: rgba(34, 197, 94, 0.07);
+  --uba-lottie-result-mark-color: #fffaf3;
+  --uba-lottie-result-mark-shadow: rgba(0, 82, 35, 0.24);
 }
 
 .uba-lottie-spinner {
@@ -941,6 +986,106 @@ button {
   border: 4px solid color-mix(in srgb, var(--uba-lottie-spinner-color) 14%, transparent);
   border-top-color: var(--uba-lottie-spinner-color);
   animation: rotate 1.6s linear infinite;
+}
+
+.uba-lottie-circle-resolve-scene {
+  --uba-resolve-duration: 4400ms;
+}
+
+.uba-lottie-resolve-wrap {
+  --uba-lottie-duration: 5000ms;
+  --uba-resolve-overlap: 1600ms;
+  --uba-resolve-delay: calc(var(--uba-lottie-duration) - var(--uba-resolve-overlap));
+  width: min(260px, 52vmin);
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  position: relative;
+  color: var(--uba-lottie-spinner-color);
+  filter:
+    drop-shadow(0 0 14px var(--uba-lottie-resolve-glow))
+    drop-shadow(0 12px 28px var(--uba-lottie-resolve-shadow));
+}
+
+.uba-lottie-result-red-scene .uba-lottie-resolve-wrap,
+.uba-lottie-result-green-scene .uba-lottie-resolve-wrap {
+  animation: uba-lottie-resolve-result-glow var(--uba-resolve-duration) ease-out var(--uba-resolve-delay) 1 forwards;
+}
+
+.uba-lottie-resolve-wrap .uba-lottie-spinner {
+  width: 100%;
+  position: absolute;
+  inset: 0;
+  filter: blur(0);
+  transform-origin: 50% 50%;
+  animation:
+    uba-lottie-resolve-spinner var(--uba-resolve-duration) linear var(--uba-resolve-delay) 1 forwards,
+    uba-lottie-resolve-focus var(--uba-resolve-duration) ease-out var(--uba-resolve-delay) 1 forwards;
+  will-change: filter, transform;
+}
+
+.uba-lottie-organic-fan {
+  transform-box: view-box;
+  transform-origin: 50% 50%;
+  animation: uba-lottie-organic-fan var(--uba-resolve-duration) cubic-bezier(0.4, 0, 0.18, 1) var(--uba-resolve-delay) 1 forwards;
+  will-change: opacity, filter, transform;
+}
+
+.uba-lottie-organic-ghost {
+  opacity: 0;
+  filter: blur(0);
+  transform-box: view-box;
+  transform-origin: 50% 50%;
+  transform: rotate(var(--organic-ghost-rotation, 0deg));
+  animation: uba-lottie-organic-ghost var(--uba-resolve-duration) cubic-bezier(0.33, 0.66, 0.28, 1) var(--uba-resolve-delay) 1 forwards;
+  will-change: opacity, filter, transform;
+}
+
+.uba-lottie-organic-svg path {
+  transform-box: fill-box;
+  transform-origin: 50% 50%;
+}
+
+.uba-lottie-organic-circle {
+  fill: currentColor;
+  opacity: 0;
+  filter: blur(10px);
+  transform-box: view-box;
+  transform-origin: 50% 50%;
+  transform: scale(0.1);
+  animation: uba-lottie-resolve-circle var(--uba-resolve-duration) cubic-bezier(0.16, 1, 0.3, 1) var(--uba-resolve-delay) 1 forwards;
+  will-change: opacity, filter, transform;
+}
+
+.uba-lottie-result-red-scene .uba-lottie-organic-circle,
+.uba-lottie-result-green-scene .uba-lottie-organic-circle {
+  animation-name: uba-lottie-resolve-circle-result-shift;
+}
+
+.uba-lottie-svg .uba-lottie-organic-result-mark {
+  fill: none;
+  stroke: var(--uba-lottie-result-mark-color);
+  stroke-width: 94;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 78;
+  stroke-dashoffset: 78;
+  opacity: 0;
+  filter: drop-shadow(0 2px 5px var(--uba-lottie-result-mark-shadow));
+  transform-box: fill-box;
+  transform-origin: center;
+  transform: scale(0.56);
+  animation: uba-lottie-resolve-result-mark var(--uba-resolve-duration) cubic-bezier(0.22, 0.9, 0.22, 1) var(--uba-resolve-delay) 1 forwards;
+  will-change: opacity, stroke-dashoffset, transform;
+}
+
+.uba-lottie-result-red-scene .uba-lottie-organic-result-mark,
+.uba-lottie-result-green-scene .uba-lottie-organic-result-mark {
+  animation-name: uba-lottie-resolve-result-mark-shift;
+}
+
+.uba-lottie-svg .uba-lottie-organic-result-mark.is-error {
+  stroke-width: 102;
 }
 
 .uba-icon-loop-scene {
@@ -1572,6 +1717,15 @@ button {
   --verification-badge-shadow-b: rgba(31, 31, 31, 0.1);
 }
 
+.verification-badge-green-scene,
+.app-shell[data-prototype-theme="light"] .verification-badge-green-scene {
+  --verification-badge-draw-color: #22c55e;
+  --verification-badge-fill-color: #22c55e;
+  --verification-badge-check-color: #fffaf3;
+  --verification-badge-shadow-a: rgba(34, 197, 94, 0.16);
+  --verification-badge-shadow-b: rgba(34, 197, 94, 0.28);
+}
+
 .verification-badge-mark {
   width: min(214px, 48vmin);
   aspect-ratio: 1;
@@ -1594,6 +1748,12 @@ button {
   width: 100%;
   height: 100%;
   overflow: visible;
+  /* Scale the scalloped badge down so its silhouette matches the plain
+     success/failure wheel circle. The internal checkmark-to-circle ratio is
+     already consistent, so a uniform scale keeps both the mark size and the
+     check proportions aligned across every animation. */
+  transform: scale(0.8);
+  transform-origin: 50% 50%;
 }
 
 .fingerprint-loader-scene {
@@ -4070,25 +4230,18 @@ button {
   animation: uba-gradient-loader var(--flow-duration) cubic-bezier(0.58, 0, 0.2, 1) infinite;
 }
 
-.uba-transition-minimal-spinner {
-  width: 33px;
-  height: 33px;
-  overflow: visible;
+.uba-transition-lottie-spinner {
+  --uba-lottie-spinner-color: #fffaf4;
+  --uba-lottie-spinner-glow: rgba(255, 255, 255, 0.56);
+  width: 40px;
+  height: 40px;
+  filter: drop-shadow(0 0 9px var(--uba-lottie-spinner-glow));
 }
 
-.uba-transition-minimal-spin {
-  transform-origin: 60px 60px;
-  animation: rotate 2.4s linear infinite;
-}
-
-.uba-transition-minimal-trail {
-  fill: none;
-  stroke: #fffaf4;
-  stroke-width: 7;
-  stroke-linecap: round;
-  stroke-dasharray: 13 100;
-  filter: drop-shadow(0 0 9px rgba(255, 255, 255, 0.56));
-  animation: minimalist-window 2.8s cubic-bezier(0.6, 0, 0.22, 1) infinite;
+.uba-transition-lottie-spinner .uba-lottie-fallback {
+  width: 32px;
+  height: 32px;
+  border-width: 3px;
 }
 
 .app-shell[data-prototype-theme="dark"] .uba-gradient-flow-frame {
@@ -4325,6 +4478,46 @@ button {
   line-height: 1.2;
   font-weight: 500;
   text-align: center;
+}
+
+.core-spinner-standalone {
+  width: min(560px, 100%);
+  min-height: 560px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 54px;
+}
+
+.core-spinner-only-slot {
+  width: min(380px, 70vmin);
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  position: relative;
+  overflow: visible;
+}
+
+.core-spinner-only-slot .prototype-motion-render,
+.core-spinner-only-slot .loader-scene {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  max-width: none;
+}
+
+.core-spinner-only-slot .uba-lottie-scene {
+  width: 100%;
+}
+
+.core-spinner-only-slot .uba-lottie-spinner {
+  width: 78%;
+  max-width: none;
+}
+
+.core-spinner-only-slot[data-motion-source^="uba-spinner-1-circle-resolve"] .uba-lottie-resolve-wrap {
+  width: 78%;
 }
 
 .alty-mock-phone {
@@ -4667,12 +4860,19 @@ button {
   filter: blur(15px);
 }
 
-.alty-mock-motion-slot.is-pending[data-motion-source^="uba-coin-flip"] .uba-coin-flip-float {
+.alty-mock-motion-slot.is-pending[data-motion-source^="uba-coin-flip"] .uba-coin-flip-float,
+.alty-mock-motion-slot.is-almost[data-motion-source="uba-coin-flip"] .uba-coin-flip-float {
   animation: uba-coin-flip-float-settle 3.4s cubic-bezier(0.45, 0, 0.2, 1) 1 forwards;
 }
 
-.alty-mock-motion-slot.is-pending[data-motion-source^="uba-coin-flip"] .uba-coin-shadow {
+.alty-mock-motion-slot.is-pending[data-motion-source^="uba-coin-flip"] .uba-coin-shadow,
+.alty-mock-motion-slot.is-almost[data-motion-source="uba-coin-flip"] .uba-coin-shadow {
   animation: uba-coin-flip-shadow-settle 3.4s cubic-bezier(0.45, 0, 0.2, 1) 1 forwards;
+}
+
+/* Core spinners 06: only two full turns over the same 3s, then rest static. */
+.alty-mock-motion-slot.is-almost[data-motion-source="uba-coin-flip"] .uba-coin-flip {
+  animation: uba-coin-flip-spin-2 3s linear 1 both;
 }
 
 .alty-mock-motion-slot.is-pending[data-motion-source^="uba-coin-flip"]::before {
@@ -4817,6 +5017,96 @@ button {
 
 .alty-mock-motion-slot.is-searching .progressive-scene .comet-svg {
   width: 94%;
+}
+
+/* Orbit magnifier — red magnifier illustration (05) centered inside the red orbit scanner (01) */
+.alty-mock-motion-slot[data-motion-source="search-red-orbit-magnifier"] {
+  overflow: visible;
+}
+
+.alty-mock-motion-slot[data-motion-source="search-red-orbit-magnifier"] .prototype-motion-render,
+.alty-mock-motion-slot[data-motion-source="search-red-orbit-magnifier"] .loader-scene {
+  width: min(360px, 100%);
+  max-width: none;
+}
+
+.alty-mock-motion-slot[data-motion-source="search-red-orbit-magnifier"] .search-red-magnifier-illustration {
+  width: 116px;
+  z-index: 5;
+}
+
+/* Three concentric single-arc scanner rings, evenly spaced, uniform 2px stroke */
+.orbit-scanner-svg {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 100%;
+  height: 100%;
+  transform: translate(-50%, -50%);
+  overflow: visible;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.orbit-ring {
+  transform-origin: 60px 60px;
+}
+
+.orbit-ring path {
+  fill: none;
+  stroke: url(#orbit-line-gradient);
+  stroke-width: 2px;
+  vector-effect: non-scaling-stroke;
+  stroke-linecap: round;
+  /* red shadow for a lit glow */
+  filter:
+    drop-shadow(0 0 4px rgba(255, 36, 56, 0.7))
+    drop-shadow(0 0 10px rgba(255, 36, 56, 0.4));
+}
+
+/* Themed gradient: red -> deep red (dark theme) */
+.orbit-stop-bright {
+  stop-color: #ff3b4d;
+}
+
+.orbit-stop-fade {
+  stop-color: #2a0509;
+  stop-opacity: 0.1;
+}
+
+/* red -> light red (light theme) */
+.app-shell[data-prototype-theme="light"] .orbit-stop-bright {
+  stop-color: #ff2438;
+}
+
+.app-shell[data-prototype-theme="light"] .orbit-stop-fade {
+  stop-color: #ffbcc2;
+  stop-opacity: 0.2;
+}
+
+/* One arc per ring (dash + gap = pathLength 100), ~1.5x the old segment length. Each spins from a different starting angle */
+.orbit-ring-inner {
+  animation: orbit-spin-inner 4.6s linear infinite;
+}
+
+.orbit-ring-inner path {
+  opacity: 1;
+}
+
+.orbit-ring-mid {
+  animation: orbit-spin-mid 6s linear infinite reverse;
+}
+
+.orbit-ring-mid path {
+  opacity: 0.9;
+}
+
+.orbit-ring-outer {
+  animation: orbit-spin-outer 7.8s linear infinite;
+}
+
+.orbit-ring-outer path {
+  opacity: 0.8;
 }
 
 .alty-mock-motion-slot[data-motion-source="progressive-blur-spinner"] {
@@ -4973,6 +5263,425 @@ button {
   top: 48%;
 }
 
+/* Scanner device variant: webp device body + animated fingerprint SVG + scanning line */
+.fingerprint-scanner-scene {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  border: 0;
+  background: transparent;
+  filter:
+    drop-shadow(0 22px 40px rgba(0, 0, 0, 0.28))
+    drop-shadow(0 0 30px rgba(255, 40, 24, 0.14));
+}
+
+.fingerprint-scanner-composite {
+  --scanner-size: 340;
+  --scanner-k: calc(var(--scanner-size) / 1254);
+  position: relative;
+  width: calc(var(--scanner-size) * 1px);
+  height: calc(var(--scanner-size) * 1px);
+  max-width: 100%;
+  transform-style: preserve-3d;
+}
+
+.fingerprint-scanner-motion-shell {
+  position: absolute;
+  inset: 0;
+  transform-origin: 50% 50%;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.fingerprint-scanner-scene.is-device-floating .fingerprint-scanner-motion-shell {
+  animation: fingerprint-scanner-device-float 4.8s cubic-bezier(0.45, 0, 0.25, 1) infinite;
+}
+
+.fingerprint-scanner-scene.is-device-parallax {
+  perspective: 900px;
+  perspective-origin: 50% 46%;
+}
+
+.fingerprint-scanner-scene.is-device-parallax .fingerprint-scanner-motion-shell {
+  animation: fingerprint-scanner-device-parallax 5.4s cubic-bezier(0.42, 0, 0.2, 1) infinite;
+}
+
+@keyframes fingerprint-scanner-device-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -12px, 0);
+  }
+}
+
+@keyframes fingerprint-scanner-device-parallax {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotateX(0deg);
+  }
+  28% {
+    transform: translate3d(0, -5px, 0) rotateX(4deg);
+  }
+  58% {
+    transform: translate3d(0, -9px, 0) rotateX(-3.5deg);
+  }
+  82% {
+    transform: translate3d(0, -3px, 0) rotateX(2deg);
+  }
+}
+
+.fingerprint-scanner-device {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  pointer-events: none;
+}
+
+/* Screen plane mapped onto the device's black display via a perspective homography.
+   The element is authored in a flat 1254x1254 space, then warped so its four
+   corners land exactly on the screen quad, and scaled down to the display size. */
+.fingerprint-scanner-screen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1254px;
+  height: 1254px;
+  transform-origin: 0 0;
+  transform: scale(var(--scanner-k))
+    matrix3d(
+      0.36951344, -0.0464696005, 0, -0.0000518516,
+      -0.0831933154, 0.4414476774, 0, -0.0000184796,
+      0, 0, 1, 0,
+      328.3322235866, 273.5682746785, 0, 1
+    );
+  pointer-events: none;
+}
+
+/* Non-transformed clip layer: overflow clipping is unreliable on the 3D-warped
+   screen itself, so content is clipped here (in flat 1254px space) and then the
+   parent warps the already-clipped result onto the device's rounded display. */
+.fingerprint-scanner-plate {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 210px;
+}
+
+/* Print layers (resting base + active) stack in the same spot. left/top set the
+   print CENTRE (via the -50%,-50% translate), so they read intuitively in the
+   inspector; move/resize needs matching updates to the reveal line range. */
+.fingerprint-scanner-scene .fingerprint-scanner-print {
+  position: absolute;
+  left: 47.4%;
+  top: 47.4%;
+  width: 569px;
+  /* Match the fingerprint SVG's aspect (viewBox 293x485) so the box is the full
+     print height (942px). Without this the box collapses to a square and the
+     clip only covers the top of the print, cutting off the lower ridges.
+     top/left set the print CENTRE (via the -50%,-50% translate). If you retune
+     top, shift the scan line range in fingerprint-scan-updown by the same delta
+     (line spans top ± 36.01%). */
+  aspect-ratio: 293 / 485;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.fingerprint-scanner-scene .fingerprint-scanner-print .fingerprint-loader-scene {
+  position: static;
+  width: 100%;
+  height: auto;
+  display: block;
+  transform: none;
+  filter:
+    drop-shadow(0 0 22px rgba(255, 40, 24, 0.34))
+    drop-shadow(0 0 8px rgba(255, 90, 74, 0.28));
+}
+
+.fingerprint-scanner-scene .fingerprint-scanner-print .fingerprint-loader-svg {
+  width: 100%;
+  height: auto;
+  max-width: none;
+}
+
+/* Resting base print: the full fingerprint at the same stroke width as the
+   "active" lines, kept faint/transparent and never animated. The active lines
+   render on top of this. */
+.fingerprint-scanner-scene .fingerprint-loader-lines-static .fingerprint-loader-line {
+  opacity: 0.3;
+  animation: none;
+  stroke-dashoffset: 0;
+}
+
+/* --- Scan-reveal variant (02) --- */
+/* The active print is a separate layer stacked over the base. A CSS inset() clip
+   on this plain HTML wrapper (a deterministic box, unaffected by the SVG glow
+   filter region) uncovers it top-to-bottom exactly at the scan line. */
+.fingerprint-scanner-scene.is-scan-reveal .fingerprint-scanner-print.is-active {
+  clip-path: inset(0 0 100% 0);
+  animation: fingerprint-reveal-clip 4.4s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+.fingerprint-scanner-scene.is-scan-reveal
+  .fingerprint-scanner-print.is-active
+  .fingerprint-loader-line {
+  animation: none;
+  stroke-dashoffset: 0;
+  opacity: 1;
+}
+
+.fingerprint-scanner-scene.is-scan-reveal .fingerprint-scanner-line {
+  opacity: 1;
+  animation: fingerprint-scan-updown 4.4s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+.fingerprint-scanner-line {
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  height: 14px;
+  border-radius: 40px;
+  background: linear-gradient(
+    90deg,
+    rgba(120, 12, 8, 0) 0%,
+    rgba(255, 96, 74, 0.85) 22%,
+    rgba(255, 232, 224, 0.98) 50%,
+    rgba(255, 96, 74, 0.85) 78%,
+    rgba(120, 12, 8, 0) 100%
+  );
+  /* screen blend lightens the ridges the beam passes over (red -> bright
+     pink/white), instead of just sitting on top of them. */
+  mix-blend-mode: screen;
+  /* drop-shadow follows the gradient's alpha, so the glow tapers with the line
+     instead of blooming into rounded caps at the transparent ends. */
+  filter:
+    blur(0.4px)
+    drop-shadow(0 0 9px rgba(255, 70, 48, 0.85))
+    drop-shadow(0 0 20px rgba(255, 44, 24, 0.5));
+  opacity: 0;
+}
+
+/* The clip's reveal edge and the line share one eased timeline and the same
+   plate span (the line's -5%..70% is the plate mapping of the clip box's
+   top..bottom), so the line rides the reveal edge. Down (0→44%) reveals, hold,
+   up (56→100%) hides — then repeat. */
+/* The line overshoots just past the fingerprint at both ends (so it fully clears
+   the print instead of resting on the top/bottom ridges); the clip is held
+   pinned during those overshoots so the reveal edge and line stay locked
+   together through the scan itself (9→44% down, 56→91% up). */
+@keyframes fingerprint-reveal-clip {
+  0%,
+  9% {
+    clip-path: inset(0 0 97.9% 0);
+  }
+  44%,
+  56% {
+    clip-path: inset(0 0 2.1% 0);
+  }
+  91%,
+  100% {
+    clip-path: inset(0 0 97.9% 0);
+  }
+}
+
+@keyframes fingerprint-scan-updown {
+  0% {
+    top: 4%;
+  }
+  9% {
+    top: 11.4%;
+  }
+  44% {
+    top: 83.4%;
+  }
+  50% {
+    top: 90%;
+  }
+  56% {
+    top: 83.4%;
+  }
+  91% {
+    top: 11.4%;
+  }
+  100% {
+    top: 4%;
+  }
+}
+
+/* --- Plain-draw variant (03): a calmer, more premium draw --- */
+/* Softer easing, an even top-to-bottom cascade, a longer hold, and a clean
+   opacity fade-out (the ridges stay fully drawn as they fade, instead of the
+   default's abrupt reverse-draw) for a smoother loop. */
+.fingerprint-scanner-scene.is-plain-draw
+  .fingerprint-loader-lines:not(.fingerprint-loader-lines-static)
+  .fingerprint-loader-line {
+  animation-name: fingerprint-line-draw-smooth;
+  animation-duration: 6.6s;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.15, 1);
+}
+
+.fingerprint-scanner-scene.is-plain-draw .line-a {
+  animation-delay: 0s;
+}
+.fingerprint-scanner-scene.is-plain-draw .line-b {
+  animation-delay: 0.16s;
+}
+.fingerprint-scanner-scene.is-plain-draw .line-c {
+  animation-delay: 0.32s;
+}
+.fingerprint-scanner-scene.is-plain-draw .line-e {
+  animation-delay: 0.48s;
+}
+.fingerprint-scanner-scene.is-plain-draw .line-d {
+  animation-delay: 0.64s;
+}
+
+@keyframes fingerprint-line-draw-smooth {
+  0% {
+    opacity: 0;
+    stroke-dashoffset: 100;
+  }
+  9% {
+    opacity: 1;
+  }
+  46% {
+    opacity: 1;
+    stroke-dashoffset: 0;
+  }
+  80% {
+    opacity: 1;
+    stroke-dashoffset: 0;
+  }
+  100% {
+    opacity: 0;
+    stroke-dashoffset: 0;
+  }
+}
+
+/* --- Plain-draw + shine variant (04): draw once, hold, then shimmer once --- */
+/* Same staggered plain-draw cascade as variant 03, but the active lines run a
+   single time and settle fully drawn (no fade-out loop). Once they've settled,
+   a skeleton-shimmer highlight sweeps through the print a single time. */
+.fingerprint-scanner-scene.is-shine-once
+  .fingerprint-loader-lines:not(.fingerprint-loader-lines-static)
+  .fingerprint-loader-line {
+  animation-name: fingerprint-line-draw-hold;
+  animation-duration: 2.6s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.15, 1);
+}
+
+@keyframes fingerprint-line-draw-hold {
+  0% {
+    opacity: 0;
+    stroke-dashoffset: 100;
+  }
+  14% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    stroke-dashoffset: 0;
+  }
+}
+
+/* White copy of the print, revealed only through a diagonal band mask. The band
+   sweeps across once (after the draw settles), so the highlight travels through
+   the fingerprint ridges; screen blend lifts the red ridges toward white as it
+   passes. The strokes themselves stay put — only the mask moves. */
+.fingerprint-scanner-scene .fingerprint-shine-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  opacity: 0;
+  -webkit-mask-image: linear-gradient(
+    118deg,
+    transparent 40%,
+    #000 50%,
+    transparent 60%
+  );
+  mask-image: linear-gradient(118deg, transparent 40%, #000 50%, transparent 60%);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: 260% 260%;
+  mask-size: 260% 260%;
+  -webkit-mask-position: 130% 130%;
+  mask-position: 130% 130%;
+  filter: drop-shadow(0 0 5px rgba(255, 238, 228, 0.7));
+  animation: fingerprint-shine-sweep 1.5s cubic-bezier(0.5, 0, 0.2, 1) 3.35s 1 forwards;
+}
+
+.fingerprint-shine-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.fingerprint-shine-line {
+  fill: none;
+  stroke-width: 19.7772;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+@keyframes fingerprint-shine-sweep {
+  0% {
+    opacity: 0;
+    -webkit-mask-position: 130% 130%;
+    mask-position: 130% 130%;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    -webkit-mask-position: -30% -30%;
+    mask-position: -30% -30%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fingerprint-scanner-scene .fingerprint-shine-layer {
+    animation-duration: 2.6s;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fingerprint-scanner-scene.is-device-floating .fingerprint-scanner-motion-shell,
+  .fingerprint-scanner-scene.is-device-parallax .fingerprint-scanner-motion-shell {
+    animation-duration: 9.6s;
+  }
+}
+
+.alty-mock-motion-slot.is-biometrics .fingerprint-scanner-composite {
+  --scanner-size: 360;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin: 0;
+  transform: translate(-50%, -50%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fingerprint-scanner-scene.is-scan-reveal .fingerprint-scanner-line,
+  .fingerprint-scanner-scene.is-scan-reveal .fingerprint-scanner-print.is-active {
+    animation-duration: 8.8s;
+  }
+}
+
 .prototype-refresh-gesture {
   --ptr-duration: 5.4s;
   --ptr-visual-scale: 0.75;
@@ -5034,6 +5743,10 @@ button {
   stroke-dashoffset: 100;
   opacity: 1;
   animation: ptr-line-fill-draw-motion 6.8s cubic-bezier(0.65, 0, 0.35, 1) 1 forwards;
+}
+
+.ptr-line-fill-red-gesture .ptr-line-fill-draw {
+  stroke: #ef2a22;
 }
 
 .app-shell[data-prototype-theme="light"] .prototype-refresh-gesture {
@@ -7161,6 +7874,314 @@ img.alty-identity-bust-image {
   }
 }
 
+@keyframes uba-lottie-resolve-spinner {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+
+  40% {
+    transform: rotate(270deg) scale(1);
+  }
+
+  56% {
+    transform: rotate(430deg) scale(1);
+  }
+
+  70% {
+    transform: rotate(590deg) scale(1);
+  }
+
+  84% {
+    transform: rotate(720deg) scale(1);
+  }
+
+  94% {
+    transform: rotate(720deg) scale(1);
+  }
+
+  100% {
+    transform: rotate(720deg) scale(1);
+  }
+}
+
+@keyframes uba-lottie-resolve-focus {
+  0%,
+  44% {
+    filter: blur(0);
+  }
+
+  64% {
+    filter: blur(0.52px);
+  }
+
+  76% {
+    filter: blur(0.32px);
+  }
+
+  100% {
+    filter: blur(0);
+  }
+}
+
+@keyframes uba-lottie-resolve-result-glow {
+  0%,
+  86% {
+    filter:
+      drop-shadow(0 0 14px var(--uba-lottie-resolve-glow))
+      drop-shadow(0 12px 28px var(--uba-lottie-resolve-shadow));
+  }
+
+  94%,
+  100% {
+    filter:
+      drop-shadow(0 0 14px var(--uba-lottie-result-glow))
+      drop-shadow(0 12px 28px var(--uba-lottie-result-shadow));
+  }
+}
+
+@keyframes uba-lottie-organic-fan {
+  0%,
+  66% {
+    opacity: 1;
+    filter: blur(0);
+    transform: scale(1);
+  }
+
+  74% {
+    opacity: 0.72;
+    filter: blur(0.35px);
+    transform: scale(0.9);
+  }
+
+  82% {
+    opacity: 0.2;
+    filter: blur(1.6px);
+    transform: scale(0.52);
+  }
+
+  90% {
+    opacity: 0.04;
+    filter: blur(3.8px);
+    transform: scale(0.18);
+  }
+
+  100% {
+    opacity: 0;
+    filter: blur(6px);
+    transform: scale(0);
+  }
+}
+
+@keyframes uba-lottie-organic-ghost {
+  0%,
+  42% {
+    opacity: 0;
+    filter: blur(0);
+    transform: rotate(var(--organic-ghost-rotation, 0deg)) scale(1);
+  }
+
+  54% {
+    opacity: calc(var(--organic-ghost-max-opacity, 0.6) * 0.34);
+    filter: blur(0.1px);
+    transform: rotate(var(--organic-ghost-rotation, 0deg)) scale(1);
+  }
+
+  66% {
+    opacity: var(--organic-ghost-max-opacity, 0.6);
+    filter: blur(0.22px);
+    transform: rotate(var(--organic-ghost-rotation, 0deg)) scale(1);
+  }
+
+  74% {
+    opacity: calc(var(--organic-ghost-max-opacity, 0.6) * 0.7);
+    filter: blur(0.5px);
+    transform: rotate(var(--organic-ghost-rotation, 0deg)) scale(0.86);
+  }
+
+  84% {
+    opacity: calc(var(--organic-ghost-max-opacity, 0.6) * 0.16);
+    filter: blur(1.8px);
+    transform: rotate(var(--organic-ghost-rotation, 0deg)) scale(0.42);
+  }
+
+  92% {
+    opacity: calc(var(--organic-ghost-max-opacity, 0.6) * 0.03);
+    filter: blur(3.4px);
+    transform: rotate(var(--organic-ghost-rotation, 0deg)) scale(0.14);
+  }
+
+  100% {
+    opacity: 0;
+    filter: blur(5px);
+    transform: rotate(var(--organic-ghost-rotation, 0deg)) scale(0);
+  }
+}
+
+@keyframes uba-lottie-resolve-circle {
+  0%,
+  46% {
+    fill: currentColor;
+    opacity: 0;
+    filter: blur(14px);
+    transform: scale(0.18);
+  }
+
+  56% {
+    fill: var(--uba-lottie-result-circle-color, currentColor);
+    opacity: 0.5;
+    filter: blur(7px);
+    transform: scale(0.78);
+  }
+
+  64% {
+    fill: var(--uba-lottie-result-circle-color, currentColor);
+    opacity: 0.9;
+    filter: blur(2.8px);
+    transform: scale(0.98);
+  }
+
+  72%,
+  86% {
+    fill: var(--uba-lottie-result-circle-color, currentColor);
+    opacity: 1;
+    filter: blur(0);
+    transform: scale(1);
+  }
+
+  94% {
+    fill: var(--uba-lottie-result-circle-color, currentColor);
+    opacity: 1;
+    filter: blur(0);
+    transform: scale(0.85);
+  }
+
+  100% {
+    fill: var(--uba-lottie-result-circle-color, currentColor);
+    opacity: 1;
+    filter: blur(0);
+    transform: scale(1);
+  }
+}
+
+@keyframes uba-lottie-resolve-circle-result-shift {
+  0%,
+  46% {
+    fill: currentColor;
+    opacity: 0;
+    filter: blur(14px);
+    transform: scale(0.18);
+  }
+
+  56% {
+    fill: currentColor;
+    opacity: 0.5;
+    filter: blur(7px);
+    transform: scale(0.78);
+  }
+
+  64% {
+    fill: currentColor;
+    opacity: 0.9;
+    filter: blur(2.8px);
+    transform: scale(0.98);
+  }
+
+  72%,
+  86% {
+    fill: currentColor;
+    opacity: 1;
+    filter: blur(0);
+    transform: scale(1);
+  }
+
+  90% {
+    fill: var(--uba-lottie-result-circle-color, currentColor);
+    opacity: 1;
+    filter: blur(0);
+    transform: scale(0.94);
+  }
+
+  94% {
+    fill: var(--uba-lottie-result-circle-color, currentColor);
+    opacity: 1;
+    filter: blur(0);
+    transform: scale(0.85);
+  }
+
+  100% {
+    fill: var(--uba-lottie-result-circle-color, currentColor);
+    opacity: 1;
+    filter: blur(0);
+    transform: scale(1);
+  }
+}
+
+@keyframes uba-lottie-resolve-result-mark {
+  0%,
+  78% {
+    opacity: 0;
+    stroke-dashoffset: 78;
+    transform: scale(0.56);
+  }
+
+  84% {
+    opacity: 1;
+    stroke-dashoffset: 78;
+    transform: scale(0.56);
+  }
+
+  91% {
+    opacity: 1;
+    stroke-dashoffset: 0;
+    transform: scale(0.66);
+  }
+
+  95% {
+    opacity: 1;
+    stroke-dashoffset: 0;
+    transform: scale(0.57);
+  }
+
+  100% {
+    opacity: 1;
+    stroke-dashoffset: 0;
+    transform: scale(0.6);
+  }
+}
+
+@keyframes uba-lottie-resolve-result-mark-shift {
+  0%,
+  88% {
+    opacity: 0;
+    stroke-dashoffset: 78;
+    transform: scale(0.56);
+  }
+
+  91% {
+    opacity: 1;
+    stroke-dashoffset: 78;
+    transform: scale(0.56);
+  }
+
+  96% {
+    opacity: 1;
+    stroke-dashoffset: 0;
+    transform: scale(0.66);
+  }
+
+  98% {
+    opacity: 1;
+    stroke-dashoffset: 0;
+    transform: scale(0.57);
+  }
+
+  100% {
+    opacity: 1;
+    stroke-dashoffset: 0;
+    transform: scale(0.6);
+  }
+}
+
 @keyframes uba-coin-float {
   0%,
   100% {
@@ -7277,6 +8298,31 @@ img.alty-identity-bust-image {
 
   100% {
     transform: rotateX(8deg) rotateY(1080deg);
+  }
+}
+
+/* Two-turn variant of the flip spin (720deg) for Core spinners 06. */
+@keyframes uba-coin-flip-spin-2 {
+  0% {
+    transform: rotateX(8deg) rotateY(0deg);
+    /* ease-in: accelerate up from rest */
+    animation-timing-function: cubic-bezier(0.42, 0, 1, 1);
+  }
+
+  40% {
+    transform: rotateX(8deg) rotateY(240deg);
+    /* steady, fast middle turn */
+    animation-timing-function: linear;
+  }
+
+  65% {
+    transform: rotateX(8deg) rotateY(480deg);
+    /* ease-out: slow the final turn down into the resting logo face */
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  }
+
+  100% {
+    transform: rotateX(8deg) rotateY(720deg);
   }
 }
 
@@ -7720,6 +8766,33 @@ img.alty-identity-bust-image {
   82%,
   100% {
     clip-path: inset(0 0 100% 0);
+  }
+}
+
+@keyframes orbit-spin-inner {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes orbit-spin-mid {
+  from {
+    transform: rotate(140deg);
+  }
+  to {
+    transform: rotate(500deg);
+  }
+}
+
+@keyframes orbit-spin-outer {
+  from {
+    transform: rotate(260deg);
+  }
+  to {
+    transform: rotate(620deg);
   }
 }
 

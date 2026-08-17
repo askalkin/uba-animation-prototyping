@@ -247,30 +247,6 @@ const pages = [
     `,
   },
   {
-    slug: "uba-loader-gradient-blob-prototype",
-    title: "Page transition",
-    accent: "uba",
-    section: "prototypes",
-    themeable: true,
-    label: "Gradient blob loader transitioning from PIN entry to successful payment.",
-    scene: () => `
-      <div class="alty-flow-scene" role="img" aria-label="UBA gradient blob loader prototype over payment confirmation flow">
-        ${ubaLoaderGradientBlobPrototype()}
-      </div>
-    `,
-  },
-  {
-    slug: "account-opening-pending",
-    title: "Account pending screen",
-    accent: "ink",
-    section: "prototypes",
-    themeable: true,
-    label: "Pending account-opening mockup from the supplied Figma specs.",
-    scene: () => `
-      ${altyMockupPrototype("pending")}
-    `,
-  },
-  {
     slug: "account-opening-almost-there",
     title: "Core spinners",
     accent: "ink",
@@ -282,69 +258,14 @@ const pages = [
     `,
   },
   {
-    slug: "enable-biometrics",
-    title: "Enable biometrics",
-    accent: "red",
-    section: "prototypes",
-    themeable: true,
-    label: "Biometrics onboarding mockup with fingerprint verification motion.",
-    scene: () => `
-      ${altyMockupPrototype("biometrics")}
-    `,
-  },
-  {
-    slug: "identity-verification",
-    title: "Identity verification",
-    accent: "red",
-    section: "prototypes",
-    themeable: true,
-    label: "Identity verification mockup with user scan motion.",
-    scene: () => `
-      ${altyMockupPrototype("identity")}
-    `,
-  },
-  {
-    slug: "six-digit-code",
-    title: "6-digit code",
-    accent: "red",
-    section: "prototypes",
-    themeable: true,
-    label: "Login verification code mockup with filled OTP fields.",
-    scene: () => `
-      ${altyMockupPrototype("otp")}
-    `,
-  },
-  {
-    slug: "verify-securepass",
-    title: "Verify with SecurePass",
-    accent: "red",
-    section: "prototypes",
-    themeable: true,
-    label: "SecurePass verification mockup: empty 6-digit code entry, new-limit summary, and numeric keyboard.",
-    scene: () => `
-      ${altyMockupPrototype("securepass")}
-    `,
-  },
-  {
-    slug: "code-error",
-    title: "Code error",
-    accent: "red",
-    section: "prototypes",
-    themeable: true,
-    label: "6-digit code mockup where an invalid code shakes the input row, turns the border red, and fires an error haptic.",
-    scene: () => `
-      ${altyMockupPrototype("otp-error")}
-    `,
-  },
-  {
-    slug: "searching-keyboard",
-    title: "Searching",
+    slug: "core-spinners-02",
+    title: "Feedback spinners",
     accent: "ink",
     section: "prototypes",
     themeable: true,
-    label: "Search screen mockup with active keyboard and empty searching state.",
+    label: "Standalone feedback spinner animations without the onboarding mockup.",
     scene: () => `
-      ${altyMockupPrototype("searching")}
+      ${coreSpinnerStandalonePrototype("core-spinner-02")}
     `,
   },
   {
@@ -370,6 +291,17 @@ const pages = [
     `,
   },
   {
+    slug: "transaction-history-pull-refresh",
+    title: "Transaction refresh list",
+    accent: "ink",
+    section: "prototypes",
+    themeable: true,
+    label: "Pull-to-refresh transaction history mockup from the supplied Figma specs.",
+    scene: () => `
+      ${altyMockupPrototype("pull")}
+    `,
+  },
+  {
     slug: "couldnt-load-results",
     title: "Couldn't load results",
     accent: "red",
@@ -381,14 +313,82 @@ const pages = [
     `,
   },
   {
-    slug: "transaction-history-pull-refresh",
-    title: "Transaction refresh list",
+    slug: "code-error",
+    title: "Code error",
+    accent: "red",
+    section: "prototypes",
+    themeable: true,
+    label: "6-digit code mockup where an invalid code shakes the input row, turns the border red, and fires an error haptic.",
+    scene: () => `
+      ${altyMockupPrototype("otp-error")}
+    `,
+  },
+  {
+    slug: "enable-biometrics",
+    title: "Enable biometrics",
+    accent: "red",
+    section: "prototypes",
+    themeable: true,
+    label: "Biometrics onboarding mockup with fingerprint verification motion.",
+    scene: () => `
+      ${altyMockupPrototype("biometrics")}
+    `,
+  },
+  {
+    slug: "searching-keyboard",
+    title: "Searching",
     accent: "ink",
     section: "prototypes",
     themeable: true,
-    label: "Pull-to-refresh transaction history mockup from the supplied Figma specs.",
+    label: "Search screen mockup with active keyboard and empty searching state.",
     scene: () => `
-      ${altyMockupPrototype("pull")}
+      ${altyMockupPrototype("searching")}
+    `,
+  },
+  {
+    slug: "six-digit-code",
+    title: "6-digit code",
+    accent: "red",
+    section: "prototypes",
+    themeable: true,
+    label: "Login verification code mockup with filled OTP fields.",
+    scene: () => `
+      ${altyMockupPrototype("otp")}
+    `,
+  },
+  {
+    slug: "verify-securepass",
+    title: "Verify with SecurePass",
+    accent: "red",
+    section: "prototypes",
+    themeable: true,
+    label: "SecurePass verification mockup: empty 6-digit code entry, new-limit summary, and numeric keyboard.",
+    scene: () => `
+      ${altyMockupPrototype("securepass")}
+    `,
+  },
+  {
+    slug: "identity-verification",
+    title: "Identity verification",
+    accent: "red",
+    section: "prototypes",
+    themeable: true,
+    label: "Identity verification mockup with user scan motion.",
+    scene: () => `
+      ${altyMockupPrototype("identity")}
+    `,
+  },
+  {
+    slug: "uba-loader-gradient-blob-prototype",
+    title: "Page transition",
+    accent: "uba",
+    section: "prototypes",
+    themeable: true,
+    label: "Gradient blob loader transitioning from PIN entry to successful payment.",
+    scene: () => `
+      <div class="alty-flow-scene" role="img" aria-label="UBA gradient blob loader prototype over payment confirmation flow">
+        ${ubaLoaderGradientBlobPrototype()}
+      </div>
     `,
   },
   {
@@ -469,32 +469,8 @@ const navGroups = {
   ],
   prototypes: [
     {
-      title: "Page transitions",
-      slugs: ["uba-loader-gradient-blob-prototype"],
-    },
-    {
       title: "Core spinners",
-      slugs: ["account-opening-pending", "account-opening-almost-there"],
-    },
-    {
-      title: "Biometrics",
-      slugs: ["enable-biometrics"],
-    },
-    {
-      title: "Identity verification",
-      slugs: ["identity-verification"],
-    },
-    {
-      title: "Code entry",
-      slugs: ["six-digit-code", "verify-securepass"],
-    },
-    {
-      title: "Error states",
-      slugs: ["code-error", "couldnt-load-results"],
-    },
-    {
-      title: "Search",
-      slugs: ["searching-keyboard"],
+      slugs: ["account-opening-almost-there", "core-spinners-02"],
     },
     {
       title: "Success",
@@ -503,6 +479,30 @@ const navGroups = {
     {
       title: "Pull to refresh",
       slugs: ["transaction-history-pull-refresh"],
+    },
+    {
+      title: "Error states",
+      slugs: ["couldnt-load-results", "code-error"],
+    },
+    {
+      title: "Biometrics",
+      slugs: ["enable-biometrics"],
+    },
+    {
+      title: "Search",
+      slugs: ["searching-keyboard"],
+    },
+    {
+      title: "Code entry",
+      slugs: ["six-digit-code", "verify-securepass"],
+    },
+    {
+      title: "Identity verification",
+      slugs: ["identity-verification"],
+    },
+    {
+      title: "Page transitions",
+      slugs: ["uba-loader-gradient-blob-prototype"],
     },
   ],
 };
@@ -520,16 +520,12 @@ const prototypeMotionVariantSets = {
   otp: {
     title: "Colorway",
     variants: [
-      { slug: "otp-red", title: "Red", colorway: "" },
-      { slug: "otp-mono", title: "Mono check", colorway: "mono" },
       { slug: "otp-green", title: "Green", colorway: "green" },
     ],
   },
   securepass: {
     title: "Colorway",
     variants: [
-      { slug: "securepass-red", title: "Red", colorway: "" },
-      { slug: "securepass-mono", title: "Mono check", colorway: "mono" },
       { slug: "securepass-green", title: "Green", colorway: "green" },
     ],
   },
@@ -537,29 +533,32 @@ const prototypeMotionVariantSets = {
     title: "Core spinners",
     variants: [
       { slug: "progressive-blur-spinner-solo", title: "Red comet arc" },
-      { slug: "minimalist-spinner", title: "Single arc" },
       { slug: "uba-spinner-1", title: "UBA spinner 1" },
       { slug: "uba-spinner-1-red", title: "UBA spinner 1 red" },
-      { slug: "uba-spinner-2", title: "UBA spinner 2" },
-      { slug: "uba-spinner-2-red", title: "UBA spinner 2 red" },
-      { slug: "silver-uba-coin", title: "Silver UBA coin" },
       { slug: "uba-icon-loop", title: "Banking icons loader" },
+      { slug: "uba-card-rotation", title: "Card rotation" },
+      { slug: "uba-coin-flip", title: "Coin flip" },
+    ],
+  },
+  "core-spinner-02": {
+    title: "Feedback spinners",
+    variants: [
+      { slug: "uba-spinner-1-circle-resolve-green", title: "Green check", number: "02" },
+      { slug: "uba-spinner-1-circle-resolve-error", title: "Red X", number: "03" },
     ],
   },
   searching: {
     title: "Search loaders",
     variants: [
-      { slug: "progressive-blur-spinner", title: "Red orbit scanner" },
-      { slug: "search-spinner-2", title: "Gradient magnifier" },
-      { slug: "search-spinner-2-white-ripple", title: "Ripple pulse" },
-      { slug: "search-icon-animation", title: "Floating magnifier" },
       { slug: "search-red-magnifier-loader", title: "Red magnifier" },
+      { slug: "search-red-orbit-magnifier", title: "Orbit magnifier" },
     ],
   },
   biometrics: {
     title: "Biometrics",
     variants: [
-      { slug: "identity-verification-motion-layered", title: "Layered fingerprint" },
+      { slug: "biometric-scanner-device-plain-float", title: "Scanner float", number: "03A" },
+      { slug: "biometric-scanner-device-plain-parallax", title: "Scanner parallax", number: "03B" },
     ],
   },
   identity: {
@@ -571,21 +570,15 @@ const prototypeMotionVariantSets = {
   success: {
     title: "Success loaders",
     variants: [
-      { slug: "success-spinner-neutral", title: "Neutral fill to check" },
-      { slug: "success-spinner-green", title: "Green fill to check" },
-      { slug: "green-success-confetti", title: "Green confetti" },
-      { slug: "green-success-rays", title: "Green rays" },
-      { slug: "verification-badge", title: "Verification badge" },
-      { slug: "uploaded-success-confetti", title: "Uploaded confetti" },
+      { slug: "verification-badge-green", title: "Green verification badge" },
       { slug: "uploaded-success-confetti-green", title: "Green uploaded confetti" },
-      { slug: "green-success-stars", title: "Green stars" },
+      { slug: "success-spinner-green", title: "Green fill to check" },
     ],
   },
   failed: {
     title: "Failure loaders",
     variants: [
       { slug: "failure-wheel-red", title: "Red fill to X" },
-      { slug: "failure-wheel-neutral", title: "Neutral fill to X" },
       { slug: "failure-verification-badge", title: "Badge fill to X" },
     ],
   },
@@ -593,10 +586,8 @@ const prototypeMotionVariantSets = {
     title: "Refresh gestures",
     variants: [
       { slug: "pull-to-refresh-blob-capsule", title: "Blob capsule" },
-      { slug: "pull-to-refresh-glass-capsule", title: "Red sphere" },
-      { slug: "pull-to-refresh-neutral-capsule-2", title: "Neutral check" },
-      { slug: "flip-coin-pull-to-refresh-white", title: "White coin flip" },
       { slug: "pull-to-refresh-line-fill", title: "Line fill" },
+      { slug: "pull-to-refresh-line-fill-red", title: "Line fill (red)" },
     ],
   },
 };
@@ -605,6 +596,7 @@ const app = document.getElementById("app");
 let prototypeTheme = "dark";
 const prototypeVariantState = {};
 let ubaLottieSpinnerFrame = 0;
+let ubaLottieOrganicId = 0;
 let ubaIconLoopGeneration = 0;
 let otpErrorHapticsGeneration = 0;
 let successConfettiLottieInstances = [];
@@ -734,6 +726,45 @@ function searchRedMagnifierIllustration() {
   `;
 }
 
+function searchOrbitScannerRings() {
+  // Each orbit is a single explicit arc path (no dashing), so it is always one line.
+  const orbitArc = (r, sweepDeg) => {
+    const rad = (d) => (d * Math.PI) / 180;
+    const start = 0;
+    const end = start + sweepDeg;
+    const x1 = (60 + r * Math.cos(rad(start))).toFixed(2);
+    const y1 = (60 + r * Math.sin(rad(start))).toFixed(2);
+    const x2 = (60 + r * Math.cos(rad(end))).toFixed(2);
+    const y2 = (60 + r * Math.sin(rad(end))).toFixed(2);
+    const largeArc = sweepDeg > 180 ? 1 : 0;
+    return `M ${x1} ${y1} A ${r} ${r} 0 ${largeArc} 1 ${x2} ${y2}`;
+  };
+  const rings = [
+    { cls: "orbit-ring-inner", r: 26, sweep: 165 },
+    { cls: "orbit-ring-mid", r: 34, sweep: 150 },
+    { cls: "orbit-ring-outer", r: 42, sweep: 185 },
+  ];
+  const groups = rings
+    .map(
+      (ring) => `
+      <g class="orbit-ring ${ring.cls}">
+        <path d="${orbitArc(ring.r, ring.sweep)}"></path>
+      </g>`
+    )
+    .join("");
+  return `
+    <svg class="orbit-scanner-svg" viewBox="0 0 120 120" aria-hidden="true">
+      <defs>
+        <linearGradient id="orbit-line-gradient" class="orbit-line-gradient" x1="0" y1="0" x2="1" y2="1">
+          <stop class="orbit-stop-bright" offset="0%"></stop>
+          <stop class="orbit-stop-fade" offset="100%"></stop>
+        </linearGradient>
+      </defs>
+      ${groups}
+    </svg>
+  `;
+}
+
 function searchSpinnerRippleField() {
   return `
     <span class="search-ripple-field" aria-hidden="true">
@@ -755,10 +786,36 @@ function searchSpinnerWhiteIcon() {
   `;
 }
 
-function ubaLottieSpinnerScene(spinnerKey, label, variant = "neutral") {
+function ubaLottieSpinnerScene(spinnerKey, label, variant = "neutral", options = {}) {
+  const { mode = "pingpong", result = "", resultTone = "" } = options;
+  const isCircleResolve = mode === "circle-resolve";
+  const modeAttribute = mode !== "pingpong" ? ` data-uba-lottie-mode="${mode}"` : "";
+  const resultAttribute = result ? ` data-uba-lottie-result="${result}"` : "";
+  const colorClass =
+    variant === "red" ? "uba-lottie-red-scene" : variant === "green" ? "uba-lottie-green-scene" : "";
+  const resultToneClass =
+    resultTone === "red"
+      ? "uba-lottie-result-red-scene"
+      : resultTone === "green"
+        ? "uba-lottie-result-green-scene"
+        : "";
+  const sceneClasses = [colorClass, resultToneClass].filter(Boolean).join(" ");
+
+  if (isCircleResolve) {
+    return `
+      <div class="loader-scene uba-lottie-scene uba-lottie-circle-resolve-scene ${sceneClasses}" role="img" aria-label="${label}">
+        <div class="uba-lottie-resolve-wrap">
+          <div class="uba-lottie-spinner" data-uba-lottie-spinner="${spinnerKey}"${modeAttribute}${resultAttribute}>
+            <span class="uba-lottie-fallback" aria-hidden="true"></span>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
   return `
-    <div class="loader-scene uba-lottie-scene ${variant === "red" ? "uba-lottie-red-scene" : ""}" role="img" aria-label="${label}">
-      <div class="uba-lottie-spinner" data-uba-lottie-spinner="${spinnerKey}">
+    <div class="loader-scene uba-lottie-scene ${sceneClasses}" role="img" aria-label="${label}">
+      <div class="uba-lottie-spinner" data-uba-lottie-spinner="${spinnerKey}"${modeAttribute}>
         <span class="uba-lottie-fallback" aria-hidden="true"></span>
       </div>
     </div>
@@ -1205,14 +1262,16 @@ function roundedStarPath(cx, cy, outerRadius, innerRadius, points, cornerRadius)
   return commands.join(" ");
 }
 
-function verificationBadgePrototype(result = "success") {
+function verificationBadgePrototype(result = "success", colorway = "") {
   const badgePath = roundedStarPath(60, 60, 49, 36, 8, 8.5);
   const isError = result === "error";
   const resultLabel = isError ? "an X" : "a check";
   const resultPath = isError ? "M40 40 L80 80 M80 40 L40 80" : "M36 62 L52 77 L84 43";
+  const colorwayClass = colorway ? `verification-badge-${colorway}-scene` : "";
+  const colorLabel = colorway === "green" ? "Green" : "White";
 
   return `
-    <div class="loader-scene verification-badge-scene ${isError ? "verification-badge-error-scene" : ""}" role="img" aria-label="White verification badge drawing, filling, and resolving into ${resultLabel}">
+    <div class="loader-scene verification-badge-scene ${isError ? "verification-badge-error-scene" : ""} ${colorwayClass}" role="img" aria-label="${colorLabel} verification badge drawing, filling, and resolving into ${resultLabel}">
       <div class="verification-badge-mark">
         <svg class="verification-badge-svg" viewBox="0 0 120 120" aria-hidden="true">
           <defs>
@@ -1385,11 +1444,9 @@ function ubaLoaderGradientBlobPrototype() {
             <span class="uba-blob uba-blob-lift"></span>
           </div>
           <div class="alty-transition-loader">
-            <svg class="uba-transition-minimal-spinner" viewBox="0 0 120 120" aria-hidden="true">
-              <g class="uba-transition-minimal-spin">
-                <circle class="uba-transition-minimal-trail" cx="60" cy="60" r="34" pathLength="100"></circle>
-              </g>
-            </svg>
+            <div class="uba-transition-lottie-spinner uba-lottie-spinner" data-uba-lottie-spinner="uba-spinner-1">
+              <span class="uba-lottie-fallback" aria-hidden="true"></span>
+            </div>
           </div>
         </div>
       </div>
@@ -1514,34 +1571,83 @@ function renderPrototypeVariantPager(type, variantSet, activeIndex) {
   `;
 }
 
+function coreSpinnerStandalonePrototype(type) {
+  const variantSet = prototypeMotionVariantSets[type];
+
+  if (!variantSet) {
+    return "";
+  }
+
+  const activeIndex = getPrototypeVariantIndex(type);
+  const activeVariant = variantSet.variants[activeIndex];
+
+  return `
+    <div class="core-spinner-standalone" role="group" aria-label="${variantSet.title}">
+      ${renderPrototypeVariantPager(type, variantSet, activeIndex)}
+      <div class="core-spinner-only-slot" data-motion-source="${activeVariant.slug}" aria-hidden="true">
+        ${renderPrototypeMotionElement(activeVariant.slug, type)}
+      </div>
+    </div>
+  `;
+}
+
+const FINGERPRINT_PATHS = [
+  {
+    className: "line-a",
+    d: "M283.063 96.4064C283.063 96.4064 241.109 4.60537 153.769 10.1284C106.798 13.0986 57.4328 37.8102 32.3086 79.3485",
+  },
+  {
+    className: "line-b",
+    d: "M9.8891 224.71C16.8106 127.806 91.3865 58.2669 163.072 69.017C234.757 79.7671 281.952 161.285 268.484 251.093",
+  },
+  {
+    className: "line-c",
+    d: "M12.6089 288.249C12.6089 288.249 50.2168 282.099 58.0426 228.662C67.4907 164.147 104.709 125.248 148.152 129.888C191.596 134.529 222.989 177.002 214.831 238.064C214.831 292.204 256.363 309.015 256.363 309.015M186.895 312.723C193.241 326.072 212.705 355.59 239.799 366.863",
+  },
+  {
+    className: "line-d",
+    d: "M122.373 474.402C131.19 467.727 151.396 451.757 161.68 441.275",
+  },
+  {
+    className: "line-e",
+    d: "M78.6155 444.273C102.513 429.275 152.434 390.775 160.938 356.758C164.069 368.295 177.65 396.461 206.92 416.832M43.0166 404.224C43.0166 404.224 122.018 348.331 145.611 294.676C160.938 259.819 183.682 193.565 141.655 191.619C99.6288 189.673 114.281 236.595 94.4373 275.642C63.7826 335.963 22.9922 348.041 22.9922 348.041",
+  },
+];
+
+// A white copy of the fingerprint strokes, masked by a diagonal band that sweeps
+// across once, so a skeleton-shimmer highlight travels through the print. The
+// strokes are held fully drawn; only the moving mask reveals them.
+function fingerprintShineLayer(id = "fingerprint-shine") {
+  return `
+    <div class="fingerprint-shine-layer" aria-hidden="true">
+      <svg class="fingerprint-shine-svg" viewBox="0 0 293 485">
+        <g class="fingerprint-shine-lines">
+          ${FINGERPRINT_PATHS.map(
+            (path) => `
+              <path
+                class="fingerprint-shine-line ${path.className}"
+                d="${path.d}"
+                stroke="#fff4ec"
+              ></path>
+            `,
+          ).join("")}
+        </g>
+      </svg>
+    </div>
+  `;
+}
+
 function fingerprintIdentityLoader(id = "fingerprint-loader", options = {}) {
   const useShield = Boolean(options.shield);
   const hasStaticFingerprintBase = Boolean(options.staticFingerprintBase);
+  const glowStaticBase = Boolean(options.glowStaticBase);
+  // 'all' renders both the resting base and the active lines in one svg; 'base'
+  // and 'active' render just one, so the active layer can be clipped on its own.
+  const layer = options.layer || "all";
   const gradientId = `${id}-gradient`;
   const staticGradientId = `${id}-static-gradient`;
   const glowId = `${id}-glow`;
-  const paths = [
-    {
-      className: "line-a",
-      d: "M283.063 96.4064C283.063 96.4064 241.109 4.60537 153.769 10.1284C106.798 13.0986 57.4328 37.8102 32.3086 79.3485",
-    },
-    {
-      className: "line-b",
-      d: "M9.8891 224.71C16.8106 127.806 91.3865 58.2669 163.072 69.017C234.757 79.7671 281.952 161.285 268.484 251.093",
-    },
-    {
-      className: "line-c",
-      d: "M12.6089 288.249C12.6089 288.249 50.2168 282.099 58.0426 228.662C67.4907 164.147 104.709 125.248 148.152 129.888C191.596 134.529 222.989 177.002 214.831 238.064C214.831 292.204 256.363 309.015 256.363 309.015M186.895 312.723C193.241 326.072 212.705 355.59 239.799 366.863",
-    },
-    {
-      className: "line-d",
-      d: "M122.373 474.402C131.19 467.727 151.396 451.757 161.68 441.275",
-    },
-    {
-      className: "line-e",
-      d: "M78.6155 444.273C102.513 429.275 152.434 390.775 160.938 356.758C164.069 368.295 177.65 396.461 206.92 416.832M43.0166 404.224C43.0166 404.224 122.018 348.331 145.611 294.676C160.938 259.819 183.682 193.565 141.655 191.619C99.6288 189.673 114.281 236.595 94.4373 275.642C63.7826 335.963 22.9922 348.041 22.9922 348.041",
-    },
-  ];
+  const paths = FINGERPRINT_PATHS;
 
   return `
     <div class="loader-scene fingerprint-loader-scene" role="img" aria-label="Animated fingerprint identity verification loader">
@@ -1588,9 +1694,9 @@ function fingerprintIdentityLoader(id = "fingerprint-loader", options = {}) {
             </filter>
           </defs>
           ${
-            hasStaticFingerprintBase
+            hasStaticFingerprintBase && layer !== "active"
               ? `
-                <g class="fingerprint-loader-lines fingerprint-loader-lines-static">
+                <g class="fingerprint-loader-lines fingerprint-loader-lines-static"${glowStaticBase ? ` filter="url(#${glowId})"` : ""}>
                   ${paths
                     .map(
                       (path) => `
@@ -1607,22 +1713,84 @@ function fingerprintIdentityLoader(id = "fingerprint-loader", options = {}) {
               `
               : ""
           }
-          <g class="fingerprint-loader-lines" filter="url(#${glowId})">
-            ${paths
-              .map(
-                (path) => `
-                  <path
-                    class="fingerprint-loader-line ${path.className}"
-                    d="${path.d}"
-                    pathLength="100"
-                    stroke="url(#${gradientId})"
-                  ></path>
-                `,
-              )
-              .join("")}
-          </g>
+          ${
+            layer !== "base"
+              ? `
+                <g class="fingerprint-loader-lines" filter="url(#${glowId})">
+                  ${paths
+                    .map(
+                      (path) => `
+                        <path
+                          class="fingerprint-loader-line ${path.className}"
+                          d="${path.d}"
+                          pathLength="100"
+                          stroke="url(#${gradientId})"
+                        ></path>
+                      `,
+                    )
+                    .join("")}
+                </g>
+              `
+              : ""
+          }
       </svg>
       ${useShield ? "</div>" : ""}
+    </div>
+  `;
+}
+
+function biometricScannerDevicePrototype(mode = "reveal") {
+  const isFloat = mode === "plain-float";
+  const isParallax = mode === "plain-parallax";
+  const baseMode = isFloat || isParallax ? "plain" : mode;
+  const isReveal = baseMode === "reveal";
+  // 'plain-shine' draws the print once, holds it, then sweeps a skeleton
+  // shimmer highlight through it a single time.
+  const isShine = baseMode === "plain-shine";
+  const effectClass = isFloat ? "is-device-floating" : isParallax ? "is-device-parallax" : "";
+  const modeClass = isReveal
+    ? `is-scan-reveal ${effectClass}`
+    : isShine
+      ? `is-plain-draw is-shine-once ${effectClass}`
+      : `is-plain-draw ${effectClass}`;
+  const id = isReveal
+    ? "prototype-scanner-fingerprint"
+    : isShine
+      ? "prototype-scanner-fingerprint-shine"
+      : "prototype-scanner-fingerprint-plain";
+  const label = isReveal
+    ? "Fingerprint scanner device with a scan line that reveals the print"
+    : "Fingerprint scanner device with an animated fingerprint";
+
+  const printHtml = isReveal
+    ? `
+        <div class="fingerprint-scanner-print is-base">
+          ${fingerprintIdentityLoader(`${id}-base`, { staticFingerprintBase: true, glowStaticBase: true, layer: "base" })}
+        </div>
+        <div class="fingerprint-scanner-print is-active">
+          ${fingerprintIdentityLoader(`${id}-active`, { layer: "active" })}
+        </div>
+      `
+    : `
+        <div class="fingerprint-scanner-print">
+          ${fingerprintIdentityLoader(id, { staticFingerprintBase: true, glowStaticBase: true })}
+          ${isShine ? fingerprintShineLayer(id) : ""}
+        </div>
+      `;
+
+  return `
+    <div class="loader-scene fingerprint-scanner-scene ${modeClass}" role="img" aria-label="${label}">
+      <div class="fingerprint-scanner-composite" aria-hidden="true">
+        <div class="fingerprint-scanner-motion-shell">
+          <img class="fingerprint-scanner-device" src="./assets/identity-scanner-device.webp" alt="">
+          <div class="fingerprint-scanner-screen">
+            <div class="fingerprint-scanner-plate">
+              ${printHtml}
+              ${isReveal ? '<span class="fingerprint-scanner-line"></span>' : ""}
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   `;
 }
@@ -1689,11 +1857,22 @@ function renderPrototypeMotionElement(slug, contextType = "") {
         ${searchRedMagnifierIllustration()}
       </div>
     `,
+    "search-red-orbit-magnifier": `
+      <div class="loader-scene search-red-magnifier-scene search-red-orbit-magnifier-scene" role="img" aria-label="Compact red magnifier inside orbit scanner">
+        ${searchOrbitScannerRings()}
+        ${searchRedMagnifierIllustration()}
+      </div>
+    `,
     "identity-verification-motion": fingerprintIdentityLoader("prototype-fingerprint", { shield: true }),
     "identity-verification-motion-layered": fingerprintIdentityLoader("prototype-fingerprint-layered", {
       shield: true,
       staticFingerprintBase: true,
     }),
+    "biometric-scanner-device": biometricScannerDevicePrototype("reveal"),
+    "biometric-scanner-device-plain": biometricScannerDevicePrototype("plain"),
+    "biometric-scanner-device-plain-float": biometricScannerDevicePrototype("plain-float"),
+    "biometric-scanner-device-plain-parallax": biometricScannerDevicePrototype("plain-parallax"),
+    "biometric-scanner-device-plain-shine": biometricScannerDevicePrototype("plain-shine"),
     "identity-scan-reveal": identityScanRevealPrototype(),
     "identity-bust-focus": identityBustFocusPrototype(),
     "progressive-blur-spinner-solo": `
@@ -1712,6 +1891,36 @@ function renderPrototypeMotionElement(slug, contextType = "") {
     `,
     "uba-spinner-1": ubaLottieSpinnerScene("uba-spinner-1", "Compact UBA spinner 1"),
     "uba-spinner-1-red": ubaLottieSpinnerScene("uba-spinner-1", "Compact UBA spinner 1 red", "red"),
+    "uba-spinner-1-circle-resolve": ubaLottieSpinnerScene(
+      "uba-spinner-1",
+      "Compact UBA spinner 1 resolving into a neutral check",
+      "neutral",
+      { mode: "circle-resolve", result: "success" },
+    ),
+    "uba-spinner-1-circle-resolve-green": ubaLottieSpinnerScene(
+      "uba-spinner-1",
+      "Compact UBA spinner 1 resolving into a green check",
+      "green",
+      { mode: "circle-resolve", result: "success" },
+    ),
+    "uba-spinner-1-circle-resolve-error": ubaLottieSpinnerScene(
+      "uba-spinner-1",
+      "Compact UBA spinner 1 resolving into a red X",
+      "red",
+      { mode: "circle-resolve", result: "error" },
+    ),
+    "uba-spinner-1-circle-resolve-neutral-green": ubaLottieSpinnerScene(
+      "uba-spinner-1",
+      "Compact neutral UBA spinner 1 resolving into a green check",
+      "neutral",
+      { mode: "circle-resolve", result: "success", resultTone: "green" },
+    ),
+    "uba-spinner-1-circle-resolve-neutral-error": ubaLottieSpinnerScene(
+      "uba-spinner-1",
+      "Compact neutral UBA spinner 1 resolving into a red X",
+      "neutral",
+      { mode: "circle-resolve", result: "error", resultTone: "red" },
+    ),
     "uba-spinner-2": ubaLottieSpinnerScene("uba-spinner-2", "Compact UBA spinner 2"),
     "uba-spinner-2-red": ubaLottieSpinnerScene("uba-spinner-2", "Compact UBA spinner 2 red", "red"),
     "uba-icon-loop": ubaIconLoopScene(),
@@ -1727,6 +1936,7 @@ function renderPrototypeMotionElement(slug, contextType = "") {
     "green-success-rays": greenSuccessRaysPrototype(),
     "green-success-stars": greenSuccessStarsPrototype(),
     "verification-badge": verificationBadgePrototype(),
+    "verification-badge-green": verificationBadgePrototype("success", "green"),
     "uploaded-success-confetti": uploadedSuccessConfettiPrototype(),
     "uploaded-success-confetti-green": uploadedSuccessConfettiPrototype("green"),
     "failure-wheel-red": successWheelTwoPrototype("red", "error"),
@@ -1739,15 +1949,17 @@ function renderPrototypeMotionElement(slug, contextType = "") {
     "flip-coin-pull-to-refresh-red": renderPrototypeRefreshGesture("flip-red"),
     "flip-coin-pull-to-refresh-white": renderPrototypeRefreshGesture("flip-white"),
     "pull-to-refresh-line-fill": renderPrototypeRefreshGesture("line-fill"),
+    "pull-to-refresh-line-fill-red": renderPrototypeRefreshGesture("line-fill-red"),
   };
 
   return `<div class="prototype-motion-render">${motionMarkup[slug] || ""}</div>`;
 }
 
 function renderPrototypeRefreshGesture(variant) {
-  if (variant === "line-fill") {
+  if (variant === "line-fill" || variant === "line-fill-red") {
+    const redClass = variant === "line-fill-red" ? " ptr-line-fill-red-gesture" : "";
     return `
-      <div class="prototype-refresh-gesture ptr-line-fill-gesture" aria-hidden="true">
+      <div class="prototype-refresh-gesture ptr-line-fill-gesture${redClass}" aria-hidden="true">
         ${pullRefreshLineFillMark()}
       </div>
     `;
@@ -2678,15 +2890,31 @@ function initUbaLottieSpinners() {
   const startTime = window.performance.now();
 
   const tick = (now) => {
+    let shouldContinue = false;
+
     instances.forEach((instance) => {
       const duration = instance.durationMs || 1000;
-      const elapsed = (now - startTime) % (duration * 2);
-      const progressFrame = elapsed <= duration ? elapsed / duration : 2 - elapsed / duration;
+      const elapsed = now - startTime;
+      let progressFrame;
+
+      if (instance.mode === "circle-resolve" || instance.mode === "forward-hold") {
+        progressFrame = Math.min(1, elapsed / duration);
+        shouldContinue = shouldContinue || progressFrame < 1;
+      } else {
+        const loopElapsed = elapsed % (duration * 2);
+        progressFrame = loopElapsed <= duration ? loopElapsed / duration : 2 - loopElapsed / duration;
+        shouldContinue = true;
+      }
+
       const frame = instance.ip + progressFrame * (instance.op - instance.ip);
       updateUbaLottieSpinnerInstance(instance, frame);
     });
 
-    ubaLottieSpinnerFrame = window.requestAnimationFrame(tick);
+    if (shouldContinue) {
+      ubaLottieSpinnerFrame = window.requestAnimationFrame(tick);
+    } else {
+      ubaLottieSpinnerFrame = 0;
+    }
   };
 
   tick(startTime);
@@ -3001,6 +3229,57 @@ function createUbaLottieSpinnerInstance(container, data) {
   svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
   svg.setAttribute("aria-hidden", "true");
   svg.classList.add("uba-lottie-svg");
+  const mode = container.dataset.ubaLottieMode || "pingpong";
+  const result = container.dataset.ubaLottieResult || "";
+  const fanGroup = mode === "circle-resolve" ? document.createElementNS(svgNamespace, "g") : svg;
+
+  if (mode === "circle-resolve") {
+    const fanId = `uba-organic-fan-${++ubaLottieOrganicId}`;
+    const resultPath =
+      result === "error"
+        ? "M372 372 L828 828 M828 372 L372 828"
+        : "M358.588 613.412 L532.941 774.353 L854.824 398.824";
+
+    svg.classList.add("uba-lottie-organic-svg");
+    const circle = document.createElementNS(svgNamespace, "circle");
+    const resultMark = result ? document.createElementNS(svgNamespace, "path") : null;
+
+    circle.classList.add("uba-lottie-organic-circle");
+    circle.setAttribute("cx", formatLottieNumber(width / 2));
+    circle.setAttribute("cy", formatLottieNumber(height / 2));
+    circle.setAttribute("r", formatLottieNumber(Math.min(width, height) * 0.38));
+    if (resultMark) {
+      resultMark.classList.add("uba-lottie-organic-result-mark");
+      resultMark.setAttribute("d", resultPath);
+      resultMark.setAttribute("pathLength", "78");
+
+      if (result === "error") {
+        resultMark.classList.add("is-error");
+      }
+    }
+    fanGroup.classList.add("uba-lottie-organic-fan");
+    fanGroup.setAttribute("id", fanId);
+    svg.appendChild(fanGroup);
+
+    [-15, 15, -30, 30, -45, 45].forEach((rotation, index) => {
+      const ghost = document.createElementNS(svgNamespace, "use");
+      const distance = Math.abs(rotation);
+      const opacity = distance === 15 ? 0.42 : distance === 30 ? 0.28 : 0.16;
+
+      ghost.classList.add("uba-lottie-organic-ghost");
+      ghost.style.setProperty("--organic-ghost-rotation", `${rotation}deg`);
+      ghost.style.setProperty("--organic-ghost-index", String(index));
+      ghost.style.setProperty("--organic-ghost-max-opacity", String(opacity));
+      ghost.setAttribute("href", `#${fanId}`);
+      ghost.setAttributeNS("http://www.w3.org/1999/xlink", "href", `#${fanId}`);
+      svg.appendChild(ghost);
+    });
+
+    svg.appendChild(circle);
+    if (resultMark) {
+      svg.appendChild(resultMark);
+    }
+  }
 
   data.layers.forEach((layer) => {
     const layerGroup = document.createElementNS(svgNamespace, "g");
@@ -3014,15 +3293,18 @@ function createUbaLottieSpinnerInstance(container, data) {
       }
     });
 
-    svg.appendChild(layerGroup);
+    fanGroup.appendChild(layerGroup);
   });
 
   container.replaceChildren(svg);
+  const durationMs = (((Number(data.op) || 500) - (Number(data.ip) || 0)) / (Number(data.fr) || 60)) * 1000;
+  container.closest(".uba-lottie-resolve-wrap")?.style.setProperty("--uba-lottie-duration", `${durationMs}ms`);
 
   return {
     animatedTransforms,
-    durationMs: (((Number(data.op) || 500) - (Number(data.ip) || 0)) / (Number(data.fr) || 60)) * 1000,
+    durationMs,
     ip: Number(data.ip) || 0,
+    mode,
     op: Number(data.op) || 500,
   };
 }
