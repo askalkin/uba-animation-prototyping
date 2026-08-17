@@ -259,18 +259,18 @@ const pages = [
   },
   {
     slug: "core-spinners-02",
-    title: "Feedback spinners",
+    title: "Standard success",
     accent: "ink",
     section: "prototypes",
     themeable: true,
-    label: "Standalone feedback spinner animations without the onboarding mockup.",
+    label: "Standalone standard success feedback animation without a screen mockup.",
     scene: () => `
       ${coreSpinnerStandalonePrototype("core-spinner-02")}
     `,
   },
   {
     slug: "account-opening-success",
-    title: "Account details success",
+    title: "Account Opened Success",
     accent: "green",
     section: "prototypes",
     themeable: true,
@@ -281,7 +281,7 @@ const pages = [
   },
   {
     slug: "account-opening-success-lift",
-    title: "Account details success (lift)",
+    title: "Account Opened Success (lift)",
     accent: "green",
     section: "prototypes",
     themeable: true,
@@ -303,11 +303,11 @@ const pages = [
   },
   {
     slug: "couldnt-load-results",
-    title: "Couldn't load results",
+    title: "Standard error",
     accent: "red",
     section: "prototypes",
     themeable: true,
-    label: "Failed results mockup using success-loader motion variants resolved with an X.",
+    label: "Couldn't load results mockup using error feedback variants resolved with an X.",
     scene: () => `
       ${altyMockupPrototype("failed")}
     `,
@@ -403,12 +403,32 @@ const pages = [
 ];
 
 const routeAliases = {
+  "account-opened-success": "account-opening-success",
+  "account-opened-success-lift": "account-opening-success-lift",
   "alty-marketing-transition-loader": "uba-loader-gradient-blob-prototype",
   "frosted-glass-pull-to-refresh-blob": "pull-to-refresh-blob-capsule",
   "pull-to-refresh-minimalist": "pull-to-refresh-glass-capsule",
   "search-spinner-2-white": "search-spinner-2-white-ripple",
   "search-spinner-3": "search-icon-animation",
+  "standard-error": "couldnt-load-results",
+  "standard-success": "core-spinners-02",
   "uba-media-transition-loader": "uba-loader-gradient-blob-prototype",
+};
+
+const animationOnlySceneBySlug = {
+  "account-opening-almost-there": () => renderPrototypeAnimationOnlyScene("almost"),
+  "core-spinners-02": () => renderPrototypeAnimationOnlyScene("core-spinner-02"),
+  "account-opening-success": () => renderPrototypeAnimationOnlyScene("success"),
+  "account-opening-success-lift": () => renderSuccessLiftAnimationOnlyScene(),
+  "transaction-history-pull-refresh": () => renderPrototypeAnimationOnlyScene("pull"),
+  "couldnt-load-results": () => renderPrototypeAnimationOnlyScene("failed"),
+  "code-error": () => renderOtpErrorAnimationOnlyScene(),
+  "enable-biometrics": () => renderPrototypeAnimationOnlyScene("biometrics"),
+  "searching-keyboard": () => renderPrototypeAnimationOnlyScene("searching"),
+  "six-digit-code": () => renderOtpCodeAnimationOnlyScene("otp"),
+  "verify-securepass": () => renderOtpCodeAnimationOnlyScene("securepass"),
+  "identity-verification": () => renderPrototypeAnimationOnlyScene("identity"),
+  "uba-loader-gradient-blob-prototype": () => ubaLoaderGradientBlobAnimationOnly(),
 };
 
 // Toggle to bring the "Motion elements" section back into the nav/routing.
@@ -470,19 +490,20 @@ const navGroups = {
   prototypes: [
     {
       title: "Core spinners",
-      slugs: ["account-opening-almost-there", "core-spinners-02"],
+      slugs: ["account-opening-almost-there"],
     },
     {
-      title: "Success",
-      slugs: ["account-opening-success", "account-opening-success-lift"],
+      title: "Standard feedback",
+      slugs: [
+        "core-spinners-02",
+        "couldnt-load-results",
+        "account-opening-success",
+        "account-opening-success-lift",
+      ],
     },
     {
       title: "Pull to refresh",
       slugs: ["transaction-history-pull-refresh"],
-    },
-    {
-      title: "Error states",
-      slugs: ["couldnt-load-results", "code-error"],
     },
     {
       title: "Biometrics",
@@ -494,7 +515,7 @@ const navGroups = {
     },
     {
       title: "Code entry",
-      slugs: ["six-digit-code", "verify-securepass"],
+      slugs: ["six-digit-code", "verify-securepass", "code-error"],
     },
     {
       title: "Identity verification",
@@ -534,17 +555,17 @@ const prototypeMotionVariantSets = {
     variants: [
       { slug: "progressive-blur-spinner-solo", title: "Red comet arc" },
       { slug: "uba-spinner-1", title: "UBA spinner 1" },
-      { slug: "uba-spinner-1-red", title: "UBA spinner 1 red" },
       { slug: "uba-icon-loop", title: "Banking icons loader" },
       { slug: "uba-card-rotation", title: "Card rotation" },
       { slug: "uba-coin-flip", title: "Coin flip" },
     ],
   },
   "core-spinner-02": {
-    title: "Feedback spinners",
+    title: "Standard success",
     variants: [
-      { slug: "uba-spinner-1-circle-resolve-green", title: "Green check", number: "02" },
-      { slug: "uba-spinner-1-circle-resolve-error", title: "Red X", number: "03" },
+      { slug: "uba-spinner-1-circle-resolve-green", title: "Green check" },
+      { slug: "verification-badge-green", title: "Green verification badge" },
+      { slug: "success-spinner-green", title: "Green fill to check" },
     ],
   },
   searching: {
@@ -557,8 +578,7 @@ const prototypeMotionVariantSets = {
   biometrics: {
     title: "Biometrics",
     variants: [
-      { slug: "biometric-scanner-device-plain-float", title: "Scanner float", number: "03A" },
-      { slug: "biometric-scanner-device-plain-parallax", title: "Scanner parallax", number: "03B" },
+      { slug: "biometric-scanner-device-plain-float", title: "Scanner float" },
     ],
   },
   identity: {
@@ -570,14 +590,13 @@ const prototypeMotionVariantSets = {
   success: {
     title: "Success loaders",
     variants: [
-      { slug: "verification-badge-green", title: "Green verification badge" },
       { slug: "uploaded-success-confetti-green", title: "Green uploaded confetti" },
-      { slug: "success-spinner-green", title: "Green fill to check" },
     ],
   },
   failed: {
-    title: "Failure loaders",
+    title: "Error feedback",
     variants: [
+      { slug: "uba-spinner-1-circle-resolve-error", title: "Red X spinner" },
       { slug: "failure-wheel-red", title: "Red fill to X" },
       { slug: "failure-verification-badge", title: "Badge fill to X" },
     ],
@@ -594,6 +613,7 @@ const prototypeMotionVariantSets = {
 
 const app = document.getElementById("app");
 let prototypeTheme = "dark";
+let showOnlyAnimation = false;
 const prototypeVariantState = {};
 let ubaLottieSpinnerFrame = 0;
 let ubaLottieOrganicId = 0;
@@ -603,8 +623,10 @@ let successConfettiLottieInstances = [];
 
 try {
   prototypeTheme = window.localStorage.getItem("loader-motion-theme") || prototypeTheme;
+  showOnlyAnimation = window.localStorage.getItem("loader-show-only-animation") === "true";
 } catch {
   prototypeTheme = "dark";
+  showOnlyAnimation = false;
 }
 
 if (prototypeTheme !== "light") {
@@ -612,6 +634,7 @@ if (prototypeTheme !== "light") {
 }
 
 document.documentElement.dataset.prototypeTheme = prototypeTheme;
+document.documentElement.dataset.animationMode = showOnlyAnimation ? "only" : "prototype";
 
 function getPageSection(page) {
   return page.section || "motion";
@@ -1436,20 +1459,37 @@ function ubaLoaderGradientBlobPrototype() {
           ${altyPhoneResult(true)}
         </div>
 
-        <div class="alty-transition-overlay uba-gradient-transition-overlay" aria-hidden="true">
-          <div class="alty-transition-blob-field">
-            <span class="uba-blob uba-blob-main"></span>
-            <span class="uba-blob uba-blob-red"></span>
-            <span class="uba-blob uba-blob-yellow"></span>
-            <span class="uba-blob uba-blob-lift"></span>
-          </div>
-          <div class="alty-transition-loader">
-            <div class="uba-transition-lottie-spinner uba-lottie-spinner" data-uba-lottie-spinner="uba-spinner-1">
-              <span class="uba-lottie-fallback" aria-hidden="true"></span>
-            </div>
-          </div>
+        ${ubaGradientTransitionOverlay()}
+      </div>
+  `;
+}
+
+function ubaGradientTransitionOverlay() {
+  return `
+    <div class="alty-transition-overlay uba-gradient-transition-overlay" aria-hidden="true">
+      <div class="alty-transition-blob-field">
+        <span class="uba-blob uba-blob-main"></span>
+        <span class="uba-blob uba-blob-red"></span>
+        <span class="uba-blob uba-blob-yellow"></span>
+        <span class="uba-blob uba-blob-lift"></span>
+      </div>
+      <div class="alty-transition-loader">
+        <div class="uba-transition-lottie-spinner uba-lottie-spinner" data-uba-lottie-spinner="uba-spinner-1">
+          <span class="uba-lottie-fallback" aria-hidden="true"></span>
         </div>
       </div>
+    </div>
+  `;
+}
+
+function ubaLoaderGradientBlobAnimationOnly() {
+  return `
+    <div class="animation-only-scene animation-only-transition-scene" role="img" aria-label="UBA gradient blob transition loader animation">
+      <div class="uba-gradient-device-stage uba-gradient-flow-frame uba-gradient-animation-only-frame">
+        <div class="animation-only-transition-backdrop" aria-hidden="true"></div>
+        ${ubaGradientTransitionOverlay()}
+      </div>
+    </div>
   `;
 }
 
@@ -1543,6 +1583,10 @@ function getPrototypeVariantIndex(type) {
 }
 
 function renderPrototypeVariantPager(type, variantSet, activeIndex) {
+  if (!variantSet || variantSet.variants.length <= 1) {
+    return "";
+  }
+
   const activeVariant = variantSet.variants[activeIndex];
 
   return `
@@ -1589,6 +1633,118 @@ function coreSpinnerStandalonePrototype(type) {
       </div>
     </div>
   `;
+}
+
+function renderAnimationOnlyShell(options = {}) {
+  const { ariaLabel = "Animation only preview", classes = "", controls = "", content = "" } = options;
+
+  return `
+    <div class="animation-only-scene animation-only-prototype alty-mockup-prototype ${classes}" role="group" aria-label="${ariaLabel}">
+      ${controls}
+      ${content}
+    </div>
+  `;
+}
+
+function renderPrototypeAnimationOnlyScene(type) {
+  const variantSet = prototypeMotionVariantSets[type];
+
+  if (!variantSet) {
+    return "";
+  }
+
+  const activeIndex = getPrototypeVariantIndex(type);
+  const activeVariant = variantSet.variants[activeIndex];
+  const motionSource = activeVariant?.slug || "";
+
+  return renderAnimationOnlyShell({
+    ariaLabel: `${variantSet.title} animation only preview`,
+    classes: `animation-only-${type}`,
+    controls: renderPrototypeVariantPager(type, variantSet, activeIndex),
+    content: renderAnimationOnlyMotionSlot(type, motionSource),
+  });
+}
+
+function renderAnimationOnlyMotionSlot(type, motionSource) {
+  if (!motionSource) {
+    return "";
+  }
+
+  if (type === "success" && motionSource.startsWith("uploaded-success-confetti")) {
+    const underlaySource = motionSource.endsWith("-green") ? "success-spinner-green" : "success-wheel-2";
+
+    return `
+      <div class="animation-only-success-combo" data-motion-source="${motionSource}" aria-hidden="true">
+        <div class="animation-only-success-underlay">
+          ${renderPrototypeMotionElement(underlaySource, type)}
+        </div>
+        <div class="animation-only-success-confetti">
+          ${renderPrototypeMotionElement(motionSource, type)}
+        </div>
+      </div>
+    `;
+  }
+
+  return `
+    <div class="animation-only-motion-slot animation-only-motion-${type}" data-motion-source="${motionSource}" aria-hidden="true">
+      ${renderPrototypeMotionElement(motionSource, type)}
+    </div>
+  `;
+}
+
+function renderSuccessLiftAnimationOnlyScene() {
+  const variantSet = prototypeMotionVariantSets.success;
+  const activeIndex = getPrototypeVariantIndex("success");
+  const activeVariant = variantSet.variants[activeIndex];
+
+  return renderAnimationOnlyShell({
+    ariaLabel: "Account success checkmark and confetti animation only preview",
+    classes: "animation-only-success animation-only-success-lift",
+    controls: renderPrototypeVariantPager("success", variantSet, activeIndex),
+    content: renderAnimationOnlyMotionSlot("success", activeVariant.slug),
+  });
+}
+
+function renderOtpCodeAnimationOnlyScene(type) {
+  const variantSet = prototypeMotionVariantSets[type];
+  const activeIndex = getPrototypeVariantIndex(type);
+  const colorway = getPrototypeVariantColorway(type);
+  const colorwayClass = colorway ? `is-${colorway}` : "";
+
+  return renderAnimationOnlyShell({
+    ariaLabel: `${variantSet?.title || "Code entry"} animation only preview`,
+    classes: `animation-only-otp animation-only-${type}`,
+    controls: variantSet ? renderPrototypeVariantPager(type, variantSet, activeIndex) : "",
+    content: `
+      <div class="animation-only-otp-slot ${colorwayClass}" aria-hidden="true">
+        ${altyMockupOtpCells({ colorway })}
+      </div>
+    `,
+  });
+}
+
+function renderOtpErrorAnimationOnlyScene() {
+  const digits = ["1", "2", "3", "5", "3", "3"];
+
+  return renderAnimationOnlyShell({
+    ariaLabel: "Invalid code animation only preview",
+    classes: "animation-only-otp animation-only-otp-error",
+    content: `
+      <div class="animation-only-otp-slot is-error" aria-hidden="true">
+        <div class="alty-mock-otp-cells is-error" data-otp-error-cells>
+          ${digits
+            .map(
+              (digit, index) => `
+                <span style="--otp-index:${index};">
+                  <b>${digit}</b>
+                </span>
+              `,
+            )
+            .join("")}
+        </div>
+      </div>
+    `,
+  });
 }
 
 const FINGERPRINT_PATHS = [
@@ -2066,11 +2222,12 @@ function altyMockupPrototype(type, options = {}) {
   const activeIndex = getPrototypeVariantIndex(type);
   const activeVariant = variantSet?.variants[activeIndex];
   const activeMotionSource = activeVariant ? ` data-active-motion-source="${activeVariant.slug}"` : "";
+  const hasVisibleVariantPager = Boolean(variantSet && variantSet.variants.length > 1);
 
   return `
     <div class="alty-mockup-prototype alty-mockup-${type}-prototype${lift ? " is-lift-mode" : ""}"${activeMotionSource} role="group" aria-label="${labels[type]}">
-      <article class="alty-mockup-stage ${variantSet ? "has-prototype-variant-pager" : ""}">
-        ${variantSet ? renderPrototypeVariantPager(type, variantSet, activeIndex) : ""}
+      <article class="alty-mockup-stage ${hasVisibleVariantPager ? "has-prototype-variant-pager" : ""}">
+        ${hasVisibleVariantPager ? renderPrototypeVariantPager(type, variantSet, activeIndex) : ""}
         ${altyMockupPhone(type)}
       </article>
     </div>
@@ -2737,6 +2894,15 @@ function renderPageNav(sectionPages, activePage, activeSection) {
   return `${renderedGroups}${ungroupedGroup}`;
 }
 
+function renderActivePageScene(activePage) {
+  if (!showOnlyAnimation) {
+    return activePage.scene();
+  }
+
+  const animationOnlyScene = animationOnlySceneBySlug[activePage.slug];
+  return animationOnlyScene ? animationOnlyScene() : activePage.scene();
+}
+
 function render() {
   const currentSlug = getCurrentSlug();
   const activePage = pages.find((page) => page.slug === currentSlug) || defaultPage;
@@ -2786,16 +2952,31 @@ function render() {
       </button>
     </div>
   `;
+  const animationOnlyControls = `
+    <label class="animation-mode-toggle">
+      <input
+        type="checkbox"
+        data-animation-mode-toggle
+        ${showOnlyAnimation ? "checked" : ""}
+        aria-label="Show only animation"
+      >
+      <span class="animation-mode-track" aria-hidden="true"><span></span></span>
+      <span class="animation-mode-label">Show only animation</span>
+    </label>
+  `;
   const headerControls = `
     <div class="header-control-row">
       ${sectionControls}
+      ${animationOnlyControls}
       ${themeControls}
     </div>
   `;
 
   app.dataset.accent = activePage.accent;
   app.dataset.prototypeTheme = prototypeTheme === "light" ? "light" : "dark";
+  app.dataset.animationMode = showOnlyAnimation ? "only" : "prototype";
   document.documentElement.dataset.prototypeTheme = prototypeTheme === "light" ? "light" : "dark";
+  document.documentElement.dataset.animationMode = showOnlyAnimation ? "only" : "prototype";
   app.innerHTML = `
     <aside class="side-rail" aria-label="Loader pages">
       <a class="brand-mark" href="#${defaultPage.slug}" aria-label="UBA-animations-prototypes home">
@@ -2808,22 +2989,41 @@ function render() {
     </aside>
     <main class="page-view">
       <section class="page-heading" aria-labelledby="page-title">
-        <div class="heading-top">${headerControls}</div>
-        <h1 id="page-title">${activePage.title}</h1>
+        <div class="heading-top">
+          <h1 id="page-title">${activePage.title}</h1>
+          ${headerControls}
+        </div>
       </section>
-      <section class="stage-band">
-        ${activePage.scene()}
+      <section class="stage-band" data-animation-only-page="${showOnlyAnimation ? activePage.slug : ""}">
+        ${renderActivePageScene(activePage)}
       </section>
     </main>
   `;
 
   initPullZones();
+  initAnimationModeSwitchers();
   initThemeSwitchers();
   initPrototypeVariantPagers();
   initUbaLottieSpinners();
   initSuccessConfettiLotties();
   initUbaIconLoopScenes();
   initOtpErrorHaptics();
+}
+
+function initAnimationModeSwitchers() {
+  document.querySelectorAll("[data-animation-mode-toggle]").forEach((toggle) => {
+    toggle.addEventListener("change", () => {
+      showOnlyAnimation = toggle.checked;
+
+      try {
+        window.localStorage.setItem("loader-show-only-animation", String(showOnlyAnimation));
+      } catch {
+        // Animation mode persistence is optional.
+      }
+
+      render();
+    });
+  });
 }
 
 function initThemeSwitchers() {
