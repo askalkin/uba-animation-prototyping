@@ -1,6 +1,6 @@
 {
   "generated": "2026-08-17",
-  "count": 25,
+  "count": 26,
   "statusMeanings": {
     "ready": "Motion converts 1:1. Deliverable is an animation file.",
     "ready-with-asset": "Same, plus a raster image must ship alongside at @2x/@3x.",
@@ -519,7 +519,9 @@
           "key": "success",
           "label": "Successful account-opening screen",
           "candidates": [
-            "uploaded-success-confetti-green"
+            "uploaded-success-confetti-green",
+            "green-success-confetti",
+            "green-success-stars"
           ],
           "page": "account-opening-success",
           "index": 0
@@ -553,13 +555,15 @@
       "requiredImages": [],
       "slots": [
         {
-          "key": "",
-          "label": "",
+          "key": "success",
+          "label": "Successful account-opening screen",
           "candidates": [
-            "green-success-confetti"
+            "uploaded-success-confetti-green",
+            "green-success-confetti",
+            "green-success-stars"
           ],
-          "page": "core-spinners-02",
-          "index": 0
+          "page": "account-opening-success",
+          "index": 1
         }
       ],
       "blockers": [],
@@ -588,13 +592,15 @@
       "requiredImages": [],
       "slots": [
         {
-          "key": "",
-          "label": "",
+          "key": "success",
+          "label": "Successful account-opening screen",
           "candidates": [
+            "uploaded-success-confetti-green",
+            "green-success-confetti",
             "green-success-stars"
           ],
-          "page": "core-spinners-02",
-          "index": 0
+          "page": "account-opening-success",
+          "index": 2
         }
       ],
       "blockers": [],
@@ -833,6 +839,46 @@
       "blockers": [],
       "decision": "",
       "durationReview": "Cycle is 9200ms. System spinners cycle in roughly 1s; at this tempo the loader can read as stalled rather than working.",
+      "detailedSpec": ""
+    },
+    {
+      "slug": "notification-bell-ring",
+      "title": "Bell ring",
+      "group": "Notifications",
+      "status": "ready-with-asset",
+      "targetFormat": "Lottie + image",
+      "playback": {
+        "kind": "loop",
+        "mode": "loop",
+        "cycleMs": 3200,
+        "activeMs": 1768,
+        "source": "four CSS tracks, all 3.2s infinite \u2014 measured from the web source"
+      },
+      "files": {
+        "bundle": [
+          "animations/notification-bell-ring/assets/images/notification-bell-red.webp"
+        ],
+        "preview": "animations/notification-bell-ring/reference/preview.html",
+        "source": "animations/notification-bell-ring/reference/source.html",
+        "spec": "animations/notification-bell-ring/README.md"
+      },
+      "requiredImages": [
+        "shared/assets/notification-bell-red.webp"
+      ],
+      "slots": [
+        {
+          "key": "notification",
+          "label": "Notification alert opt-in screen",
+          "candidates": [
+            "notification-bell-ring"
+          ],
+          "page": "notification-bell",
+          "index": 0
+        }
+      ],
+      "blockers": [],
+      "decision": "",
+      "durationReview": "Reduced motion is handled specially here: instead of the global fallback that cuts animation to 0.001ms, this scene slows to 9s. Mirror that on device \u2014 <code>UIAccessibility.isReduceMotionEnabled</code> / Android's animator scale \u2014 rather than freezing the bell.",
       "detailedSpec": ""
     },
     {

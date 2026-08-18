@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User focus scan</title>
+    <title>Bell ring</title>
     <link rel="stylesheet" href="../../../reference/shared/styles.css">
     <style>
       :root { color-scheme: dark; }
@@ -59,19 +59,20 @@
     </style>
   </head>
   <body>
-    <div class="app-shell export-preview-shell" data-prototype-theme="dark" data-animation-mode="only" data-preview-motion-source="identity-bust-focus">
-      <section class="stage-band" data-animation-only-page="identity-verification">
-        <div class="animation-only-motion-slot animation-only-motion-identity" data-motion-source="identity-bust-focus" aria-hidden="true">
+    <div class="app-shell export-preview-shell" data-prototype-theme="dark" data-animation-mode="only" data-preview-motion-source="notification-bell-ring">
+      <section class="stage-band" data-animation-only-page="notification-bell-ring">
+        <div class="animation-only-motion-slot animation-only-motion-notification" data-motion-source="notification-bell-ring" aria-hidden="true">
               <div class="prototype-motion-render">
-            <div class="alty-identity-motion alty-identity-bust-motion" aria-hidden="true">
-              <div class="alty-identity-bust-stack">
-                <img class="alty-identity-bust-image is-white" src="../../../reference/shared/assets/identity-user-bust.webp" alt="">
-                <span class="alty-identity-bust-red-layer">
-                  <span class="alty-identity-bust-red-fill"></span>
-                  <img class="alty-identity-bust-image is-red" src="../../../reference/shared/assets/identity-user-bust-red.webp" alt="">
-                </span>
-                <span class="alty-identity-bust-scan"></span>
-              </div>
+            <div class="loader-scene notification-bell-scene" role="img" aria-label="Red notification bell ringing">
+
+            <div class="notification-bell-mark">
+              <span class="notification-bell-pulse pulse-a" aria-hidden="true"></span>
+              <span class="notification-bell-pulse pulse-b" aria-hidden="true"></span>
+              <span class="notification-bell-pulse pulse-c" aria-hidden="true"></span>
+              <span class="notification-bell-shadow" aria-hidden="true"></span>
+              <img class="notification-bell-image" src="../../../reference/shared/assets/notification-bell-red.webp" alt="">
+            </div>
+
             </div>
           </div>
             </div>

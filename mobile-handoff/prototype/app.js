@@ -346,6 +346,17 @@ const pages = [
     `,
   },
   {
+    slug: "notification-bell",
+    title: "Notification bell",
+    accent: "red",
+    section: "prototypes",
+    themeable: true,
+    label: "Enable-notifications permission sheet over a dimmed UBA account home screen.",
+    scene: () => `
+      ${altyMockupPrototype("notification")}
+    `,
+  },
+  {
     slug: "six-digit-code",
     title: "6-digit code",
     accent: "red",
@@ -425,6 +436,7 @@ const animationOnlySceneBySlug = {
   "code-error": () => renderOtpErrorAnimationOnlyScene(),
   "enable-biometrics": () => renderPrototypeAnimationOnlyScene("biometrics"),
   "searching-keyboard": () => renderPrototypeAnimationOnlyScene("searching"),
+  "notification-bell": () => renderPrototypeAnimationOnlyScene("notification"),
   "six-digit-code": () => renderOtpCodeAnimationOnlyScene("otp"),
   "verify-securepass": () => renderOtpCodeAnimationOnlyScene("securepass"),
   "identity-verification": () => renderPrototypeAnimationOnlyScene("identity"),
@@ -514,6 +526,10 @@ const navGroups = {
       slugs: ["searching-keyboard"],
     },
     {
+      title: "Notifications",
+      slugs: ["notification-bell"],
+    },
+    {
       title: "Code entry",
       slugs: ["six-digit-code", "verify-securepass", "code-error"],
     },
@@ -573,6 +589,12 @@ const prototypeMotionVariantSets = {
     variants: [
       { slug: "search-red-magnifier-loader", title: "Red magnifier" },
       { slug: "search-red-orbit-magnifier", title: "Orbit magnifier" },
+    ],
+  },
+  notification: {
+    title: "Notification bell",
+    variants: [
+      { slug: "notification-bell-ring", title: "Bell ring" },
     ],
   },
   biometrics: {
@@ -648,6 +670,13 @@ let ubaLottieOrganicId = 0;
 let ubaIconLoopGeneration = 0;
 let otpErrorHapticsGeneration = 0;
 let successConfettiLottieInstances = [];
+const initialModeParam = new URLSearchParams(window.location.search).get("mode");
+const initialAnimationMode =
+  initialModeParam === "animation" || initialModeParam === "only"
+    ? true
+    : initialModeParam === "prototype"
+      ? false
+      : null;
 
 try {
   prototypeTheme = window.localStorage.getItem("loader-motion-theme") || prototypeTheme;
@@ -655,6 +684,10 @@ try {
 } catch {
   prototypeTheme = "dark";
   showOnlyAnimation = false;
+}
+
+if (initialAnimationMode !== null) {
+  showOnlyAnimation = initialAnimationMode;
 }
 
 if (prototypeTheme !== "light") {
@@ -1351,6 +1384,26 @@ function verificationBadgePrototype(result = "success", colorway = "") {
   `;
 }
 
+function notificationBellPrototype() {
+  return `
+    <div class="loader-scene notification-bell-scene" role="img" aria-label="Red notification bell ringing">
+      ${notificationBellMark()}
+    </div>
+  `;
+}
+
+function notificationBellMark(modifier = "") {
+  return `
+    <div class="notification-bell-mark${modifier ? ` ${modifier}` : ""}">
+      <span class="notification-bell-pulse pulse-a" aria-hidden="true"></span>
+      <span class="notification-bell-pulse pulse-b" aria-hidden="true"></span>
+      <span class="notification-bell-pulse pulse-c" aria-hidden="true"></span>
+      <span class="notification-bell-shadow" aria-hidden="true"></span>
+      <img class="notification-bell-image" src="./assets/notification-bell-red.png" alt="">
+    </div>
+  `;
+}
+
 function altyBrandStory(type) {
   const labels = {
     dense: "UBA seed dense loader storyboard animation",
@@ -1610,6 +1663,20 @@ function getPrototypeVariantIndex(type) {
   return Math.max(0, Math.min(variantSet.variants.length - 1, index));
 }
 
+function renderAnimationModeToggle(extraClass = "") {
+  return `
+    <label class="animation-mode-toggle ${extraClass}">
+      <input
+        type="checkbox"
+        data-animation-mode-toggle
+        ${showOnlyAnimation ? "checked" : ""}
+        aria-label="${showOnlyAnimation ? "Show prototype" : "Show just animation"}"
+      >
+      <span class="animation-mode-label">${showOnlyAnimation ? "Prototype" : "Just animation"}</span>
+    </label>
+  `;
+}
+
 function renderPrototypeVariantPager(type, variantSet, activeIndex) {
   if (!variantSet || variantSet.variants.length <= 1) {
     return "";
@@ -1620,23 +1687,26 @@ function renderPrototypeVariantPager(type, variantSet, activeIndex) {
   return `
     <div class="prototype-variant-pager" aria-label="${variantSet.title} variants">
       <span class="prototype-variant-context">${variantSet.title}</span>
-      <div class="prototype-variant-buttons">
-        ${variantSet.variants
-          .map(
-            (variant, index) => `
-              <button
-                class="prototype-variant-button ${index === activeIndex ? "is-active" : ""}"
-                type="button"
-                data-prototype-variant-type="${type}"
-                data-prototype-variant-index="${index}"
-                aria-label="Show ${variant.title}"
-                aria-pressed="${index === activeIndex}"
-              >
-                ${variant.number || String(index + 1).padStart(2, "0")}
-              </button>
-            `,
-          )
-          .join("")}
+      <div class="prototype-variant-action-row">
+        <div class="prototype-variant-buttons">
+          ${variantSet.variants
+            .map(
+              (variant, index) => `
+                <button
+                  class="prototype-variant-button ${index === activeIndex ? "is-active" : ""}"
+                  type="button"
+                  data-prototype-variant-type="${type}"
+                  data-prototype-variant-index="${index}"
+                  aria-label="Show ${variant.title}"
+                  aria-pressed="${index === activeIndex}"
+                >
+                  ${variant.number || String(index + 1).padStart(2, "0")}
+                </button>
+              `,
+            )
+            .join("")}
+        </div>
+        ${renderAnimationModeToggle("is-pager-control")}
       </div>
       <strong>${activeVariant.title}</strong>
     </div>
@@ -2047,6 +2117,7 @@ function renderPrototypeMotionElement(slug, contextType = "") {
         ${searchRedMagnifierIllustration()}
       </div>
     `,
+    "notification-bell-ring": notificationBellPrototype(),
     "identity-verification-motion": fingerprintIdentityLoader("prototype-fingerprint", { shield: true }),
     "identity-verification-motion-layered": fingerprintIdentityLoader("prototype-fingerprint-layered", {
       shield: true,
@@ -2243,6 +2314,7 @@ function altyMockupPrototype(type, options = {}) {
     "otp-loading": "Static 6-digit verification code screen with a scrim and banking-icons loader overlay",
     securepass: "Verify with SecurePass screen with empty 6-digit code entry and numeric keyboard",
     searching: "Searching screen with keyboard",
+    notification: "Notification alert opt-in screen",
     success: "Successful account-opening screen",
     failed: "Could not load results screen",
     pull: "Pull-to-refresh transaction history screen",
@@ -2274,6 +2346,7 @@ function altyMockupPhone(type) {
     "otp-loading": altyMockupOtpLoadingScreen,
     securepass: altyMockupSecurePassScreen,
     searching: altyMockupSearchingScreen,
+    notification: altyMockupNotificationScreen,
     "standard-success": altyMockupStandardSuccessScreen,
     success: altyMockupSuccessScreen,
     failed: altyMockupFailedScreen,
@@ -2591,6 +2664,62 @@ function altyMockupSearchingScreen() {
   `;
 }
 
+function altyMockupNotificationScreen() {
+  return `
+    ${altyMockupStatusBar()}
+    <div class="alty-notification-home" aria-hidden="true">
+      <section class="alty-notification-accounts">
+        <span class="alty-notification-red-glow"></span>
+        <div class="alty-notification-account-card">
+          <div class="alty-notification-top-nav">
+            <span class="alty-notification-avatar">
+              <img src="./assets/notification-avatar.png" alt="">
+            </span>
+            <span class="alty-notification-currency">
+              <span class="alty-notification-flag"></span>
+              <strong>NGN</strong>
+              <span class="alty-notification-chevron"></span>
+            </span>
+            <span class="alty-notification-card-bell">
+              ${altyMockupSmallBellGlyph()}
+            </span>
+          </div>
+          <div class="alty-notification-balance">
+            <p>Total balance &bull; 10 accounts</p>
+            <strong>₦98,865,229,204.00 ${altyMockupEyeSlashGlyph()}</strong>
+          </div>
+          <span class="alty-notification-swipe"></span>
+        </div>
+      </section>
+      <section class="alty-notification-actions">
+        ${altyMockupNotificationAction("card", "Cards")}
+        ${altyMockupNotificationAction("plus", "Fund")}
+        ${altyMockupNotificationAction("arrow", "Transfer")}
+        ${altyMockupNotificationAction("phone", "Airtime")}
+        ${altyMockupNotificationAction("card", "")}
+      </section>
+      <div class="alty-notification-updated">
+        ${altyMockupRefreshGlyph()}
+        <span>Last updated 2:27 PM</span>
+      </div>
+    </div>
+    <div class="alty-notification-backdrop" aria-hidden="true"></div>
+    <section class="alty-notification-sheet" aria-label="Enable notifications">
+      <div class="alty-notification-art-frame">
+        ${notificationBellMark("is-sheet-icon")}
+      </div>
+      <div class="alty-notification-sheet-copy">
+        <h2>Enable notifications</h2>
+        <p>Enable notifications to track your spending, incoming transactions, and receive security alerts to help keep your money safe.</p>
+      </div>
+      <div class="alty-notification-sheet-actions">
+        <button class="alty-notification-sheet-button is-secondary" type="button">Not now</button>
+        <button class="alty-notification-sheet-button is-primary" type="button">Enable</button>
+      </div>
+    </section>
+  `;
+}
+
 function altyMockupStandardSuccessScreen() {
   return `
     ${altyMockupStatusBar()}
@@ -2759,6 +2888,91 @@ function altyMockupSearchGlyph() {
       <circle cx="10.8" cy="10.8" r="5.8"></circle>
       <path d="M15.2 15.2 L20 20"></path>
     </svg>
+  `;
+}
+
+function altyMockupSmallBellGlyph() {
+  return `
+    <svg class="alty-mock-small-bell" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M8 17H16C15.15 16.05 15 14.95 15 13.25V10.4C15 8.05 13.72 6.5 12 6.5C10.28 6.5 9 8.05 9 10.4V13.25C9 14.95 8.85 16.05 8 17Z"></path>
+      <path d="M10.2 18.4C10.55 19.05 11.18 19.45 12 19.45C12.82 19.45 13.45 19.05 13.8 18.4"></path>
+      <path d="M11 6.7C11.05 5.9 11.43 5.45 12 5.45C12.57 5.45 12.95 5.9 13 6.7"></path>
+    </svg>
+  `;
+}
+
+function altyMockupEyeSlashGlyph() {
+  return `
+    <svg class="alty-mock-eye-slash" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M3.4 12.2C5.45 8.65 8.35 6.85 12 6.85C15.65 6.85 18.55 8.65 20.6 12.2C19.72 13.72 18.7 14.92 17.56 15.78"></path>
+      <path d="M14.1 14.25C13.52 14.78 12.82 15.05 12 15.05C10.2 15.05 8.95 13.8 8.95 12C8.95 11.16 9.22 10.46 9.75 9.9"></path>
+      <path d="M4.8 4.8L19.2 19.2"></path>
+    </svg>
+  `;
+}
+
+function altyMockupRefreshGlyph() {
+  return `
+    <svg class="alty-mock-refresh-glyph" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M17.7 7.1A7.2 7.2 0 0 0 5.35 10.8"></path>
+      <path d="M17.7 7.1V3.8"></path>
+      <path d="M17.7 7.1H14.4"></path>
+      <path d="M6.3 16.9A7.2 7.2 0 0 0 18.65 13.2"></path>
+      <path d="M6.3 16.9V20.2"></path>
+      <path d="M6.3 16.9H9.6"></path>
+    </svg>
+  `;
+}
+
+function altyMockupNotificationAction(type, label) {
+  return `
+    <div class="alty-notification-action-item">
+      <span class="alty-notification-action-circle">${altyMockupNotificationActionGlyph(type)}</span>
+      <span>${label}</span>
+    </div>
+  `;
+}
+
+function altyMockupNotificationActionGlyph(type) {
+  const paths = {
+    card: `
+      <rect x="4" y="6" width="16" height="12" rx="2.2"></rect>
+      <path d="M4 10H20"></path>
+      <path d="M7.2 14.2H11.4"></path>
+    `,
+    plus: `
+      <circle cx="12" cy="12" r="7.2"></circle>
+      <path d="M12 8.2V15.8"></path>
+      <path d="M8.2 12H15.8"></path>
+    `,
+    arrow: `
+      <circle cx="12" cy="12" r="7.2"></circle>
+      <path d="M9.1 14.9L15 9"></path>
+      <path d="M10.3 9H15V13.7"></path>
+    `,
+    phone: `
+      <rect x="7.3" y="3.8" width="9.4" height="16.4" rx="2.2"></rect>
+      <path d="M10.5 17.1H13.5"></path>
+    `,
+  };
+
+  return `
+    <svg class="alty-notification-action-glyph is-${type}" viewBox="0 0 24 24" aria-hidden="true">
+      ${paths[type] || paths.card}
+    </svg>
+  `;
+}
+
+function altyMockupNotificationItem(title, detail, time, unread = false) {
+  return `
+    <article class="alty-mock-notification-item ${unread ? "is-unread" : ""}">
+      <span class="alty-mock-notification-item-icon" aria-hidden="true">${altyMockupSmallBellGlyph()}</span>
+      <div>
+        <strong>${title}</strong>
+        <p>${detail}</p>
+      </div>
+      <time>${time}</time>
+    </article>
   `;
 }
 
@@ -2956,10 +3170,14 @@ function render() {
   const activePage = pages.find((page) => page.slug === currentSlug) || defaultPage;
   const activeSection = getPageSection(activePage);
   const sectionPages = pages.filter((page) => getPageSection(page) === activeSection);
-  const sectionControls = visibleSections.length > 1
+  const modeControls = `
+    <nav class="section-switch dev-switch" aria-label="Gallery mode">
+      <a class="section-choice" href="./mobile-handoff/gallery.html">Dev</a>
+    </nav>
+  `;
+  const sectionControls = MOTION_ELEMENTS_VISIBLE && visibleSections.length > 1
     ? `
-    <nav class="section-switch" aria-label="Gallery section">
-      ${MOTION_ELEMENTS_VISIBLE ? `
+    <nav class="section-switch" aria-label="Prototype section">
       <a
         class="section-choice ${activeSection === "motion" ? "is-active" : ""}"
         href="#${pages.find((page) => getPageSection(page) === "motion").slug}"
@@ -2967,7 +3185,6 @@ function render() {
       >
         Motion elements
       </a>
-      ` : ""}
       <a
         class="section-choice ${activeSection === "prototypes" ? "is-active" : ""}"
         href="#${pages.find((page) => getPageSection(page) === "prototypes").slug}"
@@ -3000,19 +3217,10 @@ function render() {
       </button>
     </div>
   `;
-  const animationOnlyControls = `
-    <label class="animation-mode-toggle">
-      <input
-        type="checkbox"
-        data-animation-mode-toggle
-        ${showOnlyAnimation ? "checked" : ""}
-        aria-label="${showOnlyAnimation ? "Show Prototype" : "Show Animation"}"
-      >
-      <span class="animation-mode-label">${showOnlyAnimation ? "Prototype" : "Animation"}</span>
-    </label>
-  `;
+  const animationOnlyControls = renderAnimationModeToggle("is-header-control");
   const headerControls = `
     <div class="header-control-row">
+      ${modeControls}
       ${sectionControls}
       ${animationOnlyControls}
       ${themeControls}

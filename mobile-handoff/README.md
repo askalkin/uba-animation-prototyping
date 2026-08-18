@@ -2,11 +2,11 @@
 
 Everything the iOS and Android teams need to build the UBA animation set.
 
-**25 animations** · web sources exported 2026-08-17
+**26 animations** · web sources exported 2026-08-17
 
 - **Ready** — 14
 - **Built in app code** — 7
-- **Ready + image** — 4
+- **Ready + image** — 5
 
 ## Open this first
 
@@ -96,6 +96,7 @@ reference/shared/      shared CSS, runtime, fonts, images
 | [Scanner float](animations/biometric-scanner-device-plain-float/) | Biometrics | Ready + image | Lottie + image |
 | [Red magnifier](animations/search-red-magnifier-loader/) | Search | Ready + image | Lottie + image |
 | [Orbit magnifier](animations/search-red-orbit-magnifier/) | Search | Ready + image | Lottie + image |
+| [Bell ring](animations/notification-bell-ring/) | Notifications | Ready + image | Lottie + image |
 | [6-digit code green](animations/otp-green/) | Code entry | Built in app code | native screen |
 | [SecurePass green](animations/securepass-green/) | Code entry | Built in app code | native screen |
 | [Code error](animations/otp-error/) | Code entry | Built in app code | native screen |
