@@ -263,9 +263,9 @@ const pages = [
     accent: "ink",
     section: "prototypes",
     themeable: true,
-    label: "Standalone standard success feedback animation without a screen mockup.",
+    label: "Standard success feedback variants inside a phone mockup.",
     scene: () => `
-      ${coreSpinnerStandalonePrototype("core-spinner-02")}
+      ${altyMockupPrototype("standard-success", { variantType: "core-spinner-02" })}
     `,
   },
   {
@@ -591,6 +591,8 @@ const prototypeMotionVariantSets = {
     title: "Success loaders",
     variants: [
       { slug: "uploaded-success-confetti-green", title: "Green uploaded confetti" },
+      { slug: "green-success-confetti", title: "Green check confetti scatter" },
+      { slug: "green-success-stars", title: "Green check star sprinkle" },
     ],
   },
   failed: {
@@ -1974,8 +1976,8 @@ function identityBustFocusPrototype() {
           <span class="alty-identity-bust-red-fill"></span>
           <img class="alty-identity-bust-image is-red" src="./assets/identity-user-bust-red.png" alt="">
         </span>
+        <span class="alty-identity-bust-scan"></span>
       </div>
-      <span class="alty-identity-bust-scan"></span>
     </div>
   `;
 }
@@ -2203,10 +2205,11 @@ function altyMockupMotionSlot(type, slotStyle = "", overrideSlug = "") {
 }
 
 function altyMockupPrototype(type, options = {}) {
-  const { lift = false } = options;
+  const { lift = false, variantType = type } = options;
   const labels = {
     pending: "Pending account-opening screen",
     almost: "Almost there onboarding screen",
+    "standard-success": "Standard success feedback screen",
     biometrics: "Enable biometrics onboarding screen",
     identity: "Identity verification onboarding screen",
     otp: "6-digit verification code login screen",
@@ -2218,8 +2221,8 @@ function altyMockupPrototype(type, options = {}) {
     failed: "Could not load results screen",
     pull: "Pull-to-refresh transaction history screen",
   };
-  const variantSet = prototypeMotionVariantSets[type];
-  const activeIndex = getPrototypeVariantIndex(type);
+  const variantSet = prototypeMotionVariantSets[variantType];
+  const activeIndex = getPrototypeVariantIndex(variantType);
   const activeVariant = variantSet?.variants[activeIndex];
   const activeMotionSource = activeVariant ? ` data-active-motion-source="${activeVariant.slug}"` : "";
   const hasVisibleVariantPager = Boolean(variantSet && variantSet.variants.length > 1);
@@ -2227,7 +2230,7 @@ function altyMockupPrototype(type, options = {}) {
   return `
     <div class="alty-mockup-prototype alty-mockup-${type}-prototype${lift ? " is-lift-mode" : ""}"${activeMotionSource} role="group" aria-label="${labels[type]}">
       <article class="alty-mockup-stage ${hasVisibleVariantPager ? "has-prototype-variant-pager" : ""}">
-        ${hasVisibleVariantPager ? renderPrototypeVariantPager(type, variantSet, activeIndex) : ""}
+        ${hasVisibleVariantPager ? renderPrototypeVariantPager(variantType, variantSet, activeIndex) : ""}
         ${altyMockupPhone(type)}
       </article>
     </div>
@@ -2245,6 +2248,7 @@ function altyMockupPhone(type) {
     "otp-loading": altyMockupOtpLoadingScreen,
     securepass: altyMockupSecurePassScreen,
     searching: altyMockupSearchingScreen,
+    "standard-success": altyMockupStandardSuccessScreen,
     success: altyMockupSuccessScreen,
     failed: altyMockupFailedScreen,
     pull: altyMockupPullScreen,
@@ -2558,6 +2562,24 @@ function altyMockupSearchingScreen() {
       ${altyMockupMotionSlot("searching", "search")}
     </main>
     ${altyMockupKeyboard()}
+  `;
+}
+
+function altyMockupStandardSuccessScreen() {
+  return `
+    ${altyMockupStatusBar()}
+    ${altyMockupTopBar()}
+    <main class="alty-mock-content alty-mock-standard-success-content">
+      ${altyMockupMotionSlot("core-spinner-02", "success")}
+      <div class="alty-mock-copy-block">
+        <h2>Successful</h2>
+        <p>Your request has been completed.</p>
+      </div>
+    </main>
+    <footer class="alty-mock-footer is-single">
+      ${altyMockupButton("Done", "primary")}
+    </footer>
+    ${altyMockupHomeIndicator()}
   `;
 }
 
@@ -2909,7 +2931,7 @@ function render() {
   const activeSection = getPageSection(activePage);
   const sectionPages = pages.filter((page) => getPageSection(page) === activeSection);
   const modeControls = `
-    <nav class="section-switch" aria-label="Gallery mode">
+    <nav class="section-switch dev-switch" aria-label="Gallery mode">
       <a class="section-choice" href="./mobile-handoff/gallery.html">Dev</a>
     </nav>
   `;
@@ -2961,10 +2983,9 @@ function render() {
         type="checkbox"
         data-animation-mode-toggle
         ${showOnlyAnimation ? "checked" : ""}
-        aria-label="Show only animation"
+        aria-label="${showOnlyAnimation ? "Show Prototype" : "Show Animation"}"
       >
-      <span class="animation-mode-track" aria-hidden="true"><span></span></span>
-      <span class="animation-mode-label">Show only animation</span>
+      <span class="animation-mode-label">${showOnlyAnimation ? "Prototype" : "Animation"}</span>
     </label>
   `;
   const headerControls = `

@@ -105,11 +105,18 @@ html,
 body {
   min-height: 100%;
   margin: 0;
+  scrollbar-width: none;
 }
 
 body {
   background: var(--bg);
   color: var(--text);
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  width: 0;
+  height: 0;
 }
 
 :root[data-prototype-theme="light"] body {
@@ -374,6 +381,30 @@ button {
   box-shadow: inset 0 0 0 1px var(--line-strong);
 }
 
+.dev-switch {
+  padding: 0;
+  border-color: transparent;
+  background: var(--text);
+}
+
+.app-shell[data-prototype-theme="light"] .dev-switch {
+  background: var(--text);
+}
+
+.dev-switch .section-choice {
+  min-height: 44px;
+  padding: 0 22px;
+  color: var(--bg);
+  background: var(--text);
+  font-weight: 600;
+}
+
+.dev-switch .section-choice:hover,
+.dev-switch .section-choice:focus-visible {
+  color: var(--bg);
+  background: var(--text);
+}
+
 .page-heading p {
   margin: 0;
   color: var(--muted);
@@ -460,11 +491,11 @@ button {
   min-height: 44px;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 4px 14px 4px 4px;
+  justify-content: center;
+  padding: 0 22px;
   border: 1px solid var(--line);
   border-radius: 999px;
-  background: rgba(255, 247, 230, 0.045);
+  background: rgba(255, 247, 230, 0.035);
   color: var(--muted);
   cursor: pointer;
   user-select: none;
@@ -475,7 +506,7 @@ button {
 }
 
 .app-shell[data-prototype-theme="light"] .animation-mode-toggle {
-  background: rgba(24, 24, 24, 0.045);
+  background: rgba(24, 24, 24, 0.035);
 }
 
 .animation-mode-toggle:hover,
@@ -491,43 +522,6 @@ button {
   block-size: 1px;
   opacity: 0;
   pointer-events: none;
-}
-
-.animation-mode-track {
-  width: 34px;
-  height: 34px;
-  flex: 0 0 auto;
-  display: grid;
-  place-items: center;
-  border-radius: 999px;
-  background: transparent;
-  box-shadow: none;
-  transition:
-    background 0.22s ease,
-    box-shadow 0.22s ease,
-    transform 0.22s ease;
-}
-
-.animation-mode-track span {
-  width: 20px;
-  height: 20px;
-  display: block;
-  border-radius: inherit;
-  background: #050505;
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.26);
-}
-
-.animation-mode-toggle input:checked + .animation-mode-track {
-  background: var(--panel);
-  box-shadow:
-    0 0 0 1px var(--line-strong),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.04);
-}
-
-.animation-mode-toggle:hover .animation-mode-track,
-.animation-mode-toggle:focus-within .animation-mode-track {
-  background: var(--panel);
-  transform: translateY(-1px);
 }
 
 .animation-mode-label {
@@ -5196,6 +5190,10 @@ button {
   max-width: none;
 }
 
+.alty-mock-motion-slot .uba-lottie-resolve-wrap {
+  width: 88%;
+}
+
 .alty-mock-motion-slot[data-motion-source^="uba-card-rotation"] {
   width: 188px;
   height: 148px;
@@ -6321,6 +6319,7 @@ button {
 
 .alty-mock-onboarding-content,
 .alty-mock-identity-content,
+.alty-mock-standard-success-content,
 .alty-mock-success-content,
 .alty-mock-failed-content {
   display: flex;
@@ -6372,6 +6371,7 @@ button {
   gap: 30px;
 }
 
+.alty-mock-standard-success-content,
 .alty-mock-failed-content {
   align-items: center;
   justify-content: center;
@@ -6380,16 +6380,19 @@ button {
   transform: translateY(-18px);
 }
 
+.alty-mock-standard-success-content .alty-mock-copy-block,
 .alty-mock-failed-content .alty-mock-copy-block {
   max-width: 330px;
   justify-items: center;
 }
 
+.alty-mock-standard-success-content .alty-mock-copy-block h2,
 .alty-mock-failed-content .alty-mock-copy-block h2 {
   font-size: 28px;
   line-height: 36px;
 }
 
+.alty-mock-standard-success-content .alty-mock-copy-block p,
 .alty-mock-failed-content .alty-mock-copy-block p {
   max-width: 290px;
   color: var(--mock-muted);
@@ -6844,7 +6847,7 @@ button {
 }
 
 .alty-identity-bust-stack {
-  --identity-bust-shadow-pad: 54px;
+  --identity-bust-shadow-pad: 28px;
   width: min(
     calc(286px + var(--identity-bust-shadow-pad) + var(--identity-bust-shadow-pad)),
     calc(76% + var(--identity-bust-shadow-pad) + var(--identity-bust-shadow-pad))
@@ -6933,12 +6936,16 @@ img.alty-identity-bust-image {
 }
 
 .alty-identity-bust-scan {
-  width: min(284px, 78%);
+  width: min(
+    210px,
+    calc(100% - var(--identity-bust-shadow-pad) - var(--identity-bust-shadow-pad) - 34px)
+  );
   height: 3px;
   position: absolute;
   left: 50%;
   top: 50%;
   z-index: 4;
+  pointer-events: none;
   border-radius: 999px;
   background:
     linear-gradient(90deg, transparent, rgba(255, 95, 82, 0.8) 22%, #d51709 50%, rgba(255, 76, 64, 0.76) 78%, transparent);
@@ -7579,18 +7586,31 @@ img.alty-identity-bust-image {
 .alty-mockup-failed-prototype .verification-badge-outline,
 .alty-mockup-failed-prototype .verification-badge-fill,
 .alty-mockup-failed-prototype .verification-badge-mark,
-.alty-mockup-failed-prototype .verification-badge-check {
+.alty-mockup-failed-prototype .verification-badge-check,
+.alty-mockup-standard-success-prototype .success-wheel-two-rotor,
+.alty-mockup-standard-success-prototype .success-wheel-two-line,
+.alty-mockup-standard-success-prototype .success-wheel-two-fill,
+.alty-mockup-standard-success-prototype .success-wheel-two-mark,
+.alty-mockup-standard-success-prototype .success-wheel-two-check,
+.alty-mockup-standard-success-prototype .verification-badge-rotor,
+.alty-mockup-standard-success-prototype .verification-badge-trace,
+.alty-mockup-standard-success-prototype .verification-badge-outline,
+.alty-mockup-standard-success-prototype .verification-badge-fill,
+.alty-mockup-standard-success-prototype .verification-badge-mark,
+.alty-mockup-standard-success-prototype .verification-badge-check {
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
 }
 
 .alty-mockup-success-prototype .success-wheel-two-fill,
-.alty-mockup-failed-prototype .success-wheel-two-fill {
+.alty-mockup-failed-prototype .success-wheel-two-fill,
+.alty-mockup-standard-success-prototype .success-wheel-two-fill {
   animation-name: prototype-success-wheel-two-fill;
 }
 
 .alty-mockup-success-prototype .success-wheel-two-check,
-.alty-mockup-failed-prototype .success-wheel-two-check {
+.alty-mockup-failed-prototype .success-wheel-two-check,
+.alty-mockup-standard-success-prototype .success-wheel-two-check {
   animation-name: prototype-success-wheel-two-check;
 }
 
