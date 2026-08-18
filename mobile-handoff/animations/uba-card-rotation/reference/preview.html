@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en" data-prototype-theme="dark" data-animation-mode="only">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card rotation</title>
+    <link rel="stylesheet" href="../../../reference/shared/styles.css">
+    <style>
+      :root { color-scheme: dark; }
+
+      body {
+        min-height: 100vh;
+        margin: 0;
+        display: grid;
+        place-items: center;
+        background: #080907;
+      }
+
+      .export-preview-shell {
+        width: min(720px, 100vw);
+        min-height: min(720px, 100vh);
+        display: grid;
+        place-items: center;
+        overflow: visible;
+      }
+
+      .export-preview-shell .stage-band {
+        width: min(620px, 96vw);
+        min-height: min(620px, 96vh);
+        overflow: visible;
+      }
+
+      .export-preview-shell[data-preview-motion-source="identity-bust-focus"] {
+        min-height: min(760px, 100vh);
+      }
+
+      .export-preview-shell[data-preview-motion-source="identity-bust-focus"] .stage-band {
+        min-height: min(700px, 96vh);
+      }
+
+      /* Code-entry mockups size themselves from the viewport (calc(100vw - 96px)).
+         Inside a narrow preview frame that squeezes six 56px-tall cells into a
+         fraction of their width, so they render as tall pills instead of cells.
+         Pin them to the design width and scale the whole scene down instead. */
+      .export-preview-shell .animation-only-otp.alty-mockup-prototype,
+      .export-preview-shell .animation-only-securepass.alty-mockup-prototype,
+      .export-preview-shell .animation-only-otp-slot {
+        width: 361px;
+        max-width: none;
+      }
+
+      @media (max-width: 460px) {
+        .export-preview-shell .animation-only-otp.alty-mockup-prototype,
+        .export-preview-shell .animation-only-securepass.alty-mockup-prototype {
+          transform: scale(0.62);
+          transform-origin: 50% 50%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app-shell export-preview-shell" data-prototype-theme="dark" data-animation-mode="only" data-preview-motion-source="uba-card-rotation">
+      <section class="stage-band" data-animation-only-page="account-opening-almost-there">
+        <div class="animation-only-motion-slot animation-only-motion-almost" data-motion-source="uba-card-rotation" aria-hidden="true">
+              <div class="prototype-motion-render">
+            <div class="loader-scene uba-card-rotation-scene" role="img" aria-label="UBA debit card rotating from front to back">
+              <span class="uba-card-shadow" aria-hidden="true"></span>
+              <div class="uba-card-flip">
+                <div class="uba-card-flip-face is-front">
+                  <img src="../../../reference/shared/assets/uba-card-front.webp" alt="">
+                </div>
+                <div class="uba-card-flip-face is-back">
+                  <img src="../../../reference/shared/assets/uba-card-back.webp" alt="">
+                </div>
+              </div>
+            </div>
+          </div>
+            </div>
+      </section>
+    </div>
+    <script src="../../../reference/shared/assets/lottie-svg.min.js"></script>
+    <script src="../../../reference/shared/assets/confetti-lottie-data.js"></script>
+    <script src="../../../reference/shared/assets/uba-spinner-data.js"></script>
+    <script src="../../../reference/shared/preview-runtime.js"></script>
+  </body>
+</html>

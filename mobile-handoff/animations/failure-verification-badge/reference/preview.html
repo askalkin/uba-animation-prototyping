@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en" data-prototype-theme="dark" data-animation-mode="only">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Badge fill to X</title>
+    <link rel="stylesheet" href="../../../reference/shared/styles.css">
+    <style>
+      :root { color-scheme: dark; }
+
+      body {
+        min-height: 100vh;
+        margin: 0;
+        display: grid;
+        place-items: center;
+        background: #080907;
+      }
+
+      .export-preview-shell {
+        width: min(720px, 100vw);
+        min-height: min(720px, 100vh);
+        display: grid;
+        place-items: center;
+        overflow: visible;
+      }
+
+      .export-preview-shell .stage-band {
+        width: min(620px, 96vw);
+        min-height: min(620px, 96vh);
+        overflow: visible;
+      }
+
+      .export-preview-shell[data-preview-motion-source="identity-bust-focus"] {
+        min-height: min(760px, 100vh);
+      }
+
+      .export-preview-shell[data-preview-motion-source="identity-bust-focus"] .stage-band {
+        min-height: min(700px, 96vh);
+      }
+
+      /* Code-entry mockups size themselves from the viewport (calc(100vw - 96px)).
+         Inside a narrow preview frame that squeezes six 56px-tall cells into a
+         fraction of their width, so they render as tall pills instead of cells.
+         Pin them to the design width and scale the whole scene down instead. */
+      .export-preview-shell .animation-only-otp.alty-mockup-prototype,
+      .export-preview-shell .animation-only-securepass.alty-mockup-prototype,
+      .export-preview-shell .animation-only-otp-slot {
+        width: 361px;
+        max-width: none;
+      }
+
+      @media (max-width: 460px) {
+        .export-preview-shell .animation-only-otp.alty-mockup-prototype,
+        .export-preview-shell .animation-only-securepass.alty-mockup-prototype {
+          transform: scale(0.62);
+          transform-origin: 50% 50%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app-shell export-preview-shell" data-prototype-theme="dark" data-animation-mode="only" data-preview-motion-source="failure-verification-badge">
+      <section class="stage-band" data-animation-only-page="couldnt-load-results">
+        <div class="animation-only-motion-slot animation-only-motion-failed" data-motion-source="failure-verification-badge" aria-hidden="true">
+              <div class="prototype-motion-render">
+            <div class="loader-scene verification-badge-scene verification-badge-error-scene " role="img" aria-label="White verification badge drawing, filling, and resolving into an X">
+              <div class="verification-badge-mark">
+                <svg class="verification-badge-svg" viewBox="0 0 120 120" aria-hidden="true">
+                  <defs>
+                    <linearGradient id="verification-badge-fill-gradient" x1="22" y1="18" x2="94" y2="103" gradientUnits="userSpaceOnUse">
+                      <stop offset="0%" stop-color="var(--verification-badge-fill-color, #ffffff)" stop-opacity="1"></stop>
+                      <stop offset="56%" stop-color="var(--verification-badge-fill-color, #ffffff)" stop-opacity="1"></stop>
+                      <stop offset="100%" stop-color="var(--verification-badge-fill-color, #ffffff)" stop-opacity="1"></stop>
+                    </linearGradient>
+                    <filter id="verification-badge-soft-glow" x="-35%" y="-35%" width="170%" height="170%">
+                      <feGaussianBlur stdDeviation="3.2" result="blur"></feGaussianBlur>
+                      <feMerge>
+                        <feMergeNode in="blur"></feMergeNode>
+                        <feMergeNode in="SourceGraphic"></feMergeNode>
+                      </feMerge>
+                    </filter>
+                  </defs>
+                  <g class="verification-badge-rotor">
+                    <path class="verification-badge-trace" d="M65.6 17.4 L68.18 20.34 Q73.78 26.74 82.26 26.18 L86.17 25.92 Q94.65 25.35 94.08 33.83 L93.82 37.74 Q93.26 46.22 99.66 51.82 L102.6 54.4 Q109 60 102.6 65.6 L99.66 68.18 Q93.26 73.78 93.82 82.26 L94.08 86.17 Q94.65 94.65 86.17 94.08 L82.26 93.82 Q73.78 93.26 68.18 99.66 L65.6 102.6 Q60 109 54.4 102.6 L51.82 99.66 Q46.22 93.26 37.74 93.82 L33.83 94.08 Q25.35 94.65 25.92 86.17 L26.18 82.26 Q26.74 73.78 20.34 68.18 L17.4 65.6 Q11 60 17.4 54.4 L20.34 51.82 Q26.74 46.22 26.18 37.74 L25.92 33.83 Q25.35 25.35 33.83 25.92 L37.74 26.18 Q46.22 26.74 51.82 20.34 L54.4 17.4 Q60 11 65.6 17.4 Z" pathLength="100"></path>
+                  </g>
+                  <path class="verification-badge-fill" d="M65.6 17.4 L68.18 20.34 Q73.78 26.74 82.26 26.18 L86.17 25.92 Q94.65 25.35 94.08 33.83 L93.82 37.74 Q93.26 46.22 99.66 51.82 L102.6 54.4 Q109 60 102.6 65.6 L99.66 68.18 Q93.26 73.78 93.82 82.26 L94.08 86.17 Q94.65 94.65 86.17 94.08 L82.26 93.82 Q73.78 93.26 68.18 99.66 L65.6 102.6 Q60 109 54.4 102.6 L51.82 99.66 Q46.22 93.26 37.74 93.82 L33.83 94.08 Q25.35 94.65 25.92 86.17 L26.18 82.26 Q26.74 73.78 20.34 68.18 L17.4 65.6 Q11 60 17.4 54.4 L20.34 51.82 Q26.74 46.22 26.18 37.74 L25.92 33.83 Q25.35 25.35 33.83 25.92 L37.74 26.18 Q46.22 26.74 51.82 20.34 L54.4 17.4 Q60 11 65.6 17.4 Z"></path>
+                  <path class="verification-badge-outline" d="M65.6 17.4 L68.18 20.34 Q73.78 26.74 82.26 26.18 L86.17 25.92 Q94.65 25.35 94.08 33.83 L93.82 37.74 Q93.26 46.22 99.66 51.82 L102.6 54.4 Q109 60 102.6 65.6 L99.66 68.18 Q93.26 73.78 93.82 82.26 L94.08 86.17 Q94.65 94.65 86.17 94.08 L82.26 93.82 Q73.78 93.26 68.18 99.66 L65.6 102.6 Q60 109 54.4 102.6 L51.82 99.66 Q46.22 93.26 37.74 93.82 L33.83 94.08 Q25.35 94.65 25.92 86.17 L26.18 82.26 Q26.74 73.78 20.34 68.18 L17.4 65.6 Q11 60 17.4 54.4 L20.34 51.82 Q26.74 46.22 26.18 37.74 L25.92 33.83 Q25.35 25.35 33.83 25.92 L37.74 26.18 Q46.22 26.74 51.82 20.34 L54.4 17.4 Q60 11 65.6 17.4 Z" pathLength="100"></path>
+                  <path class="verification-badge-check is-error" d="M40 40 L80 80 M80 40 L40 80" pathLength="100"></path>
+                </svg>
+              </div>
+            </div>
+          </div>
+            </div>
+      </section>
+    </div>
+    <script src="../../../reference/shared/assets/lottie-svg.min.js"></script>
+    <script src="../../../reference/shared/assets/confetti-lottie-data.js"></script>
+    <script src="../../../reference/shared/assets/uba-spinner-data.js"></script>
+    <script src="../../../reference/shared/preview-runtime.js"></script>
+  </body>
+</html>

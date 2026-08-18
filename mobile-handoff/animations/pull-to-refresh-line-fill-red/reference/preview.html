@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en" data-prototype-theme="dark" data-animation-mode="only">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Line fill red</title>
+    <link rel="stylesheet" href="../../../reference/shared/styles.css">
+    <style>
+      :root { color-scheme: dark; }
+
+      body {
+        min-height: 100vh;
+        margin: 0;
+        display: grid;
+        place-items: center;
+        background: #080907;
+      }
+
+      .export-preview-shell {
+        width: min(720px, 100vw);
+        min-height: min(720px, 100vh);
+        display: grid;
+        place-items: center;
+        overflow: visible;
+      }
+
+      .export-preview-shell .stage-band {
+        width: min(620px, 96vw);
+        min-height: min(620px, 96vh);
+        overflow: visible;
+      }
+
+      .export-preview-shell[data-preview-motion-source="identity-bust-focus"] {
+        min-height: min(760px, 100vh);
+      }
+
+      .export-preview-shell[data-preview-motion-source="identity-bust-focus"] .stage-band {
+        min-height: min(700px, 96vh);
+      }
+
+      /* Code-entry mockups size themselves from the viewport (calc(100vw - 96px)).
+         Inside a narrow preview frame that squeezes six 56px-tall cells into a
+         fraction of their width, so they render as tall pills instead of cells.
+         Pin them to the design width and scale the whole scene down instead. */
+      .export-preview-shell .animation-only-otp.alty-mockup-prototype,
+      .export-preview-shell .animation-only-securepass.alty-mockup-prototype,
+      .export-preview-shell .animation-only-otp-slot {
+        width: 361px;
+        max-width: none;
+      }
+
+      @media (max-width: 460px) {
+        .export-preview-shell .animation-only-otp.alty-mockup-prototype,
+        .export-preview-shell .animation-only-securepass.alty-mockup-prototype {
+          transform: scale(0.62);
+          transform-origin: 50% 50%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app-shell export-preview-shell" data-prototype-theme="dark" data-animation-mode="only" data-preview-motion-source="pull-to-refresh-line-fill-red">
+      <section class="stage-band" data-animation-only-page="transaction-history-pull-refresh">
+        <div class="animation-only-motion-slot animation-only-motion-pull" data-motion-source="pull-to-refresh-line-fill-red" aria-hidden="true">
+              <div class="prototype-motion-render">
+              <div class="prototype-refresh-gesture ptr-line-fill-gesture ptr-line-fill-red-gesture" aria-hidden="true">
+        
+            <svg class="ptr-line-fill-mark" viewBox="72 68 124 112" aria-hidden="true" focusable="false">
+      
+                    <path class="ptr-line-fill-guide" d="M101.755 160.74L113.692 104.994C119.867 117.203 126.039 129.527 132.145 141.852C133.298 144.809 134.269 147.765 134.264 150.49C134.258 153.494 133.23 155.582 131.432 157.096C129.571 158.664 126.753 159.727 122.993 160.327C122.363 160.405 121.468 160.519 120.688 160.614C120.294 160.662 119.937 160.705 119.666 160.735C119.334 160.772 119.253 160.775 119.303 160.776Z" pathLength="100"></path>
+                    <path class="ptr-line-fill-draw" d="M101.755 160.74L113.692 104.994C119.867 117.203 126.039 129.527 132.145 141.852C133.298 144.809 134.269 147.765 134.264 150.49C134.258 153.494 133.23 155.582 131.432 157.096C129.571 158.664 126.753 159.727 122.993 160.327C122.363 160.405 121.468 160.519 120.688 160.614C120.294 160.662 119.937 160.705 119.666 160.735C119.334 160.772 119.253 160.775 119.303 160.776Z" pathLength="100"></path>
+          
+                    <path class="ptr-line-fill-guide" d="M162.389 89.5L150.565 145.271C144.364 133.074 138.168 120.762 132.037 108.449C130.878 105.495 129.901 102.541 129.901 99.8154C129.901 96.8113 130.924 94.7222 132.719 93.2041C134.577 91.6325 137.393 90.5634 141.151 89.9561C141.782 89.8769 142.675 89.7609 143.456 89.6641C143.849 89.6153 144.206 89.5719 144.478 89.541C144.809 89.5032 144.89 89.5 144.84 89.5Z" pathLength="100"></path>
+                    <path class="ptr-line-fill-draw" d="M162.389 89.5L150.565 145.271C144.364 133.074 138.168 120.762 132.037 108.449C130.878 105.495 129.901 102.541 129.901 99.8154C129.901 96.8113 130.924 94.7222 132.719 93.2041C134.577 91.6325 137.393 90.5634 141.151 89.9561C141.782 89.8769 142.675 89.7609 143.456 89.6641C143.849 89.6153 144.206 89.5719 144.478 89.541C144.809 89.5032 144.89 89.5 144.84 89.5Z" pathLength="100"></path>
+          
+            </svg>
+  
+              </div>
+            </div>
+            </div>
+      </section>
+    </div>
+    <script src="../../../reference/shared/assets/lottie-svg.min.js"></script>
+    <script src="../../../reference/shared/assets/confetti-lottie-data.js"></script>
+    <script src="../../../reference/shared/assets/uba-spinner-data.js"></script>
+    <script src="../../../reference/shared/preview-runtime.js"></script>
+  </body>
+</html>

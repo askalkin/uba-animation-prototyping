@@ -2908,10 +2908,14 @@ function render() {
   const activePage = pages.find((page) => page.slug === currentSlug) || defaultPage;
   const activeSection = getPageSection(activePage);
   const sectionPages = pages.filter((page) => getPageSection(page) === activeSection);
-  const sectionControls = visibleSections.length > 1
+  const modeControls = `
+    <nav class="section-switch" aria-label="Gallery mode">
+      <a class="section-choice" href="./mobile-handoff/gallery.html">Dev</a>
+    </nav>
+  `;
+  const sectionControls = MOTION_ELEMENTS_VISIBLE && visibleSections.length > 1
     ? `
-    <nav class="section-switch" aria-label="Gallery section">
-      ${MOTION_ELEMENTS_VISIBLE ? `
+    <nav class="section-switch" aria-label="Prototype section">
       <a
         class="section-choice ${activeSection === "motion" ? "is-active" : ""}"
         href="#${pages.find((page) => getPageSection(page) === "motion").slug}"
@@ -2919,7 +2923,6 @@ function render() {
       >
         Motion elements
       </a>
-      ` : ""}
       <a
         class="section-choice ${activeSection === "prototypes" ? "is-active" : ""}"
         href="#${pages.find((page) => getPageSection(page) === "prototypes").slug}"
@@ -2966,6 +2969,7 @@ function render() {
   `;
   const headerControls = `
     <div class="header-control-row">
+      ${modeControls}
       ${sectionControls}
       ${animationOnlyControls}
       ${themeControls}

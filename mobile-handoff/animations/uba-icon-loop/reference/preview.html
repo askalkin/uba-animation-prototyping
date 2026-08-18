@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en" data-prototype-theme="dark" data-animation-mode="only">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banking icons loader</title>
+    <link rel="stylesheet" href="../../../reference/shared/styles.css">
+    <style>
+      :root { color-scheme: dark; }
+
+      body {
+        min-height: 100vh;
+        margin: 0;
+        display: grid;
+        place-items: center;
+        background: #080907;
+      }
+
+      .export-preview-shell {
+        width: min(720px, 100vw);
+        min-height: min(720px, 100vh);
+        display: grid;
+        place-items: center;
+        overflow: visible;
+      }
+
+      .export-preview-shell .stage-band {
+        width: min(620px, 96vw);
+        min-height: min(620px, 96vh);
+        overflow: visible;
+      }
+
+      .export-preview-shell[data-preview-motion-source="identity-bust-focus"] {
+        min-height: min(760px, 100vh);
+      }
+
+      .export-preview-shell[data-preview-motion-source="identity-bust-focus"] .stage-band {
+        min-height: min(700px, 96vh);
+      }
+
+      /* Code-entry mockups size themselves from the viewport (calc(100vw - 96px)).
+         Inside a narrow preview frame that squeezes six 56px-tall cells into a
+         fraction of their width, so they render as tall pills instead of cells.
+         Pin them to the design width and scale the whole scene down instead. */
+      .export-preview-shell .animation-only-otp.alty-mockup-prototype,
+      .export-preview-shell .animation-only-securepass.alty-mockup-prototype,
+      .export-preview-shell .animation-only-otp-slot {
+        width: 361px;
+        max-width: none;
+      }
+
+      @media (max-width: 460px) {
+        .export-preview-shell .animation-only-otp.alty-mockup-prototype,
+        .export-preview-shell .animation-only-securepass.alty-mockup-prototype {
+          transform: scale(0.62);
+          transform-origin: 50% 50%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app-shell export-preview-shell" data-prototype-theme="dark" data-animation-mode="only" data-preview-motion-source="uba-icon-loop">
+      <section class="stage-band" data-animation-only-page="account-opening-almost-there">
+        <div class="animation-only-motion-slot animation-only-motion-almost" data-motion-source="uba-icon-loop" aria-hidden="true">
+              <div class="prototype-motion-render">
+            <div class="loader-scene uba-icon-loop-scene" role="img" aria-label="White UBA loader icons drawing in and reverse-erasing in a continuous loop" data-uba-icon-loop>
+              <div class="uba-icon-loop-stack">
+        
+                <span class="uba-icon-loop-icon" data-uba-icon-loop-key="bank">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M10 18V11"></path><path d="M11.119 2.20498C11.3932 2.07044 11.6946 2.00049 12 2.00049C12.3054 2.00049 12.6068 2.07044 12.881 2.20498L20.721 6.05098C20.8225 6.10073 20.9042 6.18342 20.9527 6.28557C21.0012 6.38771 21.0136 6.50327 20.988 6.61339C20.9623 6.72351 20.9001 6.82168 20.8115 6.8919C20.7229 6.96211 20.6131 7.00021 20.5 6.99998H3.5C3.38702 6.99998 3.27737 6.96172 3.18892 6.89143C3.10047 6.82114 3.03843 6.72296 3.01292 6.6129C2.9874 6.50284 2.99992 6.38738 3.04842 6.28534C3.09692 6.1833 3.17855 6.10069 3.28 6.05098L11.119 2.20498Z"></path><path d="M14 18V11"></path><path d="M18 18V11"></path><path d="M3 22H21"></path><path d="M6 18V11"></path>
+                  </svg>
+                </span>
+      
+                <span class="uba-icon-loop-icon" data-uba-icon-loop-key="card">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M20 5H4C2.89543 5 2 5.89543 2 7V17C2 18.1046 2.89543 19 4 19H20C21.1046 19 22 18.1046 22 17V7C22 5.89543 21.1046 5 20 5Z"></path><path d="M2 10H22"></path>
+                  </svg>
+                </span>
+      
+                <span class="uba-icon-loop-icon" data-uba-icon-loop-key="earth">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M21.54 15H17C16.4696 15 15.9609 15.2107 15.5858 15.5858C15.2107 15.9609 15 16.4696 15 17V21.54"></path><path d="M7 3.33984V4.99984C7 5.79549 7.31607 6.55855 7.87868 7.12116C8.44129 7.68377 9.20435 7.99984 10 7.99984C10.5304 7.99984 11.0391 8.21056 11.4142 8.58563C11.7893 8.9607 12 9.46941 12 9.99984C12 11.0998 12.9 11.9998 14 11.9998C14.5304 11.9998 15.0391 11.7891 15.4142 11.4141C15.7893 11.039 16 10.5303 16 9.99984C16 8.89984 16.9 7.99984 18 7.99984H21.17"></path><path d="M11 21.95V18C11 17.4696 10.7893 16.9609 10.4142 16.5858C10.0391 16.2107 9.53042 16 8.99999 16C8.46955 16 7.96085 15.7893 7.58577 15.4142C7.2107 15.0391 6.99999 14.5304 6.99999 14V13C6.99999 12.4696 6.78927 11.9609 6.4142 11.5858C6.03913 11.2107 5.53042 11 4.99999 11H2.04999"></path><path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"></path>
+                  </svg>
+                </span>
+      
+                <span class="uba-icon-loop-icon" data-uba-icon-loop-key="naira">
+                  <svg viewBox="0 0 26 24" aria-hidden="true">
+                    <path d="M8.55554 19.1668V5.8335L18.3333 19.1668V5.8335"></path><path d="M5 10.7002H21"></path><path d="M5 14.2559H21"></path>
+                  </svg>
+                </span>
+      
+                <span class="uba-icon-loop-icon" data-uba-icon-loop-key="security">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M20 13C20 18 16.5 20.5 12.34 21.95C12.1222 22.0238 11.8855 22.0202 11.67 21.94C7.5 20.5 4 18 4 13V5.99996C4 5.73474 4.10536 5.48039 4.29289 5.29285C4.48043 5.10532 4.73478 4.99996 5 4.99996C7 4.99996 9.5 3.79996 11.24 2.27996C11.4519 2.09896 11.7214 1.99951 12 1.99951C12.2786 1.99951 12.5481 2.09896 12.76 2.27996C14.51 3.80996 17 4.99996 19 4.99996C19.2652 4.99996 19.5196 5.10532 19.7071 5.29285C19.8946 5.48039 20 5.73474 20 5.99996V13Z"></path><path d="M9 12L11 14L15 10"></path>
+                  </svg>
+                </span>
+      
+                <span class="uba-icon-loop-icon" data-uba-icon-loop-key="wallet">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M3 11H6.75C7.06049 11 7.36672 11.0723 7.64443 11.2111C7.92214 11.35 8.16371 11.5516 8.35 11.8L8.8 12.4C9.17259 12.8968 9.65572 13.3 10.2111 13.5777C10.7666 13.8554 11.379 14 12 14C12.621 14 13.2334 13.8554 13.7889 13.5777C14.3443 13.3 14.8274 12.8968 15.2 12.4L15.65 11.8C15.8363 11.5516 16.0779 11.35 16.3556 11.2111C16.6333 11.0723 16.9395 11 17.25 11H21"></path><path d="M3 7H21"></path><path d="M19 3H5C3.89543 3 3 3.89543 3 5V19C3 20.1046 3.89543 21 5 21H19C20.1046 21 21 20.1046 21 19V5C21 3.89543 20.1046 3 19 3Z"></path>
+                  </svg>
+                </span>
+      
+              </div>
+            </div>
+          </div>
+            </div>
+      </section>
+    </div>
+    <script src="../../../reference/shared/assets/lottie-svg.min.js"></script>
+    <script src="../../../reference/shared/assets/confetti-lottie-data.js"></script>
+    <script src="../../../reference/shared/assets/uba-spinner-data.js"></script>
+    <script src="../../../reference/shared/preview-runtime.js"></script>
+  </body>
+</html>

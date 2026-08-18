@@ -1,0 +1,46 @@
+<div class="animation-only-motion-slot animation-only-motion-almost" data-motion-source="progressive-blur-spinner-solo" aria-hidden="true">
+      <div class="prototype-motion-render">
+      <div class="loader-scene progressive-solo-scene" role="img" aria-label="Compact red comet arc">
+        
+    <svg class="comet-svg" viewBox="0 0 120 120" aria-hidden="true">
+      <defs>
+        <linearGradient id="prototype-core-comet-trail" x1="88" y1="18" x2="23" y2="93" gradientUnits="userSpaceOnUse">
+          
+          <stop offset="0%" stop-color="rgba(255, 36, 56, 1)"></stop>
+          <stop offset="48%" stop-color="rgba(255, 36, 56, 0.55)"></stop>
+          <stop offset="100%" stop-color="rgba(255, 36, 56, 0)"></stop>
+        
+        </linearGradient>
+        <filter id="prototype-core-comet-glow" x="-35%" y="-35%" width="170%" height="170%">
+          <feGaussianBlur stdDeviation="4" result="blur"></feGaussianBlur>
+          <feColorMatrix
+            in="blur"
+            type="matrix"
+            values="1 0 0 0 0.9  0 0.22 0 0 0.02  0 0 0.18 0 0.03  0 0 0 1 0"
+          ></feColorMatrix>
+        </filter>
+      </defs>
+      <g class="svg-spin">
+        <circle
+          class="comet-glow comet-trim"
+          cx="60"
+          cy="60"
+          r="34"
+          pathLength="100"
+          stroke="url(#prototype-core-comet-trail)"
+          filter="url(#prototype-core-comet-glow)"
+        ></circle>
+        <circle
+          class="comet-stroke comet-trim"
+          cx="60"
+          cy="60"
+          r="34"
+          pathLength="100"
+          stroke="url(#prototype-core-comet-trail)"
+        ></circle>
+      </g>
+    </svg>
+  
+      </div>
+    </div>
+    </div>

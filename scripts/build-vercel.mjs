@@ -5,7 +5,14 @@ import { fileURLToPath } from "node:url";
 
 const root = dirname(fileURLToPath(new URL("../package.json", import.meta.url)));
 const output = join(root, "public");
-const staticEntries = ["index.html", "app.js", "styles.css", "splash-animation.html", "assets"];
+const staticEntries = [
+  "index.html",
+  "app.js",
+  "styles.css",
+  "splash-animation.html",
+  "assets",
+  "mobile-handoff",
+];
 
 await rm(output, { recursive: true, force: true });
 await mkdir(output, { recursive: true });

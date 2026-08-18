@@ -8,7 +8,14 @@ const dist = join(root, "dist");
 const client = join(dist, "client");
 const server = join(dist, "server");
 
-const staticEntries = ["index.html", "app.js", "styles.css", "splash-animation.html", "assets"];
+const staticEntries = [
+  "index.html",
+  "app.js",
+  "styles.css",
+  "splash-animation.html",
+  "assets",
+  "mobile-handoff",
+];
 
 const workerSource = `
 const cacheableExtensions = new Set([
@@ -16,7 +23,10 @@ const cacheableExtensions = new Set([
   ".js",
   ".json",
   ".lottie",
+  ".mov",
+  ".mp4",
   ".png",
+  ".webm",
   ".webp",
   ".woff2",
 ]);

@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en" data-prototype-theme="dark" data-animation-mode="only">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blob capsule</title>
+    <link rel="stylesheet" href="../../../reference/shared/styles.css">
+    <style>
+      :root { color-scheme: dark; }
+
+      body {
+        min-height: 100vh;
+        margin: 0;
+        display: grid;
+        place-items: center;
+        background: #080907;
+      }
+
+      .export-preview-shell {
+        width: min(720px, 100vw);
+        min-height: min(720px, 100vh);
+        display: grid;
+        place-items: center;
+        overflow: visible;
+      }
+
+      .export-preview-shell .stage-band {
+        width: min(620px, 96vw);
+        min-height: min(620px, 96vh);
+        overflow: visible;
+      }
+
+      .export-preview-shell[data-preview-motion-source="identity-bust-focus"] {
+        min-height: min(760px, 100vh);
+      }
+
+      .export-preview-shell[data-preview-motion-source="identity-bust-focus"] .stage-band {
+        min-height: min(700px, 96vh);
+      }
+
+      /* Code-entry mockups size themselves from the viewport (calc(100vw - 96px)).
+         Inside a narrow preview frame that squeezes six 56px-tall cells into a
+         fraction of their width, so they render as tall pills instead of cells.
+         Pin them to the design width and scale the whole scene down instead. */
+      .export-preview-shell .animation-only-otp.alty-mockup-prototype,
+      .export-preview-shell .animation-only-securepass.alty-mockup-prototype,
+      .export-preview-shell .animation-only-otp-slot {
+        width: 361px;
+        max-width: none;
+      }
+
+      @media (max-width: 460px) {
+        .export-preview-shell .animation-only-otp.alty-mockup-prototype,
+        .export-preview-shell .animation-only-securepass.alty-mockup-prototype {
+          transform: scale(0.62);
+          transform-origin: 50% 50%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app-shell export-preview-shell" data-prototype-theme="dark" data-animation-mode="only" data-preview-motion-source="pull-to-refresh-blob-capsule">
+      <section class="stage-band" data-animation-only-page="transaction-history-pull-refresh">
+        <div class="animation-only-motion-slot animation-only-motion-pull" data-motion-source="pull-to-refresh-blob-capsule" aria-hidden="true">
+              <div class="prototype-motion-render">
+            <div class="prototype-refresh-gesture ptr-blob-capsule" aria-hidden="true">
+              <div class="ptr-capsule">
+        
+            <span class="ptr-blob-field">
+              <span class="ptr-blob ptr-blob-main"></span>
+              <span class="ptr-blob ptr-blob-red"></span>
+              <span class="ptr-blob ptr-blob-yellow"></span>
+            </span>
+  
+                <span class="ptr-indicator"></span>
+        
+            <svg class="ptr-success-check" viewBox="0 0 40 40" aria-hidden="true">
+              <path d="M11 21 L18 28 L30 13"></path>
+            </svg>
+  
+              </div>
+            </div>
+          </div>
+            </div>
+      </section>
+    </div>
+    <script src="../../../reference/shared/assets/lottie-svg.min.js"></script>
+    <script src="../../../reference/shared/assets/confetti-lottie-data.js"></script>
+    <script src="../../../reference/shared/assets/uba-spinner-data.js"></script>
+    <script src="../../../reference/shared/preview-runtime.js"></script>
+  </body>
+</html>

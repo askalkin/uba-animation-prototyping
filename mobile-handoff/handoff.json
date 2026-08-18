@@ -1,0 +1,1021 @@
+{
+  "generated": "2026-08-17",
+  "count": 25,
+  "statusMeanings": {
+    "ready": "Motion converts 1:1. Deliverable is an animation file.",
+    "ready-with-asset": "Same, plus a raster image must ship alongside at @2x/@3x.",
+    "decision-needed": "Blocked on a design decision.",
+    "engineering": "Not deliverable as an animation file; built in app code."
+  },
+  "playbackKinds": {
+    "loop": "Repeats until stopped. cycleMs is one revolution, not a wait time.",
+    "one-shot": "Plays once and holds. totalMs is real time the user waits.",
+    "sequence": "enterMs, then settleMs, then loops at cycleMs.",
+    "gesture": "Progress is driven by drag distance, not a clock.",
+    "event": "States are triggered by app events.",
+    "screen-transition": "Runs once as a screen transition."
+  },
+  "animations": [
+    {
+      "slug": "progressive-blur-spinner-solo",
+      "title": "Red comet arc",
+      "group": "Core spinners",
+      "status": "ready",
+      "targetFormat": "Lottie",
+      "playback": {
+        "kind": "loop",
+        "mode": "loop",
+        "cycleMs": 2350,
+        "source": "measured from web source"
+      },
+      "files": {
+        "bundle": [],
+        "preview": "animations/progressive-blur-spinner-solo/reference/preview.html",
+        "source": "animations/progressive-blur-spinner-solo/reference/source.html",
+        "spec": "animations/progressive-blur-spinner-solo/README.md"
+      },
+      "requiredImages": [],
+      "slots": [
+        {
+          "key": "almost",
+          "label": "Almost there onboarding screen",
+          "candidates": [
+            "progressive-blur-spinner-solo",
+            "uba-spinner-1",
+            "uba-icon-loop",
+            "uba-card-rotation",
+            "uba-coin-flip"
+          ],
+          "page": "account-opening-almost-there",
+          "index": 0
+        }
+      ],
+      "blockers": [],
+      "decision": "",
+      "durationReview": "",
+      "detailedSpec": ""
+    },
+    {
+      "slug": "uba-spinner-1",
+      "title": "UBA spinner 1",
+      "group": "Core spinners",
+      "status": "ready",
+      "targetFormat": "Lottie",
+      "playback": {
+        "kind": "loop",
+        "mode": "ping-pong",
+        "passMs": 5000,
+        "cycleMs": 10000,
+        "source": "file is ip 0 -> op 500 @ 100fps = one 5s forward pass"
+      },
+      "files": {
+        "bundle": [],
+        "preview": "animations/uba-spinner-1/reference/preview.html",
+        "source": "animations/uba-spinner-1/reference/source.html",
+        "spec": "animations/uba-spinner-1/README.md"
+      },
+      "requiredImages": [],
+      "slots": [
+        {
+          "key": "almost",
+          "label": "Almost there onboarding screen",
+          "candidates": [
+            "progressive-blur-spinner-solo",
+            "uba-spinner-1",
+            "uba-icon-loop",
+            "uba-card-rotation",
+            "uba-coin-flip"
+          ],
+          "page": "account-opening-almost-there",
+          "index": 1
+        }
+      ],
+      "blockers": [],
+      "decision": "",
+      "durationReview": "Cycle is 5000ms. System spinners cycle in roughly 1s; at this tempo the loader can read as stalled rather than working.",
+      "detailedSpec": ""
+    },
+    {
+      "slug": "uba-icon-loop",
+      "title": "Banking icons loader",
+      "group": "Core spinners",
+      "status": "ready",
+      "targetFormat": "Lottie",
+      "playback": {
+        "kind": "loop",
+        "mode": "loop",
+        "cycleMs": 15000,
+        "perIconMs": 2500,
+        "source": "sequence lives in preview-runtime.js, not in CSS"
+      },
+      "files": {
+        "bundle": [],
+        "preview": "animations/uba-icon-loop/reference/preview.html",
+        "source": "animations/uba-icon-loop/reference/source.html",
+        "spec": "animations/uba-icon-loop/README.md"
+      },
+      "requiredImages": [],
+      "slots": [
+        {
+          "key": "almost",
+          "label": "Almost there onboarding screen",
+          "candidates": [
+            "progressive-blur-spinner-solo",
+            "uba-spinner-1",
+            "uba-icon-loop",
+            "uba-card-rotation",
+            "uba-coin-flip"
+          ],
+          "page": "account-opening-almost-there",
+          "index": 2
+        }
+      ],
+      "blockers": [],
+      "decision": "",
+      "durationReview": "",
+      "detailedSpec": ""
+    },
+    {
+      "slug": "uba-card-rotation",
+      "title": "Card rotation",
+      "group": "Core spinners",
+      "status": "ready",
+      "targetFormat": "alpha video",
+      "playback": {
+        "kind": "loop",
+        "mode": "loop",
+        "cycleMs": 5800
+      },
+      "files": {
+        "bundle": [
+          "animations/uba-card-rotation/assets/video/uba-card-rotation-dark-android-vp9-alpha.webm",
+          "animations/uba-card-rotation/assets/video/uba-card-rotation-dark-ios-hevc-alpha.mov",
+          "animations/uba-card-rotation/assets/video/uba-card-rotation-light-android-vp9-alpha.webm",
+          "animations/uba-card-rotation/assets/video/uba-card-rotation-light-ios-hevc-alpha.mov"
+        ],
+        "preview": "animations/uba-card-rotation/reference/preview.html",
+        "source": "animations/uba-card-rotation/reference/source.html",
+        "spec": "animations/uba-card-rotation/README.md"
+      },
+      "requiredImages": [],
+      "slots": [
+        {
+          "key": "pending",
+          "label": "Pending account-opening screen",
+          "candidates": [
+            "uba-card-rotation",
+            "uba-coin-flip",
+            "uba-card-rotation-red",
+            "uba-coin-flip-red"
+          ],
+          "page": "",
+          "index": 0
+        },
+        {
+          "key": "almost",
+          "label": "Almost there onboarding screen",
+          "candidates": [
+            "progressive-blur-spinner-solo",
+            "uba-spinner-1",
+            "uba-icon-loop",
+            "uba-card-rotation",
+            "uba-coin-flip"
+          ],
+          "page": "account-opening-almost-there",
+          "index": 3
+        }
+      ],
+      "blockers": [],
+      "decision": "",
+      "durationReview": "",
+      "detailedSpec": ""
+    },
+    {
+      "slug": "uba-coin-flip",
+      "title": "Coin flip",
+      "group": "Core spinners",
+      "status": "ready",
+      "targetFormat": "alpha video",
+      "playback": {
+        "kind": "sequence",
+        "mode": "enter-then-loop",
+        "enterMs": 3000,
+        "settleMs": 3400,
+        "cycleMs": 5400
+      },
+      "files": {
+        "bundle": [
+          "animations/uba-coin-flip/assets/video/uba-coin-flip-dark-android-vp9-alpha.webm",
+          "animations/uba-coin-flip/assets/video/uba-coin-flip-dark-ios-hevc-alpha.mov",
+          "animations/uba-coin-flip/assets/video/uba-coin-flip-light-android-vp9-alpha.webm",
+          "animations/uba-coin-flip/assets/video/uba-coin-flip-light-ios-hevc-alpha.mov"
+        ],
+        "preview": "animations/uba-coin-flip/reference/preview.html",
+        "source": "animations/uba-coin-flip/reference/source.html",
+        "spec": "animations/uba-coin-flip/README.md"
+      },
+      "requiredImages": [],
+      "slots": [
+        {
+          "key": "pending",
+          "label": "Pending account-opening screen",
+          "candidates": [
+            "uba-card-rotation",
+            "uba-coin-flip",
+            "uba-card-rotation-red",
+            "uba-coin-flip-red"
+          ],
+          "page": "",
+          "index": 1
+        },
+        {
+          "key": "almost",
+          "label": "Almost there onboarding screen",
+          "candidates": [
+            "progressive-blur-spinner-solo",
+            "uba-spinner-1",
+            "uba-icon-loop",
+            "uba-card-rotation",
+            "uba-coin-flip"
+          ],
+          "page": "account-opening-almost-there",
+          "index": 4
+        }
+      ],
+      "blockers": [],
+      "decision": "",
+      "durationReview": "",
+      "detailedSpec": ""
+    },
+    {
+      "slug": "uba-spinner-1-circle-resolve-green",
+      "title": "Green check spinner",
+      "group": "Standard feedback",
+      "status": "ready",
+      "targetFormat": "Lottie",
+      "playback": {
+        "kind": "one-shot",
+        "mode": "play-once-hold",
+        "totalMs": 5000,
+        "source": "same uba-spinner-1.json, driven in 'circle-resolve' mode: one forward pass over 5000ms, then hold the last frame"
+      },
+      "files": {
+        "bundle": [],
+        "preview": "animations/uba-spinner-1-circle-resolve-green/reference/preview.html",
+        "source": "animations/uba-spinner-1-circle-resolve-green/reference/source.html",
+        "spec": "animations/uba-spinner-1-circle-resolve-green/README.md"
+      },
+      "requiredImages": [],
+      "slots": [
+        {
+          "key": "core-spinner-02",
+          "label": "Standard success feedback, shown without a screen",
+          "candidates": [
+            "uba-spinner-1-circle-resolve-green",
+            "verification-badge-green",
+            "success-spinner-green"
+          ],
+          "page": "",
+          "index": 0
+        },
+        {
+          "key": "",
+          "label": "",
+          "candidates": [
+            "uba-spinner-1-circle-resolve-green"
+          ],
+          "page": "core-spinners-02",
+          "index": 0
+        }
+      ],
+      "blockers": [],
+      "decision": "",
+      "durationReview": "Source runs 5000ms. A success/error mark is usually 800-1200ms; this was paced for gallery viewing. Recommend shortening.",
+      "detailedSpec": ""
+    },
+    {
+      "slug": "verification-badge-green",
+      "title": "Green verification badge",
+      "group": "Standard feedback",
+      "status": "ready",
+      "targetFormat": "Lottie",
+      "playback": {
+        "kind": "one-shot",
+        "mode": "play-once-hold",
+        "totalMs": 3200,
+        "source": "measured from web source"
+      },
+      "files": {
+        "bundle": [],
+        "preview": "animations/verification-badge-green/reference/preview.html",
+        "source": "animations/verification-badge-green/reference/source.html",
+        "spec": "animations/verification-badge-green/README.md"
+      },
+      "requiredImages": [],
+      "slots": [
+        {
+          "key": "core-spinner-02",
+          "label": "Standard success feedback, shown without a screen",
+          "candidates": [
+            "uba-spinner-1-circle-resolve-green",
+            "verification-badge-green",
+            "success-spinner-green"
+          ],
+          "page": "",
+          "index": 1
+        },
+        {
+          "key": "",
+          "label": "",
+          "candidates": [
+            "verification-badge-green"
+          ],
+          "page": "core-spinners-02",
+          "index": 0
+        }
+      ],
+      "blockers": [],
+      "decision": "",
+      "durationReview": "Source runs 3200ms. A success/error mark is usually 800-1200ms; this was paced for gallery viewing. Recommend shortening.",
+      "detailedSpec": ""
+    },
+    {
+      "slug": "success-spinner-green",
+      "title": "Green fill to check",
+      "group": "Standard feedback",
+      "status": "ready",
+      "targetFormat": "Lottie",
+      "playback": {
+        "kind": "one-shot",
+        "mode": "play-once-hold",
+        "totalMs": 3364,
+        "source": "measured from web source"
+      },
+      "files": {
+        "bundle": [],
+        "preview": "animations/success-spinner-green/reference/preview.html",
+        "source": "animations/success-spinner-green/reference/source.html",
+        "spec": "animations/success-spinner-green/README.md"
+      },
+      "requiredImages": [],
+      "slots": [
+        {
+          "key": "core-spinner-02",
+          "label": "Standard success feedback, shown without a screen",
+          "candidates": [
+            "uba-spinner-1-circle-resolve-green",
+            "verification-badge-green",
+            "success-spinner-green"
+          ],
+          "page": "",
+          "index": 2
+        },
+        {
+          "key": "",
+          "label": "",
+          "candidates": [
+            "success-spinner-green"
+          ],
+          "page": "core-spinners-02",
+          "index": 0
+        }
+      ],
+      "blockers": [],
+      "decision": "",
+      "durationReview": "Source runs 3364ms. A success/error mark is usually 800-1200ms; this was paced for gallery viewing. Recommend shortening.",
+      "detailedSpec": ""
+    },
+    {
+      "slug": "uba-spinner-1-circle-resolve-error",
+      "title": "Red X spinner",
+      "group": "Standard feedback",
+      "status": "ready",
+      "targetFormat": "Lottie",
+      "playback": {
+        "kind": "one-shot",
+        "mode": "play-once-hold",
+        "totalMs": 5000,
+        "source": "same uba-spinner-1.json, driven in 'circle-resolve' mode: one forward pass over 5000ms, then hold the last frame"
+      },
+      "files": {
+        "bundle": [],
+        "preview": "animations/uba-spinner-1-circle-resolve-error/reference/preview.html",
+        "source": "animations/uba-spinner-1-circle-resolve-error/reference/source.html",
+        "spec": "animations/uba-spinner-1-circle-resolve-error/README.md"
+      },
+      "requiredImages": [],
+      "slots": [
+        {
+          "key": "failed",
+          "label": "Could not load results screen",
+          "candidates": [
+            "uba-spinner-1-circle-resolve-error",
+            "failure-wheel-red",
+            "failure-verification-badge"
+          ],
+          "page": "couldnt-load-results",
+          "index": 0
+        }
+      ],
+      "blockers": [],
+      "decision": "",
+      "durationReview": "Source runs 5000ms. A success/error mark is usually 800-1200ms; this was paced for gallery viewing. Recommend shortening.",
+      "detailedSpec": ""
+    },
+    {
+      "slug": "failure-wheel-red",
+      "title": "Red fill to X",
+      "group": "Standard feedback",
+      "status": "ready",
+      "targetFormat": "Lottie",
+      "playback": {
+        "kind": "one-shot",
+        "mode": "play-once-hold",
+        "totalMs": 3364,
+        "source": "measured from web source"
+      },
+      "files": {
+        "bundle": [],
+        "preview": "animations/failure-wheel-red/reference/preview.html",
+        "source": "animations/failure-wheel-red/reference/source.html",
+        "spec": "animations/failure-wheel-red/README.md"
+      },
+      "requiredImages": [],
+      "slots": [
+        {
+          "key": "failed",
+          "label": "Could not load results screen",
+          "candidates": [
+            "uba-spinner-1-circle-resolve-error",
+            "failure-wheel-red",
+            "failure-verification-badge"
+          ],
+          "page": "couldnt-load-results",
+          "index": 1
+        }
+      ],
+      "blockers": [],
+      "decision": "",
+      "durationReview": "Source runs 3364ms. A success/error mark is usually 800-1200ms; this was paced for gallery viewing. Recommend shortening.",
+      "detailedSpec": ""
+    },
+    {
+      "slug": "failure-verification-badge",
+      "title": "Badge fill to X",
+      "group": "Standard feedback",
+      "status": "ready",
+      "targetFormat": "Lottie",
+      "playback": {
+        "kind": "one-shot",
+        "mode": "play-once-hold",
+        "totalMs": 3200,
+        "source": "measured from web source"
+      },
+      "files": {
+        "bundle": [],
+        "preview": "animations/failure-verification-badge/reference/preview.html",
+        "source": "animations/failure-verification-badge/reference/source.html",
+        "spec": "animations/failure-verification-badge/README.md"
+      },
+      "requiredImages": [],
+      "slots": [
+        {
+          "key": "failed",
+          "label": "Could not load results screen",
+          "candidates": [
+            "uba-spinner-1-circle-resolve-error",
+            "failure-wheel-red",
+            "failure-verification-badge"
+          ],
+          "page": "couldnt-load-results",
+          "index": 2
+        }
+      ],
+      "blockers": [],
+      "decision": "",
+      "durationReview": "Source runs 3200ms. A success/error mark is usually 800-1200ms; this was paced for gallery viewing. Recommend shortening.",
+      "detailedSpec": ""
+    },
+    {
+      "slug": "uploaded-success-confetti-green",
+      "title": "Uploaded success confetti green",
+      "group": "Standard feedback",
+      "status": "ready",
+      "targetFormat": "Lottie",
+      "playback": {
+        "kind": "one-shot",
+        "mode": "play-once-hold",
+        "totalMs": 3733
+      },
+      "files": {
+        "bundle": [],
+        "preview": "animations/uploaded-success-confetti-green/reference/preview.html",
+        "source": "animations/uploaded-success-confetti-green/reference/source.html",
+        "spec": "animations/uploaded-success-confetti-green/README.md"
+      },
+      "requiredImages": [],
+      "slots": [
+        {
+          "key": "success",
+          "label": "Successful account-opening screen",
+          "candidates": [
+            "uploaded-success-confetti-green"
+          ],
+          "page": "account-opening-success",
+          "index": 0
+        }
+      ],
+      "blockers": [
+        "The shipped uploaded-confetti.json is NOT the colour you see. The web runtime rewrites every static colour and gradient stop at load time to a green/white palette (green = rgb(34,197,94)), alternating green and white in dark theme and green only in light. Bundle the file as-is and you get the original artwork colours."
+      ],
+      "decision": "",
+      "durationReview": "Source runs 3733ms. A success/error mark is usually 800-1200ms; this was paced for gallery viewing. Recommend shortening.",
+      "detailedSpec": ""
+    },
+    {
+      "slug": "green-success-confetti",
+      "title": "Green check confetti scatter",
+      "group": "Standard feedback",
+      "status": "ready",
+      "targetFormat": "Lottie",
+      "playback": {
+        "kind": "one-shot",
+        "mode": "play-once-hold",
+        "totalMs": 3364,
+        "source": "measured from web source"
+      },
+      "files": {
+        "bundle": [],
+        "preview": "animations/green-success-confetti/reference/preview.html",
+        "source": "animations/green-success-confetti/reference/source.html",
+        "spec": "animations/green-success-confetti/README.md"
+      },
+      "requiredImages": [],
+      "slots": [
+        {
+          "key": "",
+          "label": "",
+          "candidates": [
+            "green-success-confetti"
+          ],
+          "page": "core-spinners-02",
+          "index": 0
+        }
+      ],
+      "blockers": [],
+      "decision": "",
+      "durationReview": "Source runs 3364ms. A success/error mark is usually 800-1200ms; this was paced for gallery viewing. Recommend shortening.",
+      "detailedSpec": ""
+    },
+    {
+      "slug": "green-success-stars",
+      "title": "Green check star sprinkle",
+      "group": "Standard feedback",
+      "status": "ready",
+      "targetFormat": "Lottie",
+      "playback": {
+        "kind": "one-shot",
+        "mode": "play-once-hold",
+        "totalMs": 3364,
+        "source": "measured from web source"
+      },
+      "files": {
+        "bundle": [],
+        "preview": "animations/green-success-stars/reference/preview.html",
+        "source": "animations/green-success-stars/reference/source.html",
+        "spec": "animations/green-success-stars/README.md"
+      },
+      "requiredImages": [],
+      "slots": [
+        {
+          "key": "",
+          "label": "",
+          "candidates": [
+            "green-success-stars"
+          ],
+          "page": "core-spinners-02",
+          "index": 0
+        }
+      ],
+      "blockers": [],
+      "decision": "",
+      "durationReview": "Source runs 3364ms. A success/error mark is usually 800-1200ms; this was paced for gallery viewing. Recommend shortening.",
+      "detailedSpec": ""
+    },
+    {
+      "slug": "pull-to-refresh-blob-capsule",
+      "title": "Blob capsule",
+      "group": "Pull to refresh",
+      "status": "engineering",
+      "targetFormat": "Rive state machine",
+      "playback": {
+        "kind": "gesture",
+        "mode": "driven-by-drag-distance"
+      },
+      "files": {
+        "bundle": [],
+        "preview": "animations/pull-to-refresh-blob-capsule/reference/preview.html",
+        "source": "animations/pull-to-refresh-blob-capsule/reference/source.html",
+        "spec": "animations/pull-to-refresh-blob-capsule/README.md"
+      },
+      "requiredImages": [],
+      "slots": [
+        {
+          "key": "pull",
+          "label": "Pull-to-refresh transaction history screen",
+          "candidates": [
+            "pull-to-refresh-blob-capsule",
+            "pull-to-refresh-line-fill",
+            "pull-to-refresh-line-fill-red"
+          ],
+          "page": "transaction-history-pull-refresh",
+          "index": 0
+        }
+      ],
+      "blockers": [
+        "Progress is tied to pull distance, not a timeline.",
+        "9 keyframes animate blur (1-16px) in the capsule dissolve."
+      ],
+      "decision": "",
+      "durationReview": "",
+      "detailedSpec": ""
+    },
+    {
+      "slug": "pull-to-refresh-line-fill",
+      "title": "Line fill",
+      "group": "Pull to refresh",
+      "status": "engineering",
+      "targetFormat": "Rive state machine",
+      "playback": {
+        "kind": "gesture",
+        "mode": "driven-by-drag-distance"
+      },
+      "files": {
+        "bundle": [],
+        "preview": "animations/pull-to-refresh-line-fill/reference/preview.html",
+        "source": "animations/pull-to-refresh-line-fill/reference/source.html",
+        "spec": "animations/pull-to-refresh-line-fill/README.md"
+      },
+      "requiredImages": [],
+      "slots": [
+        {
+          "key": "pull",
+          "label": "Pull-to-refresh transaction history screen",
+          "candidates": [
+            "pull-to-refresh-blob-capsule",
+            "pull-to-refresh-line-fill",
+            "pull-to-refresh-line-fill-red"
+          ],
+          "page": "transaction-history-pull-refresh",
+          "index": 1
+        }
+      ],
+      "blockers": [
+        "Gesture-driven.",
+        "6 keyframes animate blur (1-8px)."
+      ],
+      "decision": "",
+      "durationReview": "",
+      "detailedSpec": ""
+    },
+    {
+      "slug": "pull-to-refresh-line-fill-red",
+      "title": "Line fill red",
+      "group": "Pull to refresh",
+      "status": "engineering",
+      "targetFormat": "Rive state machine",
+      "playback": {
+        "kind": "gesture",
+        "mode": "driven-by-drag-distance"
+      },
+      "files": {
+        "bundle": [],
+        "preview": "animations/pull-to-refresh-line-fill-red/reference/preview.html",
+        "source": "animations/pull-to-refresh-line-fill-red/reference/source.html",
+        "spec": "animations/pull-to-refresh-line-fill-red/README.md"
+      },
+      "requiredImages": [],
+      "slots": [
+        {
+          "key": "pull",
+          "label": "Pull-to-refresh transaction history screen",
+          "candidates": [
+            "pull-to-refresh-blob-capsule",
+            "pull-to-refresh-line-fill",
+            "pull-to-refresh-line-fill-red"
+          ],
+          "page": "transaction-history-pull-refresh",
+          "index": 2
+        }
+      ],
+      "blockers": [
+        "Gesture-driven.",
+        "6 keyframes animate blur (1-8px)."
+      ],
+      "decision": "",
+      "durationReview": "",
+      "detailedSpec": ""
+    },
+    {
+      "slug": "biometric-scanner-device-plain-float",
+      "title": "Scanner float",
+      "group": "Biometrics",
+      "status": "ready-with-asset",
+      "targetFormat": "Lottie + image",
+      "playback": {
+        "kind": "loop",
+        "mode": "loop",
+        "cycleMs": 5600,
+        "source": "measured from web source"
+      },
+      "files": {
+        "bundle": [
+          "animations/biometric-scanner-device-plain-float/assets/images/identity-scanner-device.webp"
+        ],
+        "preview": "animations/biometric-scanner-device-plain-float/reference/preview.html",
+        "source": "animations/biometric-scanner-device-plain-float/reference/source.html",
+        "spec": "animations/biometric-scanner-device-plain-float/README.md"
+      },
+      "requiredImages": [
+        "shared/assets/identity-scanner-device.webp"
+      ],
+      "slots": [
+        {
+          "key": "biometrics",
+          "label": "Enable biometrics onboarding screen",
+          "candidates": [
+            "biometric-scanner-device-plain-float"
+          ],
+          "page": "enable-biometrics",
+          "index": 0
+        }
+      ],
+      "blockers": [],
+      "decision": "",
+      "durationReview": "Cycle is 5600ms. System spinners cycle in roughly 1s; at this tempo the loader can read as stalled rather than working.",
+      "detailedSpec": ""
+    },
+    {
+      "slug": "search-red-magnifier-loader",
+      "title": "Red magnifier",
+      "group": "Search",
+      "status": "ready-with-asset",
+      "targetFormat": "Lottie + image",
+      "playback": {
+        "kind": "loop",
+        "mode": "loop",
+        "cycleMs": 4600,
+        "source": "measured from web source"
+      },
+      "files": {
+        "bundle": [
+          "animations/search-red-magnifier-loader/assets/images/search-magnifier-red.webp"
+        ],
+        "preview": "animations/search-red-magnifier-loader/reference/preview.html",
+        "source": "animations/search-red-magnifier-loader/reference/source.html",
+        "spec": "animations/search-red-magnifier-loader/README.md"
+      },
+      "requiredImages": [
+        "shared/assets/search-magnifier-red.webp"
+      ],
+      "slots": [
+        {
+          "key": "searching",
+          "label": "Searching screen with keyboard",
+          "candidates": [
+            "search-red-magnifier-loader",
+            "search-red-orbit-magnifier"
+          ],
+          "page": "searching-keyboard",
+          "index": 0
+        }
+      ],
+      "blockers": [],
+      "decision": "",
+      "durationReview": "Cycle is 4600ms. System spinners cycle in roughly 1s; at this tempo the loader can read as stalled rather than working.",
+      "detailedSpec": ""
+    },
+    {
+      "slug": "search-red-orbit-magnifier",
+      "title": "Orbit magnifier",
+      "group": "Search",
+      "status": "ready-with-asset",
+      "targetFormat": "Lottie + image",
+      "playback": {
+        "kind": "loop",
+        "mode": "loop",
+        "cycleMs": 9200,
+        "source": "measured from web source"
+      },
+      "files": {
+        "bundle": [
+          "animations/search-red-orbit-magnifier/assets/images/search-magnifier-red.webp"
+        ],
+        "preview": "animations/search-red-orbit-magnifier/reference/preview.html",
+        "source": "animations/search-red-orbit-magnifier/reference/source.html",
+        "spec": "animations/search-red-orbit-magnifier/README.md"
+      },
+      "requiredImages": [
+        "shared/assets/search-magnifier-red.webp"
+      ],
+      "slots": [
+        {
+          "key": "searching",
+          "label": "Searching screen with keyboard",
+          "candidates": [
+            "search-red-magnifier-loader",
+            "search-red-orbit-magnifier"
+          ],
+          "page": "searching-keyboard",
+          "index": 1
+        }
+      ],
+      "blockers": [],
+      "decision": "",
+      "durationReview": "Cycle is 9200ms. System spinners cycle in roughly 1s; at this tempo the loader can read as stalled rather than working.",
+      "detailedSpec": ""
+    },
+    {
+      "slug": "otp-green",
+      "title": "6-digit code green",
+      "group": "Code entry",
+      "status": "engineering",
+      "targetFormat": "native screen",
+      "playback": {
+        "kind": "event",
+        "mode": "state-machine"
+      },
+      "files": {
+        "bundle": [],
+        "preview": "animations/otp-green/reference/preview.html",
+        "source": "animations/otp-green/reference/source.html",
+        "spec": "animations/otp-green/README.md"
+      },
+      "requiredImages": [],
+      "slots": [
+        {
+          "key": "otp",
+          "label": "6-digit verification code login screen",
+          "candidates": [
+            "otp-green"
+          ],
+          "page": "six-digit-code",
+          "index": 0
+        }
+      ],
+      "blockers": [
+        "Live digits in the Fixel typeface cannot live in an animation file."
+      ],
+      "decision": "",
+      "durationReview": "",
+      "detailedSpec": "docs/03-code-entry-spec.md"
+    },
+    {
+      "slug": "securepass-green",
+      "title": "SecurePass green",
+      "group": "Code entry",
+      "status": "engineering",
+      "targetFormat": "native screen",
+      "playback": {
+        "kind": "event",
+        "mode": "state-machine"
+      },
+      "files": {
+        "bundle": [],
+        "preview": "animations/securepass-green/reference/preview.html",
+        "source": "animations/securepass-green/reference/source.html",
+        "spec": "animations/securepass-green/README.md"
+      },
+      "requiredImages": [],
+      "slots": [
+        {
+          "key": "securepass",
+          "label": "Verify with SecurePass screen with empty 6-digit code entry and numeric keyboard",
+          "candidates": [
+            "securepass-green"
+          ],
+          "page": "verify-securepass",
+          "index": 0
+        }
+      ],
+      "blockers": [
+        "Live digits in the Fixel typeface cannot live in an animation file."
+      ],
+      "decision": "",
+      "durationReview": "",
+      "detailedSpec": "docs/03-code-entry-spec.md"
+    },
+    {
+      "slug": "otp-error",
+      "title": "Code error",
+      "group": "Code entry",
+      "status": "engineering",
+      "targetFormat": "native screen",
+      "playback": {
+        "kind": "event",
+        "mode": "state-machine"
+      },
+      "files": {
+        "bundle": [],
+        "preview": "animations/otp-error/reference/preview.html",
+        "source": "animations/otp-error/reference/source.html",
+        "spec": "animations/otp-error/README.md"
+      },
+      "requiredImages": [],
+      "slots": [
+        {
+          "key": "",
+          "label": "",
+          "candidates": [
+            "otp-error"
+          ],
+          "page": "code-error",
+          "index": 0
+        }
+      ],
+      "blockers": [
+        "Live digits in the Fixel typeface cannot live in an animation file."
+      ],
+      "decision": "",
+      "durationReview": "",
+      "detailedSpec": "docs/03-code-entry-spec.md"
+    },
+    {
+      "slug": "identity-bust-focus",
+      "title": "User focus scan",
+      "group": "Identity verification",
+      "status": "ready-with-asset",
+      "targetFormat": "Lottie + image",
+      "playback": {
+        "kind": "loop",
+        "mode": "loop",
+        "cycleMs": 5200
+      },
+      "files": {
+        "bundle": [
+          "animations/identity-bust-focus/assets/images/identity-user-bust-red.webp",
+          "animations/identity-bust-focus/assets/images/identity-user-bust.webp"
+        ],
+        "preview": "animations/identity-bust-focus/reference/preview.html",
+        "source": "animations/identity-bust-focus/reference/source.html",
+        "spec": "animations/identity-bust-focus/README.md"
+      },
+      "requiredImages": [
+        "shared/assets/identity-user-bust.webp",
+        "shared/assets/identity-user-bust-red.webp"
+      ],
+      "slots": [
+        {
+          "key": "identity",
+          "label": "Identity verification onboarding screen",
+          "candidates": [
+            "identity-bust-focus"
+          ],
+          "page": "identity-verification",
+          "index": 0
+        }
+      ],
+      "blockers": [],
+      "decision": "",
+      "durationReview": "Cycle is 5200ms. System spinners cycle in roughly 1s; at this tempo the loader can read as stalled rather than working.",
+      "detailedSpec": ""
+    },
+    {
+      "slug": "uba-loader-gradient-blob-prototype",
+      "title": "UBA gradient blob transition",
+      "group": "Page transitions",
+      "status": "engineering",
+      "targetFormat": "native transition",
+      "playback": {
+        "kind": "screen-transition",
+        "mode": "one-shot"
+      },
+      "files": {
+        "bundle": [],
+        "preview": "animations/uba-loader-gradient-blob-prototype/reference/preview.html",
+        "source": "animations/uba-loader-gradient-blob-prototype/reference/source.html",
+        "spec": "animations/uba-loader-gradient-blob-prototype/README.md"
+      },
+      "requiredImages": [],
+      "slots": [
+        {
+          "key": "",
+          "label": "",
+          "candidates": [
+            "uba-loader-gradient-blob-prototype"
+          ],
+          "page": "uba-loader-gradient-blob-prototype",
+          "index": 0
+        }
+      ],
+      "blockers": [
+        "The only remaining animation using backdrop-filter (18px, 5px, plus a 0->20px keyframe). No animation format samples what is behind it.",
+        "Animates a full-screen blur 18->64px.",
+        "Animates the app UI itself, not a standalone graphic."
+      ],
+      "decision": "Blob render cost: the 56px and 64px steps happen at 8% and 0% opacity. Capping the ramp at 42px is visually free.",
+      "durationReview": "",
+      "detailedSpec": ""
+    }
+  ]
+}
