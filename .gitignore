@@ -7,4 +7,5 @@ dist/
 public/
 mobile-animation-export/
 mobile-handoff.zip
-_to_delete/
+_to_delete*/
+*.bak
