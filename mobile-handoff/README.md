@@ -2,11 +2,12 @@
 
 Everything the iOS and Android teams need to build the UBA animation set.
 
-**26 animations** · web sources exported 2026-08-17
+**27 animations** · web sources exported 2026-08-17
 
 - **Ready** — 14
 - **Built in app code** — 7
 - **Ready + image** — 5
+- **Needs a decision** — 1
 
 ## Open this first
 
@@ -76,6 +77,7 @@ reference/shared/      shared CSS, runtime, fonts, images
 
 | Animation | Group | Status | Target format |
 |---|---|---|---|
+| [Splash lockup reveal](animations/uba-splash-reveal/) | Splash | Needs a decision | undecided |
 | [Red comet arc](animations/progressive-blur-spinner-solo/) | Core spinners | Ready | Lottie |
 | [UBA spinner 1](animations/uba-spinner-1/) | Core spinners | Ready | Lottie |
 | [Banking icons loader](animations/uba-icon-loop/) | Core spinners | Ready | Lottie |

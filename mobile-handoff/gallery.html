@@ -202,6 +202,22 @@
 </header>
 
 <main>
+    <section class="group" data-group="Splash">
+      <h2>Splash</h2>
+      <div class="grid">
+        <figure class="card" data-status="decision-needed" data-slug="uba-splash-reveal">
+          <div class="frame" data-src="animations/uba-splash-reveal/reference/preview.html">
+            <span class="badge b-decision-needed">Needs a decision</span>
+            <button class="replay" title="Replay">&#8635;</button>
+          </div>
+          <figcaption>
+            <strong>Splash lockup reveal</strong>
+            <span class="meta">undecided</span>
+            <button class="spec-btn">Go to specs</button>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
     <section class="group" data-group="Core spinners">
       <h2>Core spinners</h2>
       <div class="grid">
@@ -553,6 +569,38 @@
 
 <script>
 const DATA = {
+ "uba-splash-reveal": {
+  "title": "Splash lockup reveal",
+  "group": "Splash",
+  "status": "decision-needed",
+  "statusLabel": "Needs a decision",
+  "format": "undecided",
+  "playback": "one-shot, `play-once-hold`, total 5260ms",
+  "delivered": [],
+  "images": [],
+  "blockers": [],
+  "decision": "",
+  "durationReview": "",
+  "verified": "",
+  "notes": "Built from the approved Figma spec (node 273:3201), pixel-exact. Pure CSS: percentage keyframes over one shared 5260ms animation-duration per element, no JS state machine, so it converts cleanly to a Lottie/Rive timeline. Target format is the open question: Lottie can do the stroke-draw and fill via shape trims but the two clip-path line-wipes and the exit collapse need rebuilding as mask/position keyframes; Rive would model the five-phase sequence more directly and suits it if the app needs to react to phase boundaries (e.g. timing a data fetch against the reveal); native is straightforward given the geometry is fully specified below and there is no gesture or live-text dependency.",
+  "spec": "",
+  "todo": "No exported file has been delivered yet \u2014 expect a Lottie <code>.json</code> from motion design. When it arrives, check it against <code>reference/preview.html</code> at the same size and duration before merging, paying attention to the loop seam.",
+  "howToPlay": "Play once and hold the final frame. Total 5260ms.",
+  "prototypes": [
+   "uba-splash-reveal"
+  ],
+  "slots": [
+   {
+    "key": "",
+    "label": "",
+    "candidates": [
+     "uba-splash-reveal"
+    ],
+    "page": "uba-splash-reveal",
+    "index": 0
+   }
+  ]
+ },
  "progressive-blur-spinner-solo": {
   "title": "Red comet arc",
   "group": "Core spinners",

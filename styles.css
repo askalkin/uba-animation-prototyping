@@ -13189,85 +13189,244 @@ img.alty-identity-bust-image {
   background: #d51709;
   --mock-text: #ffffff;
   --mock-phone-outline: rgba(255, 255, 255, 0.16);
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
-.uba-splash-canvas {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+/* ==========================================================================
+   Splash lockup reveal (uba-splash-reveal)
+   App-launch splash: UBA + subtitle line-wipe reveal, UBA slides left to sit
+   flush with the subtitle, the graphic mark draws in and fills, then both
+   halves collapse toward a shared centerline and disappear. Plays once and
+   holds on the empty frame — this is a launch splash, not a loop.
+
+   Geometry matches the Figma source (node 273:3201) exactly: a 220x106.05
+   logo group, horizontally centered, pinned at top:326px in a 390x844 frame
+   (not vertical-centered). See docs/animation-status.json and
+   mobile-handoff/animations/uba-splash-reveal/README.md for the full spec.
+
+   Total timeline: 5260ms, expressed below as percentages of that duration so
+   every element runs off one shared `animation-duration`. Absolute phase
+   boundaries (ms): reveal 60-810, align 1010-1560, draw 1760-2710,
+   fill 2860-3240, exit 3890-4510, then holds through 5260.
+   ========================================================================== */
+
+.uba-splash-brand {
+  position: absolute;
+  left: 50%;
+  top: 326px;
+  transform: translateX(-50%);
+  width: 220px;
+  height: 106.05px;
+}
+
+.uba-splash-top-mask {
+  /* Bottom edge is the fixed centerline (83.114px down) that
+     .uba-splash-bottom-mask continues from - that edge must stay put. Top
+     and right are padded 5px beyond the group's own bounds purely so the
+     icon's stroke-width overshoot (it sits flush against both those edges)
+     has clearance instead of being clipped; nothing visible lives in that
+     5px. */
+  position: absolute;
+  left: 0;
+  top: -5px;
+  width: 225px;
+  height: 88.114px;
+  overflow: hidden;
+}
+
+.uba-splash-bottom-mask {
+  position: absolute;
+  left: 0;
+  top: 83.114px;
+  width: 220px;
+  height: 22.936px;
+  overflow: hidden;
+}
+
+.uba-splash-top-row {
+  /* Re-establishes the group's own (0,0) origin inside the padded
+     .uba-splash-top-mask, so icon-slot/row1-wrap below can use the Figma
+     numbers directly without re-deriving them against the padded box. */
+  position: absolute;
+  left: 0;
+  top: 5px;
+  width: 220px;
+  height: 83.114px;
+  will-change: transform;
+  animation: uba-splash-top-exit 5260ms linear infinite;
+}
+
+/* ---------- graphic mark ---------- */
+/* Right-flush and top-flush against the group (Figma: right:0, top:0). The
+   svg viewBox is padded 4 units beyond the path geometry's own bounding box
+   so the 2pt stroke never brushes the edge of icon-slot's box (which would
+   get clipped by .uba-splash-top-mask) - the padding is invisible, the
+   glyph itself still lines up exactly with Figma's right/top edges. */
+
+.uba-splash-icon-slot {
+  position: absolute;
+  left: 151.394px;
+  top: -4.246px;
+  width: 72.852px;
+  height: 84.147px;
+}
+
+.uba-splash-icon-svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.uba-splash-icon-stroke {
+  fill: none;
+  stroke: #ffffff;
+  stroke-width: 2;
+  /* The path is closed (M...Z) so the dash pattern's start/end meet at the
+     exact corner chosen as the draw's starting point (bottom-left of the
+     left shape, top-right of the right shape) - with `butt` that seam
+     renders as a flat, blunt cut instead of the rounded join every other
+     corner gets from stroke-linejoin:round; a round cap there blends into
+     the same rounded look instead. */
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  opacity: 0;
+  animation: uba-splash-icon-stroke-draw 5260ms linear infinite;
+}
+
+.uba-splash-icon-fill {
+  fill: #ffffff;
+  stroke: none;
+  opacity: 0;
+  animation: uba-splash-icon-fill-in 5260ms linear infinite;
+}
+
+/* ---------- wordmark ---------- */
+/* row1-wrap is a 206px-wide reference box (matching the subtitle's width)
+   so row1-svg can be centered over it for the initial reveal, then slide to
+   -2px - the Figma-exact final left offset - for "align". */
+
+.uba-splash-row1-wrap {
+  position: absolute;
+  left: 0;
+  top: 25px;
+  width: 206px;
+  height: 51px;
+  clip-path: inset(100% 0 0 0);
+  animation: uba-splash-row1-reveal 5260ms linear infinite;
+}
+
+.uba-splash-row1-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 144px;
+  height: 51px;
+  display: block;
+  will-change: transform;
+  animation: uba-splash-row1-align 5260ms linear infinite;
+}
+
+.uba-splash-row2-wrap {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 206px;
+  height: 15.822px;
+  clip-path: inset(0 0 100% 0);
+  will-change: transform;
+  animation:
+    uba-splash-row1-reveal 5260ms linear infinite,
+    uba-splash-row2-exit 5260ms linear infinite;
+}
+
+.uba-splash-row2-svg {
+  display: block;
   width: 100%;
   height: 100%;
 }
 
-.uba-splash-logo {
-  width: 240px;
-  height: auto;
-  display: block;
-  overflow: visible;
-}
-
-.uba-splash-row1,
-.uba-splash-row2 {
-  transform-box: fill-box;
-  transform-origin: 50% 50%;
-  will-change: opacity, filter, transform;
-}
-
-.uba-splash-row1 {
-  animation: uba-splash-row1-cycle 4.2s infinite;
-}
-
-.uba-splash-row2 {
-  animation: uba-splash-row2-cycle 4.2s infinite;
-}
-
-@keyframes uba-splash-row1-cycle {
+@keyframes uba-splash-row1-reveal {
   0%,
-  6% {
-    opacity: 0;
-    filter: blur(22px);
-    transform: translateY(14px) scale(0.9);
+  1.1407% {
+    clip-path: inset(100% 0 0 0);
     animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
   }
-  27%,
-  69% {
-    opacity: 1;
-    filter: blur(0);
-    transform: translateY(0) scale(1);
-    animation-timing-function: cubic-bezier(0.4, 0, 1, 1);
-  }
-  81%,
+  15.3992%,
   100% {
-    opacity: 0;
-    filter: blur(22px);
-    transform: translateY(14px) scale(0.9);
+    clip-path: inset(0 0 0 0);
   }
 }
 
-@keyframes uba-splash-row2-cycle {
+@keyframes uba-splash-row1-align {
   0%,
-  13% {
-    opacity: 0;
-    filter: blur(14px);
-    transform: translateY(10px) scale(0.96);
-    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  19.2015% {
+    transform: translateX(31px); /* centered over the 206px-wide row1-wrap: (206 - 144) / 2 */
+    animation-timing-function: cubic-bezier(0.65, 0, 0.35, 1);
   }
-  32%,
-  65% {
-    opacity: 1;
-    filter: blur(0);
-    transform: translateY(0) scale(1);
-    animation-timing-function: cubic-bezier(0.4, 0, 1, 1);
-  }
-  77%,
+  29.6578%,
   100% {
-    opacity: 0;
-    filter: blur(14px);
-    transform: translateY(10px) scale(0.96);
+    transform: translateX(-2px); /* Figma's exact final left offset for UBA */
   }
+}
+
+@keyframes uba-splash-icon-stroke-draw {
+  0%,
+  33.4601% {
+    opacity: 0;
+    stroke-dashoffset: 1;
+    animation-timing-function: cubic-bezier(0.45, 0, 0.15, 1);
+  }
+  51.5209%,
+  100% {
+    opacity: 1;
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes uba-splash-icon-fill-in {
+  0%,
+  54.3726% {
+    opacity: 0;
+    animation-timing-function: ease;
+  }
+  61.597%,
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes uba-splash-top-exit {
+  0%,
+  73.9544% {
+    transform: translateY(0);
+    animation-timing-function: cubic-bezier(0.7, 0, 0.84, 0);
+  }
+  85.7414%,
+  100% {
+    transform: translateY(89.114px); /* clears the 83.114px top mask with margin to spare */
+  }
+}
+
+@keyframes uba-splash-row2-exit {
+  0%,
+  73.9544% {
+    transform: translateY(0);
+    animation-timing-function: cubic-bezier(0.7, 0, 0.84, 0);
+  }
+  85.7414%,
+  100% {
+    transform: translateY(-28.936px); /* clears the 22.936px bottom mask with margin to spare */
+  }
+}
+
+.animation-only-splash-scene {
+  width: min(420px, calc(100vw - 96px));
+  min-height: 860px;
+  display: grid;
+  place-items: center;
+  position: relative;
 }
 
 @keyframes spin {

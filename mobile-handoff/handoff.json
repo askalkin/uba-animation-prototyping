@@ -1,6 +1,6 @@
 {
   "generated": "2026-08-17",
-  "count": 26,
+  "count": 27,
   "statusMeanings": {
     "ready": "Motion converts 1:1. Deliverable is an animation file.",
     "ready-with-asset": "Same, plus a raster image must ship alongside at @2x/@3x.",
@@ -16,6 +16,41 @@
     "screen-transition": "Runs once as a screen transition."
   },
   "animations": [
+    {
+      "slug": "uba-splash-reveal",
+      "title": "Splash lockup reveal",
+      "group": "Splash",
+      "status": "decision-needed",
+      "targetFormat": "undecided",
+      "playback": {
+        "kind": "one-shot",
+        "mode": "play-once-hold",
+        "totalMs": 5260,
+        "source": "measured from web source: 60ms initial delay + 950ms reveal + 750ms align + 1100ms draw + 1030ms fill + 1370ms exit"
+      },
+      "files": {
+        "bundle": [],
+        "preview": "animations/uba-splash-reveal/reference/preview.html",
+        "source": "animations/uba-splash-reveal/reference/source.html",
+        "spec": "animations/uba-splash-reveal/README.md"
+      },
+      "requiredImages": [],
+      "slots": [
+        {
+          "key": "",
+          "label": "",
+          "candidates": [
+            "uba-splash-reveal"
+          ],
+          "page": "uba-splash-reveal",
+          "index": 0
+        }
+      ],
+      "blockers": [],
+      "decision": "",
+      "durationReview": "",
+      "detailedSpec": ""
+    },
     {
       "slug": "progressive-blur-spinner-solo",
       "title": "Red comet arc",
@@ -852,7 +887,7 @@
         "mode": "loop",
         "cycleMs": 3200,
         "activeMs": 1768,
-        "source": "four CSS tracks, all 3.2s infinite \u2014 measured from the web source"
+        "source": "four CSS tracks, all 3.2s infinite — measured from the web source"
       },
       "files": {
         "bundle": [
@@ -878,7 +913,7 @@
       ],
       "blockers": [],
       "decision": "",
-      "durationReview": "Reduced motion is handled specially here: instead of the global fallback that cuts animation to 0.001ms, this scene slows to 9s. Mirror that on device \u2014 <code>UIAccessibility.isReduceMotionEnabled</code> / Android's animator scale \u2014 rather than freezing the bell.",
+      "durationReview": "Reduced motion is handled specially here: instead of the global fallback that cuts animation to 0.001ms, this scene slows to 9s. Mirror that on device — <code>UIAccessibility.isReduceMotionEnabled</code> / Android's animator scale — rather than freezing the bell.",
       "detailedSpec": ""
     },
     {

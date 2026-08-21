@@ -1,0 +1,14 @@
+{
+  "almost": "account-opening-almost-there",
+  "standard-success": "core-spinners-02",
+  "success": "account-opening-success",
+  "pull": "transaction-history-pull-refresh",
+  "failed": "couldnt-load-results",
+  "otp-error": "code-error",
+  "biometrics": "enable-biometrics",
+  "searching": "searching-keyboard",
+  "notification": "notification-bell",
+  "otp": "six-digit-code",
+  "securepass": "verify-securepass",
+  "identity": "identity-verification"
+}

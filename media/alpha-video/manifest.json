@@ -1,0 +1,41 @@
+{
+  "generatedAt": "2026-08-17T18:34:38.336Z",
+  "outputs": [
+    {
+      "animation": "Card rotation",
+      "theme": "dark",
+      "fps": 30,
+      "durationMs": 5800,
+      "dimensions": "420x420",
+      "androidVp9Alpha": "mobile-animation-export/alpha-video-export/uba-card-rotation/uba-card-rotation-dark-android-vp9-alpha.webm",
+      "iosHevcAlpha": "mobile-animation-export/alpha-video-export/uba-card-rotation/uba-card-rotation-dark-ios-hevc-alpha.mov"
+    },
+    {
+      "animation": "Card rotation",
+      "theme": "light",
+      "fps": 30,
+      "durationMs": 5800,
+      "dimensions": "420x420",
+      "androidVp9Alpha": "mobile-animation-export/alpha-video-export/uba-card-rotation/uba-card-rotation-light-android-vp9-alpha.webm",
+      "iosHevcAlpha": "mobile-animation-export/alpha-video-export/uba-card-rotation/uba-card-rotation-light-ios-hevc-alpha.mov"
+    },
+    {
+      "animation": "Coin flip",
+      "theme": "dark",
+      "fps": 30,
+      "durationMs": 5400,
+      "dimensions": "420x420",
+      "androidVp9Alpha": "mobile-animation-export/alpha-video-export/uba-coin-flip/uba-coin-flip-dark-android-vp9-alpha.webm",
+      "iosHevcAlpha": "mobile-animation-export/alpha-video-export/uba-coin-flip/uba-coin-flip-dark-ios-hevc-alpha.mov"
+    },
+    {
+      "animation": "Coin flip",
+      "theme": "light",
+      "fps": 30,
+      "durationMs": 5400,
+      "dimensions": "420x420",
+      "androidVp9Alpha": "mobile-animation-export/alpha-video-export/uba-coin-flip/uba-coin-flip-light-android-vp9-alpha.webm",
+      "iosHevcAlpha": "mobile-animation-export/alpha-video-export/uba-coin-flip/uba-coin-flip-light-ios-hevc-alpha.mov"
+    }
+  ]
+}

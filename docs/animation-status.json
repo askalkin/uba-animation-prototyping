@@ -1,0 +1,429 @@
+{
+  "$comment": "Hand-maintained classification for the mobile handoff. Edited by design/product, consumed by scripts/build-mobile-handoff.py. Durations marked null still need a decision.",
+  "updated": "2026-08-17",
+  "statuses": {
+    "ready": "Motion converts 1:1. Nothing to decide.",
+    "ready-with-asset": "Motion converts 1:1, but a raster image must ship alongside the animation file.",
+    "decision-needed": "Blocked on a design decision (loop period, or 3D approach).",
+    "engineering": "Not deliverable as an animation file. Built in app code."
+  },
+  "animations": [
+    {
+      "slug": "uba-splash-reveal",
+      "status": "decision-needed",
+      "targetFormat": "undecided",
+      "playback": {
+        "kind": "one-shot",
+        "mode": "play-once-hold",
+        "totalMs": 5260,
+        "source": "measured from web source: 60ms initial delay + 950ms reveal + 750ms align + 1100ms draw + 1030ms fill + 1370ms exit"
+      },
+      "notes": "Built from the approved Figma spec (node 273:3201), pixel-exact. Pure CSS: percentage keyframes over one shared 5260ms animation-duration per element, no JS state machine, so it converts cleanly to a Lottie/Rive timeline. Target format is the open question: Lottie can do the stroke-draw and fill via shape trims but the two clip-path line-wipes and the exit collapse need rebuilding as mask/position keyframes; Rive would model the five-phase sequence more directly and suits it if the app needs to react to phase boundaries (e.g. timing a data fetch against the reveal); native is straightforward given the geometry is fully specified below and there is no gesture or live-text dependency.",
+      "geometry": {
+        "group": "220x106.05, horizontally centered, top:326px in a 390x844 frame (not vertical-centered)",
+        "wordmark": "144x51, final position left:-2px top:25px within the group",
+        "subtitle": "206x15.822 (tight glyph height), left:0, bottom-flush in the group",
+        "graphicMark": "~64.36px wide with a 2px stroke, right-flush and top-flush against the group"
+      }
+    },
+    {
+      "slug": "progressive-blur-spinner-solo",
+      "status": "ready",
+      "targetFormat": "Lottie",
+      "playback": {
+        "kind": "loop",
+        "mode": "loop",
+        "cycleMs": 2350,
+        "source": "measured from web source"
+      },
+      "notes": "Static SVG glow on a rotating group. Bake the soft edge into artwork, animate the transform.",
+      "loopPeriods": [
+        1.75,
+        2.35
+      ]
+    },
+    {
+      "slug": "uba-spinner-1",
+      "status": "ready",
+      "targetFormat": "Lottie",
+      "delivered": [
+        "shared/lottie/uba-spinner-1.json"
+      ],
+      "playback": {
+        "kind": "loop",
+        "mode": "ping-pong",
+        "passMs": 5000,
+        "cycleMs": 10000,
+        "source": "file is ip 0 -> op 500 @ 100fps = one 5s forward pass"
+      },
+      "notes": "The delivered .json contains a single 5s forward pass and nothing else. Every playback pattern in this set is applied by the web runtime, which sets the frame manually rather than letting the player run: this scene reverses at the end (ping-pong), while the green-check and red-X scenes play the same file once and hold. Loading the file with default player settings gives a 5s forward loop, which matches none of them.",
+      "durationReview": "Cycle is 5000ms. System spinners cycle in roughly 1s; at this tempo the loader can read as stalled rather than working."
+    },
+    {
+      "slug": "uba-icon-loop",
+      "status": "ready",
+      "targetFormat": "Lottie",
+      "playback": {
+        "kind": "loop",
+        "mode": "loop",
+        "cycleMs": 15000,
+        "perIconMs": 2500,
+        "source": "sequence lives in preview-runtime.js, not in CSS"
+      },
+      "devInstructions": "The whole sequence is JavaScript, not CSS or a file \u2014 six banking icons drawn one at a time with stroke-dash. Per icon: draw 850ms, hold 500ms, erase 850ms, gap 300ms = 2500ms, cycling through all six for a 15s loop. Draw eases on <code>cubic-bezier(0.16, 1, 0.3, 1)</code>, erase on <code>cubic-bezier(0.65, 0, 0.35, 1)</code>. The draw reveals a short leading segment at 12% of the duration so a just-started stroke does not sit as a visible round-cap dot.",
+      "notes": "No exported file yet. Nothing about this timing is recoverable from the CSS."
+    },
+    {
+      "slug": "uba-card-rotation",
+      "status": "ready",
+      "targetFormat": "alpha video",
+      "delivered": [
+        "assets/video/uba-card-rotation-dark-ios-hevc-alpha.mov",
+        "assets/video/uba-card-rotation-dark-android-vp9-alpha.webm",
+        "assets/video/uba-card-rotation-light-ios-hevc-alpha.mov",
+        "assets/video/uba-card-rotation-light-android-vp9-alpha.webm"
+      ],
+      "playback": {
+        "kind": "loop",
+        "mode": "loop",
+        "cycleMs": 5800
+      },
+      "verified": "Alpha channel confirmed. Loop seam measured seamless (0.06x max frame step).",
+      "notes": "True 3D in the web source; delivered as alpha video instead of a 2D fake. 420x420 @ 30fps."
+    },
+    {
+      "slug": "uba-coin-flip",
+      "status": "ready",
+      "targetFormat": "alpha video",
+      "delivered": [
+        "assets/video/uba-coin-flip-dark-ios-hevc-alpha.mov",
+        "assets/video/uba-coin-flip-dark-android-vp9-alpha.webm",
+        "assets/video/uba-coin-flip-light-ios-hevc-alpha.mov",
+        "assets/video/uba-coin-flip-light-android-vp9-alpha.webm"
+      ],
+      "playback": {
+        "kind": "sequence",
+        "mode": "enter-then-loop",
+        "enterMs": 3000,
+        "settleMs": 3400,
+        "cycleMs": 5400
+      },
+      "verified": "Alpha channel confirmed. Loop seam measured seamless (0.01x max frame step).",
+      "notes": "Web source layers float 5.4s against sway 7.2s; the delivered 5.4s clip loops cleanly regardless. Worth one visual check on the sway."
+    },
+    {
+      "slug": "uba-spinner-1-circle-resolve-green",
+      "status": "ready",
+      "targetFormat": "Lottie",
+      "playback": {
+        "kind": "one-shot",
+        "mode": "play-once-hold",
+        "totalMs": 5000,
+        "source": "same uba-spinner-1.json, driven in 'circle-resolve' mode: one forward pass over 5000ms, then hold the last frame"
+      },
+      "durationReview": "Source runs 5000ms. A success/error mark is usually 800-1200ms; this was paced for gallery viewing. Recommend shortening."
+    },
+    {
+      "slug": "verification-badge-green",
+      "status": "ready",
+      "targetFormat": "Lottie",
+      "playback": {
+        "kind": "one-shot",
+        "mode": "play-once-hold",
+        "totalMs": 3200,
+        "source": "measured from web source"
+      },
+      "durationReview": "Source runs 3200ms. A success/error mark is usually 800-1200ms; this was paced for gallery viewing. Recommend shortening."
+    },
+    {
+      "slug": "success-spinner-green",
+      "status": "ready",
+      "targetFormat": "Lottie",
+      "playback": {
+        "kind": "one-shot",
+        "mode": "play-once-hold",
+        "totalMs": 3364,
+        "source": "measured from web source"
+      },
+      "durationReview": "Source runs 3364ms. A success/error mark is usually 800-1200ms; this was paced for gallery viewing. Recommend shortening."
+    },
+    {
+      "slug": "uba-spinner-1-circle-resolve-error",
+      "status": "ready",
+      "targetFormat": "Lottie",
+      "playback": {
+        "kind": "one-shot",
+        "mode": "play-once-hold",
+        "totalMs": 5000,
+        "source": "same uba-spinner-1.json, driven in 'circle-resolve' mode: one forward pass over 5000ms, then hold the last frame"
+      },
+      "durationReview": "Source runs 5000ms. A success/error mark is usually 800-1200ms; this was paced for gallery viewing. Recommend shortening."
+    },
+    {
+      "slug": "failure-wheel-red",
+      "status": "ready",
+      "targetFormat": "Lottie",
+      "playback": {
+        "kind": "one-shot",
+        "mode": "play-once-hold",
+        "totalMs": 3364,
+        "source": "measured from web source"
+      },
+      "loopPeriods": [
+        7.2
+      ],
+      "durationReview": "Source runs 3364ms. A success/error mark is usually 800-1200ms; this was paced for gallery viewing. Recommend shortening."
+    },
+    {
+      "slug": "failure-verification-badge",
+      "status": "ready",
+      "targetFormat": "Lottie",
+      "playback": {
+        "kind": "one-shot",
+        "mode": "play-once-hold",
+        "totalMs": 3200,
+        "source": "measured from web source"
+      },
+      "durationReview": "Source runs 3200ms. A success/error mark is usually 800-1200ms; this was paced for gallery viewing. Recommend shortening.",
+      "notes": "All six of this scene's loops run at 6.4s. An earlier 7.2s flag was otp-error-shake from the code-entry scene, matched through a shared class name."
+    },
+    {
+      "slug": "uploaded-success-confetti-green",
+      "status": "ready",
+      "targetFormat": "Lottie",
+      "delivered": [
+        "shared/lottie/uploaded-confetti.json"
+      ],
+      "playback": {
+        "kind": "one-shot",
+        "mode": "play-once-hold",
+        "totalMs": 3733
+      },
+      "notes": "659KB / 108 layers, authored 1242x2688 @ 30fps. Consider re-authoring to a square artboard before shipping.",
+      "durationReview": "Source runs 3733ms. A success/error mark is usually 800-1200ms; this was paced for gallery viewing. Recommend shortening.",
+      "blockers": [
+        "The shipped uploaded-confetti.json is NOT the colour you see. The web runtime rewrites every static colour and gradient stop at load time to a green/white palette (green = rgb(34,197,94)), alternating green and white in dark theme and green only in light. Bundle the file as-is and you get the original artwork colours."
+      ],
+      "devInstructions": "Do not bundle <code>uploaded-confetti.json</code> unmodified \u2014 its colours are rewritten at runtime in the web prototype. Ask motion design for a re-exported file already in the green/white palette, one per theme, or apply the same colour override on device. Then play it once from frame 30 and hold; it does not loop."
+    },
+    {
+      "slug": "green-success-confetti",
+      "status": "ready",
+      "targetFormat": "Lottie",
+      "playback": {
+        "kind": "one-shot",
+        "mode": "play-once-hold",
+        "totalMs": 3364,
+        "source": "measured from web source"
+      },
+      "notes": "Per-particle scatter values are baked inline in source.html.",
+      "durationReview": "Source runs 3364ms. A success/error mark is usually 800-1200ms; this was paced for gallery viewing. Recommend shortening."
+    },
+    {
+      "slug": "green-success-stars",
+      "status": "ready",
+      "targetFormat": "Lottie",
+      "playback": {
+        "kind": "one-shot",
+        "mode": "play-once-hold",
+        "totalMs": 3364,
+        "source": "measured from web source"
+      },
+      "notes": "Per-particle values are baked inline in source.html.",
+      "durationReview": "Source runs 3364ms. A success/error mark is usually 800-1200ms; this was paced for gallery viewing. Recommend shortening."
+    },
+    {
+      "slug": "pull-to-refresh-blob-capsule",
+      "status": "engineering",
+      "targetFormat": "Rive state machine",
+      "playback": {
+        "kind": "gesture",
+        "mode": "driven-by-drag-distance"
+      },
+      "blockers": [
+        "Progress is tied to pull distance, not a timeline.",
+        "9 keyframes animate blur (1-16px) in the capsule dissolve."
+      ],
+      "notes": "Needs enter / loop / exit as three segments driven by a Rive input."
+    },
+    {
+      "slug": "pull-to-refresh-line-fill",
+      "status": "engineering",
+      "targetFormat": "Rive state machine",
+      "playback": {
+        "kind": "gesture",
+        "mode": "driven-by-drag-distance"
+      },
+      "blockers": [
+        "Gesture-driven.",
+        "6 keyframes animate blur (1-8px)."
+      ]
+    },
+    {
+      "slug": "pull-to-refresh-line-fill-red",
+      "status": "engineering",
+      "targetFormat": "Rive state machine",
+      "playback": {
+        "kind": "gesture",
+        "mode": "driven-by-drag-distance"
+      },
+      "blockers": [
+        "Gesture-driven.",
+        "6 keyframes animate blur (1-8px)."
+      ]
+    },
+    {
+      "slug": "biometric-scanner-device-plain-float",
+      "status": "ready-with-asset",
+      "targetFormat": "Lottie + image",
+      "playback": {
+        "kind": "loop",
+        "mode": "loop",
+        "cycleMs": 5600,
+        "source": "measured from web source"
+      },
+      "loopPeriods": [
+        3.3,
+        6.6
+      ],
+      "durationReview": "Cycle is 5600ms. System spinners cycle in roughly 1s; at this tempo the loader can read as stalled rather than working.",
+      "notes": "2D image plus CSS motion \u2014 no animated 3D. `preserve-3d` is set on the shell but its animated transform is a plain 2D matrix; the device screen carries a static matrix3d skew that belongs in the artwork. Ports as an image layer with a vertical translate plus stroke-draw fingerprint lines. Device float harmonised from 4.8s to 3.3s, half the 6.6s line draw, so the scene loops every 6.6s.",
+      "rasterAssets": [
+        "shared/assets/identity-scanner-device.webp"
+      ]
+    },
+    {
+      "slug": "search-red-magnifier-loader",
+      "status": "ready-with-asset",
+      "targetFormat": "Lottie + image",
+      "rasterAssets": [
+        "shared/assets/search-magnifier-red.webp"
+      ],
+      "playback": {
+        "kind": "loop",
+        "mode": "loop",
+        "cycleMs": 4600,
+        "source": "measured from web source"
+      },
+      "durationReview": "Cycle is 4600ms. System spinners cycle in roughly 1s; at this tempo the loader can read as stalled rather than working.",
+      "notes": "Single 4.6s loop. An earlier 4.4s flag belonged to .search-spinner-3-scene, which is not part of this animation."
+    },
+    {
+      "slug": "search-red-orbit-magnifier",
+      "status": "ready-with-asset",
+      "targetFormat": "Lottie + image",
+      "rasterAssets": [
+        "shared/assets/search-magnifier-red.webp"
+      ],
+      "playback": {
+        "kind": "loop",
+        "mode": "loop",
+        "cycleMs": 9200,
+        "source": "measured from web source"
+      },
+      "loopPeriods": [
+        4.6,
+        6.9,
+        9.2
+      ],
+      "durationReview": "Cycle is 9200ms. System spinners cycle in roughly 1s; at this tempo the loader can read as stalled rather than working.",
+      "notes": "Ring periods harmonised to 4.6 / 6.9 / 9.2s (ratio 1 : 1.5 : 2). The scene now repeats every 27.6s, down from ~30 minutes. A 2.3 / 4.6 / 9.2s set would bring that to 9.2s if a shorter export is needed."
+    },
+    {
+      "slug": "otp-green",
+      "status": "engineering",
+      "targetFormat": "native screen",
+      "playback": {
+        "kind": "event",
+        "mode": "state-machine"
+      },
+      "spec": "docs/03-code-entry-spec.md",
+      "blockers": [
+        "Live digits in the Fixel typeface cannot live in an animation file."
+      ]
+    },
+    {
+      "slug": "securepass-green",
+      "status": "engineering",
+      "targetFormat": "native screen",
+      "playback": {
+        "kind": "event",
+        "mode": "state-machine"
+      },
+      "spec": "docs/03-code-entry-spec.md",
+      "blockers": [
+        "Live digits in the Fixel typeface cannot live in an animation file."
+      ],
+      "notes": "Identical motion to otp-green; differs in wording only."
+    },
+    {
+      "slug": "otp-error",
+      "status": "engineering",
+      "targetFormat": "native screen",
+      "playback": {
+        "kind": "event",
+        "mode": "state-machine"
+      },
+      "spec": "docs/03-code-entry-spec.md",
+      "blockers": [
+        "Live digits in the Fixel typeface cannot live in an animation file."
+      ]
+    },
+    {
+      "slug": "identity-bust-focus",
+      "status": "ready-with-asset",
+      "targetFormat": "Lottie + image",
+      "rasterAssets": [
+        "shared/assets/identity-user-bust.webp",
+        "shared/assets/identity-user-bust-red.webp"
+      ],
+      "playback": {
+        "kind": "loop",
+        "mode": "loop",
+        "cycleMs": 5200
+      },
+      "durationReview": "Cycle is 5200ms. System spinners cycle in roughly 1s; at this tempo the loader can read as stalled rather than working.",
+      "notes": "Scan line and reveal mask verified aligned to 0px across the sweep. The mask keyframes use px insets so they interpolate in the same space as the line's translateY; expressing one in calc(100% - Npx) made the edge drift up to 16.5px."
+    },
+    {
+      "slug": "uba-loader-gradient-blob-prototype",
+      "status": "engineering",
+      "targetFormat": "native transition",
+      "playback": {
+        "kind": "screen-transition",
+        "mode": "one-shot"
+      },
+      "blockers": [
+        "The only remaining animation using backdrop-filter (18px, 5px, plus a 0->20px keyframe). No animation format samples what is behind it.",
+        "Animates a full-screen blur 18->64px.",
+        "Animates the app UI itself, not a standalone graphic."
+      ],
+      "decision": "Blob render cost: the 56px and 64px steps happen at 8% and 0% opacity. Capping the ramp at 42px is visually free.",
+      "loopPeriods": [
+        3.4,
+        3.8,
+        4.2,
+        4.8,
+        6.4
+      ]
+    },
+    {
+      "slug": "notification-bell-ring",
+      "status": "ready-with-asset",
+      "targetFormat": "Lottie + image",
+      "rasterAssets": [
+        "shared/assets/notification-bell-red.webp"
+      ],
+      "playback": {
+        "kind": "loop",
+        "mode": "loop",
+        "cycleMs": 3200,
+        "activeMs": 1768,
+        "source": "four CSS tracks, all 3.2s infinite \u2014 measured from the web source"
+      },
+      "devInstructions": "Build as a Lottie over the supplied bell image. Four layers share one 3200ms loop, so the scene repeats cleanly with no seam work. <strong>Bell</strong>: pivots near the top (<code>transform-origin: 50% 18%</code>) in a damped swing \u2014 0&deg; &rarr; &minus;14&deg; &rarr; +12&deg; &rarr; &minus;8&deg; &rarr; +5&deg; &rarr; &minus;2&deg; &rarr; rest, with a slight lift and up to 2.5% scale on the first swing, eased <code>cubic-bezier(0.44, 0, 0.18, 1)</code>. <strong>Rings</strong>: three of them expand 0.54 &rarr; 1.3 while opacity goes 0 &rarr; 0.62 &rarr; 0, staggered 0ms / 180ms / 360ms, eased <code>cubic-bezier(0.22, 0.8, 0.22, 1)</code>. <strong>Ground shadow</strong>: tracks the swing in the opposite direction (scaleX 0.74&ndash;0.96, translateX &plusmn;7px, opacity 0.46&ndash;0.7). <strong>Whole mark</strong>: breathes between 0.992 and 1.045 scale, eased <code>cubic-bezier(0.56, 0, 0.2, 1)</code>.",
+      "notes": "The motion occupies roughly 384&ndash;2150ms of the 3200ms cycle; the last second is deliberate stillness before it rings again. That pause is part of the loop \u2014 trimming it turns a periodic attention cue into a continuous jitter. The scene also appears at two sizes: 260px standalone and 135px as the icon inside the permission sheet.",
+      "durationReview": "Reduced motion is handled specially here: instead of the global fallback that cuts animation to 0.001ms, this scene slows to 9s. Mirror that on device \u2014 <code>UIAccessibility.isReduceMotionEnabled</code> / Android's animator scale \u2014 rather than freezing the bell."
+    }
+  ]
+}
