@@ -401,6 +401,17 @@ const pages = [
     `,
   },
   {
+    slug: "uba-splash-mark-reveal",
+    title: "Splash lockup reveal (mark only)",
+    accent: "uba",
+    section: "prototypes",
+    themeable: true,
+    label: "App launch splash without the subtitle: the graphic mark draws in and fills at center, then the UBA wordmark fades in and the pair spreads apart - UBA to the left, mark to the right - settling into the centered lockup.",
+    scene: () => `
+      ${splashScreenMarkPrototype()}
+    `,
+  },
+  {
     slug: "uba-loader-gradient-blob-prototype",
     title: "Page transition",
     accent: "uba",
@@ -452,6 +463,7 @@ const animationOnlySceneBySlug = {
   "verify-securepass": () => renderOtpCodeAnimationOnlyScene("securepass"),
   "identity-verification": () => renderPrototypeAnimationOnlyScene("identity"),
   "uba-splash-reveal": () => splashScreenAnimationOnly(),
+  "uba-splash-mark-reveal": () => splashScreenMarkAnimationOnly(),
   "uba-loader-gradient-blob-prototype": () => ubaLoaderGradientBlobAnimationOnly(),
 };
 
@@ -514,7 +526,7 @@ const navGroups = {
   prototypes: [
     {
       title: "Splash",
-      slugs: ["uba-splash-reveal"],
+      slugs: ["uba-splash-reveal", "uba-splash-mark-reveal"],
     },
     {
       title: "Core spinners",
@@ -2350,9 +2362,8 @@ function altyMockupPhone(type) {
   `;
 }
 
-function splashScreenMarkup() {
+function splashTopLockupMarkup() {
   return `
-    <div class="uba-splash-brand">
       <div class="uba-splash-top-mask">
         <div class="uba-splash-top-row">
           <div class="uba-splash-row1-wrap">
@@ -2379,7 +2390,13 @@ function splashScreenMarkup() {
           </div>
         </div>
       </div>
+  `;
+}
 
+function splashScreenMarkup() {
+  return `
+    <div class="uba-splash-brand">
+      ${splashTopLockupMarkup()}
       <div class="uba-splash-bottom-mask">
         <div class="uba-splash-row2-wrap">
           <svg class="uba-splash-row2-svg" viewBox="0 62.2173 201.718 15.4929" xmlns="http://www.w3.org/2000/svg">
@@ -2387,6 +2404,14 @@ function splashScreenMarkup() {
           </svg>
         </div>
       </div>
+    </div>
+  `;
+}
+
+function splashScreenMarkMarkup() {
+  return `
+    <div class="uba-splash-brand is-mark-only">
+      ${splashTopLockupMarkup()}
     </div>
   `;
 }
@@ -2409,6 +2434,30 @@ function splashScreenAnimationOnly() {
     <div class="animation-only-scene animation-only-splash-scene" role="img" aria-label="UBA splash screen: UBA and United Bank for Africa reveal, UBA aligns left, the graphic mark draws in and fills, then everything collapses to a shared centerline and disappears">
       <section class="alty-mock-phone alty-mock-phone-splash" aria-hidden="true">
         ${splashScreenMarkup()}
+        ${altyMockupHomeIndicator()}
+      </section>
+    </div>
+  `;
+}
+
+function splashScreenMarkPrototype() {
+  return `
+    <div class="alty-mockup-prototype alty-mockup-splash-prototype" role="group" aria-label="Splash screen animation (mark only)">
+      <article class="alty-mockup-stage">
+        <section class="alty-mock-phone alty-mock-phone-splash" aria-hidden="true">
+          ${splashScreenMarkMarkup()}
+          ${altyMockupHomeIndicator()}
+        </section>
+      </article>
+    </div>
+  `;
+}
+
+function splashScreenMarkAnimationOnly() {
+  return `
+    <div class="animation-only-scene animation-only-splash-scene" role="img" aria-label="UBA splash screen: the graphic mark draws in and fills at center, then the UBA wordmark fades in and the pair spreads apart into a centered UBA and mark lockup">
+      <section class="alty-mock-phone alty-mock-phone-splash" aria-hidden="true">
+        ${splashScreenMarkMarkup()}
         ${altyMockupHomeIndicator()}
       </section>
     </div>

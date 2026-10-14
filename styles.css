@@ -13218,6 +13218,143 @@ img.alty-identity-bust-image {
   height: 106.05px;
 }
 
+/* ==========================================================================
+   Mark-only variant (uba-splash-mark-reveal)
+     1. the graphic mark draws + fills on its own, centred on screen
+     2. on one coupled flight the mark drifts right into its slot while the UBA
+        wordmark slides out of the mark's left edge toward the left, U first. A
+        moving mask (its right edge pinned to the mark's left edge) keeps the word
+        visible only to the left of the mark, so it reads as emerging from the
+        mark's left side; it settles beside the mark, centred.
+     3. holds on the final centred UBA + mark lockup (plays once, `forwards`)
+   Because the mask's right edge IS the mark's left edge, no letter is ever caught
+   under the drifting mark - no bare-background flashes.
+   Crop fix: the wordmark svg's viewBox is fit tight to the glyph and its default
+   `overflow: hidden` shaved the U's flush left edge; the old wrap clip-path trimmed
+   another ~2px (the -2px Figma offset sits the U left of the wrap box). So the svg
+   now carries `overflow: visible`, and the reveal mask (on the wrap) insets NEGATIVE
+   on every side except the tracking right edge - it never clips the glyph, it only
+   hides the part of the word still behind the mark.
+   Box is just the 83.114px lockup, re-pinned to keep the optical centre the full
+   composition had (326 + 106.05/2 = 379.025 => top = 379.025 - 83.114/2).
+   Timeline 3200ms: draw 150-1250, fill 1100-1650, then mark drift + wordmark
+   pay-out share one window 1800-2800 (coupled), then holds.
+   ========================================================================== */
+.uba-splash-brand.is-mark-only {
+  top: 337.468px;
+  height: 83.114px;
+}
+
+.uba-splash-brand.is-mark-only .uba-splash-top-mask {
+  overflow: visible;
+}
+
+/* No slide-away exit. */
+.uba-splash-brand.is-mark-only .uba-splash-top-row {
+  animation: none;
+}
+
+/* The wrap is the moving mask: its right edge tracks the mark's left edge, so the
+   wordmark is only ever visible to the LEFT of the mark - it emerges from the
+   mark's left side and is never caught under it. (206px wrap, so right-inset =
+   206 - mark-left-edge: 128.2px centred -> 50.4px at the slot.) The other insets
+   stay negative so the glyph is never clipped. */
+.uba-splash-brand.is-mark-only .uba-splash-row1-wrap {
+  clip-path: inset(-12px 128.2px -12px -12px);
+  animation: uba-splashm-uba-mask 3200ms linear 1 forwards;
+}
+
+/* The wordmark slides LEFT out of the mask, U first (left-most letter, so it
+   crosses the seam first), settling at its -2px offset. overflow:visible keeps
+   the U's tight-viewBox left edge from being shaved. */
+.uba-splash-brand.is-mark-only .uba-splash-row1-svg {
+  opacity: 1;
+  overflow: visible;
+  animation: uba-splashm-uba-slide 3200ms linear 1 forwards;
+}
+
+/* The mark starts centred on screen (translateX -77.8px brings its optical
+   centre to the lockup's horizontal centre) then drifts right to its slot,
+   paying the wordmark out of its left edge as it goes. */
+.uba-splash-brand.is-mark-only .uba-splash-icon-slot {
+  animation: uba-splashm-mark-drift 3200ms linear 1 forwards;
+}
+
+.uba-splash-brand.is-mark-only .uba-splash-icon-stroke {
+  opacity: 1;
+  animation: uba-splashm-stroke-draw 3200ms linear 1 forwards;
+}
+
+.uba-splash-brand.is-mark-only .uba-splash-icon-fill {
+  animation: uba-splashm-fill-in 3200ms linear 1 forwards;
+}
+
+@keyframes uba-splashm-stroke-draw {
+  0%,
+  4.6875% {
+    stroke-dashoffset: 1;
+    animation-timing-function: cubic-bezier(0.45, 0, 0.15, 1);
+  }
+  39.0625%,
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes uba-splashm-fill-in {
+  0%,
+  34.375% {
+    opacity: 0;
+    animation-timing-function: ease;
+  }
+  51.5625%,
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Drift and pay-out share the 1800-2800ms window (56.25% - 87.5%) and the same
+   ease, so they leave the seam as one coupled gesture. */
+@keyframes uba-splashm-mark-drift {
+  0%,
+  56.25% {
+    transform: translateX(-77.8px);
+    animation-timing-function: cubic-bezier(0.37, 0, 0.2, 1);
+  }
+  87.5%,
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* U starts at the seam (translateX 77.8px puts the U's left ink on the mark's
+   centred left edge) and slides left to the -2px lockup offset. */
+@keyframes uba-splashm-uba-slide {
+  0%,
+  56.25% {
+    transform: translateX(77.8px);
+    animation-timing-function: cubic-bezier(0.37, 0, 0.2, 1);
+  }
+  87.5%,
+  100% {
+    transform: translateX(-2px);
+  }
+}
+
+/* Right inset tracks the mark's left edge (same window + ease as the drift), so
+   the mask opening and the mark stay locked together. */
+@keyframes uba-splashm-uba-mask {
+  0%,
+  56.25% {
+    clip-path: inset(-12px 128.2px -12px -12px);
+    animation-timing-function: cubic-bezier(0.37, 0, 0.2, 1);
+  }
+  87.5%,
+  100% {
+    clip-path: inset(-12px 50.4px -12px -12px);
+  }
+}
+
 .uba-splash-top-mask {
   /* Bottom edge is the fixed centerline (83.114px down) that
      .uba-splash-bottom-mask continues from - that edge must stay put. Top
